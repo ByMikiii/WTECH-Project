@@ -1,0 +1,37 @@
+# Laravel & PHP
+/vendor/
+/node_modules/
+/public/storage
+/storage/*.key
+/storage/pail
+/.env
+/.env.*.backup
+Homestead.yaml
+Homestead.json
+/.vagrant
+/.idea
+/.vscode
+/.zed
+
+# Composer
+/composer.phar
+/composer.lock
+
+# PHPUnit
+/.phpunit.cache
+/phpunit.xml
+
+# NPM & Yarn
+npm-debug.log
+yarn-error.log
+
+# IDE files
+/.idea/
+/.vscode/
+/phpactor.json
+
+# Logs and temp files
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/views/*
+/storage/app/*

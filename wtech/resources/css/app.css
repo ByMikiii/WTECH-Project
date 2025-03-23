@@ -1,12 +1,189 @@
-@import 'tailwindcss';
-
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source "../**/*.blade.php";
-@source "../**/*.js";
-@source "../**/*.vue";
-
-@theme {
+/* @import 'tailwindcss'; */
+/* @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php'; */
+/* @source '../../storage/framework/views/*.php'; */
+/* @source "..*.blade.php"; */
+/* @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+} */
+
+/* RESET */
+ul {
+  display: block;
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 0;
+  unicode-bidi: isolate;
+}
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul, ol {
+  list-style: none;
+}
+input, button, textarea, select {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+body {
+  min-height: 93vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+hr{
+  border: 0;
+  height: 1px;
+  background-color:lightgray;
+}
+small{
+  color: #444;
+}
+
+
+/* NAV */
+nav{
+  height: 92px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul{
+  display: flex;
+  align-items: center;
+}
+
+.logo{
+  height: 24px;
+  margin-left: 6px;
+}
+
+#nav-toggle{
+  margin-left: 6px;
+}
+
+#center-nav li{
+  margin: 0 12px;
+}
+
+#right-nav li{
+  margin: 0 6px;
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+#right-nav li a img{
+  width: 40px;
+  height: 40px;
+}
+
+
+/* FOOTER */
+footer{
+  width: 100vw;
+  height: 256px;
+  border-top: 1px solid lightgray;
+  /* background-color: green; */
+}
+#footer-content{
+  padding-top: 20px;
+  padding-bottom: 16px;
+}
+#footer-boxes{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 24px;
+  margin-bottom: 52px;
+}
+.footer-box{
+  padding: 4px 8px;
+  /* border: 1px solid lightgray;
+  border-radius: 8px; */
+  /* text-align: center; */
+}
+.footer-box h4{
+  margin-bottom: 4px;
+}
+.footer-box ul li{
+  text-align: left;
+  margin-bottom: 12px;
+  color: #444;
+  width: 189px;
+  font-size: 15px;
+}
+#right{
+  text-align: right;
+}
+.footer-box ul{
+  margin-top: 4px;
+}
+#bottom-footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+.socials{
+  display: flex;
+  justify-content: end;
+  margin-top: 8px;
+}
+.socials a{
+  margin: 0 8px;
+}
+
+
+/* RESPONSIVE */
+/* Phone */
+@media (max-width: 600px) {
+  nav, footer{
+    padding: 0 4px;
+  }
+  #center-nav{
+    display: none;
+  }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1024px) {
+  nav, footer{
+    padding: 0 24px;
+  }
+  #nav-toggle{
+    display: none;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  nav, footer{
+    padding: 0 40px;
+  }
+  #nav-toggle{
+    display: none;
+  }
+
 }

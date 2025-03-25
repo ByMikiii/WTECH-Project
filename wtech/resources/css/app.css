@@ -49,8 +49,22 @@ body {
   display: flex;
   flex-direction: column;
 }
+button{
+  cursor: pointer;
+}
 main {
   flex: 1;
+  width: 86%;
+  margin: 24px auto;
+  margin-bottom: 128px;
+}
+.breadcrumb{
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+.breadcrumb li{
+  /* text-decoration: underline; */
 }
 hr{
   border: 0;
@@ -60,17 +74,26 @@ hr{
 small{
   color: #444;
 }
+li a, button{
+  opacity: 65%;
+}
+li a:hover, button:hover{
+  opacity: 100%;
+}
+li a{
+  cursor: pointer;
+}
 
 
 /* NAV */
-nav{
+#main-nav{
   height: 92px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-nav ul{
+#main-nav ul{
   display: flex;
   align-items: center;
 }
@@ -114,9 +137,11 @@ footer{
 }
 #footer-boxes{
   display: flex;
+  flex-wrap: wrap;
+  gap: 16px 10px;
   justify-content: space-around;
   margin-top: 24px;
-  margin-bottom: 52px;
+  margin-bottom: 36px;
 }
 .footer-box{
   padding: 4px 8px;
@@ -138,7 +163,7 @@ footer{
   text-align: right;
 }
 .footer-box ul{
-  margin-top: 4px;
+  margin-top: 12px;
 }
 #bottom-footer{
   display: flex;
@@ -155,21 +180,57 @@ footer{
   margin: 0 8px;
 }
 
+/* MAIN PAGE */
+#hot-product{
+  height: 420px;
+  background-color: gray;
+}
+
+.product-section{
+  margin-top: 48px;
+  text-align: center;
+}
+.product-section h2{
+  text-align: left;
+  margin-bottom: 12px;
+}
+.product-list{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.product-box{
+  width: 200px;
+  height: 128px;
+  background-color: grey;
+}
+.view-more{
+  margin-top: 32px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid #444;
+}
+
 
 /* RESPONSIVE */
 /* Phone */
-@media (max-width: 600px) {
-  nav, footer{
+@media (max-width: 770px) {
+  #main-nav, footer{
     padding: 0 4px;
   }
   #center-nav{
-    display: none;
+    display: none !important;
+  }
+  .li-icons{
+    display: none !important;
   }
 }
 
 /* Tablet */
-@media (min-width: 601px) and (max-width: 1024px) {
-  nav, footer{
+@media (min-width:771px) and (max-width: 1024px) {
+  #main-nav, footer{
     padding: 0 24px;
   }
   #nav-toggle{
@@ -179,7 +240,7 @@ footer{
 
 /* Desktop */
 @media (min-width: 1025px) {
-  nav, footer{
+  #main-nav, footer{
     padding: 0 40px;
   }
   #nav-toggle{

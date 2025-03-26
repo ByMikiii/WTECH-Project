@@ -129,6 +129,26 @@ li a{
   width: 40px;
   height: 40px;
 }
+mobile-nav{
+  display: none;
+}
+#mobile-nav ul li{
+ text-align: center;
+ padding: 12px 0;
+ font-weight: bold;
+}
+#mobile-nav-search{
+  display: flex;
+}
+#mobile-nav-search input{
+  width: 100%;
+  margin-left: 16px;
+  padding: 4px 8px;
+}
+#mobile-nav-search button{
+  margin-right: 24px;
+}
+
 
 
 /* FOOTER */
@@ -172,12 +192,11 @@ footer{
 .footer-box ul{
   margin-top: 12px;
 }
-#newsletter{
-  width: 320px;
+#newsletter,#newsletter ul li{
+  min-width: 260px;
+  max-width: 320px;
 }
-#newsletter ul li{
-  width: 320px;
-}
+
 #newsletter form{
   display: flex;
   justify-content: space-between;
@@ -480,6 +499,8 @@ footer{
   border: 1px solid #444;
   margin: 0px;
 }
+
+
 
 
 /* RESPONSIVE */

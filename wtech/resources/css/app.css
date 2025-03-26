@@ -213,7 +213,7 @@ footer{
   border: 1px solid #444;
 }
 
-/*LOGIN*/
+/*LOGIN & REGISTER*/
 .container{
   text-align: center;
   margin: 75px 0;
@@ -222,15 +222,15 @@ footer{
   margin-bottom: 50px;
 }
 
-#login-form{
+.login-form{
   margin-bottom: 50px;
 }
 
-#login-form>div, .container p{
+.login-form>div, .container p{
   margin-bottom: 20px;
 }
 
-.container #login-form button{
+.container .login-form button{
   padding: 6px 12px;
   border-radius: 12px;
   border: 1px solid #444;
@@ -241,27 +241,23 @@ footer{
   text-decoration: underline;
 }
 
-.container #login-form input{
+.container .login-form input{
   padding: 6px 12px;
   border-radius: 12px;
   border: 1px solid #444;
 }
 
-.container #login-form label{
+.container .login-form label{
   display: block;
   text-align: left;
   padding-left: 4px;
 }
 
-.container #login-form div{
+.container .login-form div{
   width: 220px;
   margin-left: auto;
   margin-right: auto;
 }
-
-
-
-/*REGISTER*/
 
 
 /* RESPONSIVE */

@@ -32,6 +32,10 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
+}
+a:hover{
+  text-decoration: underline;
 }
 ul, ol {
   list-style: none;
@@ -74,8 +78,11 @@ hr{
 small{
   color: #444;
 }
-li a, button{
+li a{
   opacity: 65%;
+}
+button{
+  opacity: 75%;
 }
 li a:hover, button:hover{
   opacity: 100%;
@@ -165,6 +172,32 @@ footer{
 .footer-box ul{
   margin-top: 12px;
 }
+#newsletter{
+  width: 320px;
+}
+#newsletter ul li{
+  width: 320px;
+}
+#newsletter form{
+  display: flex;
+  justify-content: space-between;
+  height: 36px;
+  border: 1px solid #333;
+  border-radius: 12px;
+}
+#newsletter form input{
+  /* border: 1px solid #000;
+  border-radius: 12px; */
+  padding: 4px 8px;
+  width: 70%;
+}
+#newsletter form button{
+  /* border: 1px solid #000; */
+  /* border-radius: 12px; */
+  border-left: 1px solid #333;
+  padding: 4px 8px;
+  width: 30%;
+}
 #bottom-footer{
   display: flex;
   align-items: center;
@@ -182,9 +215,55 @@ footer{
 
 /* MAIN PAGE */
 #hot-product{
-  height: 420px;
-  background-color: gray;
+  /* height: 480px; */
+  height: 70vh;
+  background-color: #CCD2DC;
+  background-image: url("../images/products/air-jordan-1-retro-high-og-travis-scott/pexels-melvin-buezo-1253763-18946586.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: end;
+  padding: 72px 32px;
+  color: #fff;
+  }
+
+  #hot-product div{
+  width: 60%;
+  max-width: 720px;
+  min-width: 240px;
+  text-align: right;
+  color: white;
+  text-transform: uppercase;
 }
+.hot-name{
+  font-size: 48px;
+  font-weight: 600;
+}
+#hot-sale{
+  margin-top: 32px;
+  margin-left: auto;
+  margin-right: 28px;
+  display: flex;
+  align-items: center;
+  width: 20%;
+}
+#hot-sale div{
+  padding-right: 12px;
+}
+#hot-button{
+  margin-left: 12px;
+  padding: 12px 24px;
+  border-radius: 16px;
+  border: 1px solid #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+.old-price{
+  text-decoration: line-through;
+  opacity: 70%;
+}
+
 
 .product-section{
   margin-top: 48px;
@@ -193,6 +272,12 @@ footer{
 .product-section h2{
   text-align: left;
   margin-bottom: 12px;
+}
+.product-section-header{
+  font-size: 32px;
+}
+.section-break{
+  margin-top: 48px;
 }
 .product-list{
   display: flex;
@@ -203,14 +288,60 @@ footer{
 }
 .product-box{
   width: 200px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.product-box:hover {
+  transform: scale(1.1);
+}
+
+.product-image{
+  width: 200px;
   height: 128px;
+  object-fit:cover;
   background-color: grey;
+  border-radius: 12px;
 }
 .view-more{
-  margin-top: 32px;
+  margin-top: 48px;
+  padding: 12px 24px;
+  border-radius: 16px;
+  border: 1px solid #444;
+  font-size: 18px;
+  font-weight: bold;
+}
+.button-cart{
   padding: 6px 12px;
   border-radius: 12px;
   border: 1px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.product-prices{
+  text-align: left;
+  margin-top: 6px;
+}
+.product-name{
+  text-align: left;
+  margin-top: 2px;
+}
+.product-prices h2, .product-prices h3{
+  margin: 0 0;
+}
+.product-data{
+  padding: 0 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.button-cart-icon{
+  width: 16px;
+  height: 16px;
+}
+.button-cart-text{
+  padding-left: 4px;
+  font-weight: 500;
 }
 
 /*LOGIN & REGISTER*/
@@ -261,7 +392,7 @@ footer{
 
 /* PROFILE */
 .profile {
-  max-width: 500px; 
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -274,8 +405,8 @@ footer{
 
 .profile div {
   display: grid;
-  grid-template-columns: 1fr 1fr; 
-  align-items: center; 
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
   padding-bottom: 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid;
@@ -299,13 +430,13 @@ footer{
 /* */
 @media (max-width: 400px) {
   .profile div {
-      grid-template-columns: 1fr; 
-      text-align: center; 
+      grid-template-columns: 1fr;
+      text-align: center;
   }
 
   .profile div label {
       text-align: center;
-      padding-bottom: 5px; 
+      padding-bottom: 5px;
   }
 
   .profile div span {
@@ -324,6 +455,13 @@ footer{
   .li-icons{
     display: none !important;
   }
+  .button-cart-icon{
+    width: 28px;
+    height: 32px;
+  }
+  .button-cart-text{
+    display: none;
+  }
 }
 
 /* Tablet */
@@ -334,6 +472,14 @@ footer{
   #nav-toggle{
     display: none;
   }
+  .button-cart-icon{
+    width: 28px;
+    height: 32px;
+  }
+  .button-cart-text{
+    display: none;
+  }
+
 }
 
 /* Desktop */
@@ -344,5 +490,11 @@ footer{
   #nav-toggle{
     display: none;
   }
-
+  .product-box{
+    width: 275px;
+  }
+  .product-image{
+    width: 275px;
+    height: 176px;
+  }
 }

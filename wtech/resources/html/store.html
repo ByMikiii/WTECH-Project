@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,17 @@
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="../css/app.css">
 </head>
+
 <body>
   <nav id="main-nav">
     <button id="nav-toggle" onclick="toggleMobileNav()">
       <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 5.75H19.25"></path>
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 18.25H19.25"></path>
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 12H19.25"></path>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M4.75 5.75H19.25"></path>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M4.75 18.25H19.25"></path>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M4.75 12H19.25"></path>
       </svg>
     </button>
     <a class="logo" href=""><img class="logo" src="../images/logo.png" alt="Logo"></a>
@@ -25,7 +30,8 @@
     </ul>
     <ul id="right-nav">
       <li class="li-icons"><a href=""><img id="search-icon" src="../images/Search Icon.png" alt="Search Icon"></a></li>
-      <li class="li-icons"><a href=""><img id="profile-icon" src="../images/Profile Icon.png" alt="Profile Icon"></a></li>
+      <li class="li-icons"><a href=""><img id="profile-icon" src="../images/Profile Icon.png" alt="Profile Icon"></a>
+      </li>
       <li><a href=""><img id="cart-icon" src="../images/Cart Shopping Bag.png" alt="Cart Icon"></a></li>
     </ul>
   </nav>
@@ -56,82 +62,388 @@
   <main>
     <ol class="breadcrumb">
       <li><a href="">Domov</a></li>
-      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+        <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+      </svg>
       <li><a href="">Produkty</a></li>
-      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+        <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+      </svg>
       <li><a href="">Muži</a></li>
     </ol>
 
-    <div class="flex">
-    <section id="filter">
-      <h3>Filter</h3>
-      <hr class="darker-hr">
+    <div class="flex" id="store-container">
+      <section id="filter">
+        <h1>Filter</h1>
+        <hr class="darker-hr">
 
 
-      <h4>Cena</h4>
-      <div class="filter-section">
-        <div class="flex">
-          <div class="price-box">
-            <input class="price-input" name="price-from" type="number" value="0" min="0" max="9999">
-            <label for="price-from">od</label>
+        <h4>Cena</h4>
+        <div class="filter-section">
+          <div class="flex">
+            <div class="price-box">
+              <input class="price-input" name="price-from" type="number" value="0" min="0" max="9999">
+              <label for="price-from">od</label>
+            </div>
+            <span>-</span>
+            <div class="price-box">
+              <input class="price-input" name="price-to" type="number" value="1400" min="0" max="9999">
+              <label for="price-to">do</label>
+            </div>
           </div>
-          <span>-</span>
-          <div class="price-box">
-            <input class="price-input" name="price-to" type="number" value="1400" min="0" max="9999">
-            <label for="price-to">do</label>
+        </div>
+
+
+
+        <h4>Farba</h4>
+        <div class="filter-section" id="color-selection">
+          <button class="color-select" style="background-color: red;"></button>
+          <button class="color-select" style="background-color: blue;"></button>
+          <button class="color-select" style="background-color: yellow;"></button>
+          <button class="color-select" style="background-color: magenta;"></button>
+        </div>
+
+
+
+        <h4>Veľkosť</h4>
+        <div class="filter-section" id="size-selection">
+          <button class="size-select">36</button>
+          <button class="size-select">37</button>
+          <button class="size-select">38</button>
+          <button class="size-select">39</button>
+          <button class="size-select">40</button>
+          <button class="size-select">41</button>
+          <button class="size-select">42</button>
+          <button class="size-select">43</button>
+        </div>
+
+
+
+        <h4>Značka</h4>
+        <div class="filter-section">
+          <div>
+            <input type="checkbox" id="brand-nike" name="brand-nike" />
+            <label for="brand-nike">Nike</label>
+          </div>
+          <div>
+            <input type="checkbox" id="brand-Reebok" name="brand-Reebok" />
+            <label for="brand-Reebok">Reebok</label>
+          </div>
+          <div>
+            <input type="checkbox" id="brand-Adidas" name="brand-Adidas" />
+            <label for="brand-Adidas">Adidas</label>
           </div>
         </div>
-      </div>
 
-      <hr>
+        <button id="filter-button">Filtrovať</button>
+      </section>
 
-      <h4>Farba</h4>
-      <div class="filter-section" id="color-selection">
-        <button class="color-select" style="background-color: red;"></button>
-        <button class="color-select" style="background-color: blue;"></button>
-        <button class="color-select" style="background-color: yellow;"></button>
-        <button class="color-select" style="background-color: magenta;"></button>
-      </div>
 
-      <hr>
+      <section id="products">
+        <h1>Muži</h1>
+        <hr>
+        <section class="product-section">
+          <div class="product-list">
+            <div class="product-box">
+              <a href=""><img class="product-image"
+                  src="../images/products/air-jordan-1-retro-high-og-travis-scott/pexels-melvin-buezo-1253763-18946583.jpg"
+                  alt="Air Jordan 1" />
+                <h3 class="product-name"><a href="">Air Jordan 1 Retro High OG 'Travis Scott'</a></h3>
+                <div class="product-data">
+                  <div class="product-prices">
+                    <h2>899.99€</h2>
+                    <h3 class="old-price">1199.99€</h3>
+                  </div>
+                  <button class="button-cart">
+                    <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+                      </path>
+                    </svg>
+                    <span class="button-cart-text">
+                      Do košíka
+                    </span>
+                  </button>
+                </div>
+            </div>
 
-      <h4>Veľkosť</h4>
-      <div class="filter-section" id="size-selection">
-        <button class="size-select">36</button>
-        <button class="size-select">37</button>
-        <button class="size-select">38</button>
-        <button class="size-select">39</button>
-        <button class="size-select">40</button>
-        <button class="size-select">41</button>
-        <button class="size-select">42</button>
-        <button class="size-select">43</button>
-      </div>
+            <div class="product-box">
+              <a href=""><img class="product-image"
+                  src="../images/products/nike-air-max-1-97-sean-wotherspoon/pexels-melvin-buezo-1253763-18946645.jpg"
+                  alt="Nike Air Max 1/97 'Sean Wotherspoon" />
+                <h3 class="product-name"><a href="">Nike Air Max 1/97 'Sean Wotherspoon'</a></h3>
+                <div class="product-data">
+                  <div class="product-prices">
+                    <h2>699.99€</h2>
+                    <h3 class="old-price">799.99€</h3>
+                  </div>
+                  <button class="button-cart">
+                    <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+                      </path>
+                    </svg>
+                    <span class="button-cart-text">
+                      Do košíka
+                    </span>
+                  </button>
+                </div>
+            </div>
 
-      <hr>
+            <div class="product-box">
+              <a href=""><img class="product-image"
+                  src="../images/products/reebok-question-mid-packer-blacktop/pexels-melvin-buezo-1253763-18946648.jpg"
+                  alt="Reebok Question Mid 'Packer Shoes Take on Blacktop'" />
+                <h3 class="product-name"><a href="">Reebok Question Mid 'Packer Shoes Take on Blacktop'</a></h3>
+                <div class="product-data">
+                  <div class="product-prices">
+                    <h2>159.99€</h2>
+                    <h3 class="old-price">164.99€</h3>
+                  </div>
+                  <button class="button-cart">
+                    <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+                      </path>
+                    </svg>
+                    <span class="button-cart-text">
+                      Do košíka
+                    </span>
+                  </button>
+                </div>
+            </div>
 
-      <h4>Značka</h4>
-      <div class="filter-section">
-        <div>
-          <input type="checkbox"  id="brand-nike" name="brand-nike"/>
-          <label for="brand-nike">Nike</label>
-        </div>
-        <div>
-          <input type="checkbox"  id="brand-Reebok" name="brand-Reebok"/>
-          <label for="brand-Reebok">Reebok</label>
-        </div>
-        <div>
-          <input type="checkbox"  id="brand-Adidas" name="brand-Adidas"/>
-          <label for="brand-Adidas">Adidas</label>
-        </div>
-      </div>
+            <div class="product-box">
+              <a href=""><img class="product-image"
+                  src="../images/products/nike-joyride-run-flyknit/pexels-melvin-buezo-1253763-2529148.jpg"
+                  alt="Nike Joyride Run Flyknit" />
+                <h3 class="product-name"><a href="">Nike Joyride Run Flyknit</a></h3>
+                <div class="product-data">
+                  <div class="product-prices">
+                    <h2>149.99€</h2>
+                    <h3 class="old-price">180.00€</h3>
+                  </div>
+                  <button class="button-cart">
+                    <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+                      </path>
+                    </svg>
+                    <span class="button-cart-text">
+                      Do košíka
+                    </span>
+                  </button>
+                </div>
+            </div>
 
-      <button id="filter-button">Filtrovať</button>
-    </section>
-    <section id="products">
-      <!-- <h1>Muži</h1> -->
-    </section>
-  </div>
-  </nav>
+            <div class="product-box">
+              <a href=""><img class="product-image"
+                  src="../images/products/reebok-question-mid-packer-blacktop/pexels-melvin-buezo-1253763-18946648.jpg"
+                  alt="Reebok Question Mid 'Packer Shoes Take on Blacktop'" />
+                <h3 class="product-name"><a href="">Reebok Question Mid 'Packer Shoes Take on Blacktop'</a></h3>
+                <div class="product-data">
+                  <div class="product-prices">
+                    <h2>159.99€</h2>
+                    <h3 class="old-price">164.99€</h3>
+                  </div>
+                  <button class="button-cart">
+                    <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+                      </path>
+                    </svg>
+                    <span class="button-cart-text">
+                      Do košíka
+                    </span>
+                  </button>
+                </div>
+            </div>
+
+            <div class="product-box">
+              <a href=""><img class="product-image"
+                  src="../images/products/reebok-question-mid-packer-blacktop/pexels-melvin-buezo-1253763-18946648.jpg"
+                  alt="Reebok Question Mid 'Packer Shoes Take on Blacktop'" />
+                <h3 class="product-name"><a href="">Reebok Question Mid 'Packer Shoes Take on Blacktop'</a></h3>
+                <div class="product-data">
+                  <div class="product-prices">
+                    <h2>159.99€</h2>
+                    <h3 class="old-price">164.99€</h3>
+                  </div>
+                  <button class="button-cart">
+                    <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+                      </path>
+                    </svg>
+                    <span class="button-cart-text">
+                      Do košíka
+                    </span>
+                  </button>
+                </div>
+            </div>
+
+            <div class="product-box">
+              <a href=""><img class="product-image"
+                  src="../images/products/reebok-question-mid-packer-blacktop/pexels-melvin-buezo-1253763-18946648.jpg"
+                  alt="Reebok Question Mid 'Packer Shoes Take on Blacktop'" />
+                <h3 class="product-name"><a href="">Reebok Question Mid 'Packer Shoes Take on Blacktop'</a></h3>
+                <div class="product-data">
+                  <div class="product-prices">
+                    <h2>159.99€</h2>
+                    <h3 class="old-price">164.99€</h3>
+                  </div>
+                  <button class="button-cart">
+                    <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+                      </path>
+                    </svg>
+                    <span class="button-cart-text">
+                      Do košíka
+                    </span>
+                  </button>
+                </div>
+            </div>
+
+            <div class="product-box">
+              <a href=""><img class="product-image"
+                  src="../images/products/reebok-question-mid-packer-blacktop/pexels-melvin-buezo-1253763-18946648.jpg"
+                  alt="Reebok Question Mid 'Packer Shoes Take on Blacktop'" />
+                <h3 class="product-name"><a href="">Reebok Question Mid 'Packer Shoes Take on Blacktop'</a></h3>
+                <div class="product-data">
+                  <div class="product-prices">
+                    <h2>159.99€</h2>
+                    <h3 class="old-price">164.99€</h3>
+                  </div>
+                  <button class="button-cart">
+                    <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+                      </path>
+                    </svg>
+                    <span class="button-cart-text">
+                      Do košíka
+                    </span>
+                  </button>
+                </div>
+            </div>
+
+            <div class="product-box">
+              <a href=""><img class="product-image"
+                  src="../images/products/reebok-question-mid-packer-blacktop/pexels-melvin-buezo-1253763-18946648.jpg"
+                  alt="Reebok Question Mid 'Packer Shoes Take on Blacktop'" />
+                <h3 class="product-name"><a href="">Reebok Question Mid 'Packer Shoes Take on Blacktop'</a></h3>
+                <div class="product-data">
+                  <div class="product-prices">
+                    <h2>159.99€</h2>
+                    <h3 class="old-price">164.99€</h3>
+                  </div>
+                  <button class="button-cart">
+                    <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+                      </path>
+                    </svg>
+                    <span class="button-cart-text">
+                      Do košíka
+                    </span>
+                  </button>
+                </div>
+            </div>
+
+            <div class="product-box">
+              <a href=""><img class="product-image"
+                  src="../images/products/reebok-question-mid-packer-blacktop/pexels-melvin-buezo-1253763-18946648.jpg"
+                  alt="Reebok Question Mid 'Packer Shoes Take on Blacktop'" />
+                <h3 class="product-name"><a href="">Reebok Question Mid 'Packer Shoes Take on Blacktop'</a></h3>
+                <div class="product-data">
+                  <div class="product-prices">
+                    <h2>159.99€</h2>
+                    <h3 class="old-price">164.99€</h3>
+                  </div>
+                  <button class="button-cart">
+                    <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+                      </path>
+                    </svg>
+                    <span class="button-cart-text">
+                      Do košíka
+                    </span>
+                  </button>
+                </div>
+            </div>
+
+            <div class="product-box">
+              <a href=""><img class="product-image"
+                  src="../images/products/reebok-question-mid-packer-blacktop/pexels-melvin-buezo-1253763-18946648.jpg"
+                  alt="Reebok Question Mid 'Packer Shoes Take on Blacktop'" />
+                <h3 class="product-name"><a href="">Reebok Question Mid 'Packer Shoes Take on Blacktop'</a></h3>
+                <div class="product-data">
+                  <div class="product-prices">
+                    <h2>159.99€</h2>
+                    <h3 class="old-price">164.99€</h3>
+                  </div>
+                  <button class="button-cart">
+                    <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+                      </path>
+                    </svg>
+                    <span class="button-cart-text">
+                      Do košíka
+                    </span>
+                  </button>
+                </div>
+            </div>
+
+            <div class="product-box">
+              <a href=""><img class="product-image"
+                  src="../images/products/reebok-question-mid-packer-blacktop/pexels-melvin-buezo-1253763-18946648.jpg"
+                  alt="Reebok Question Mid 'Packer Shoes Take on Blacktop'" />
+                <h3 class="product-name"><a href="">Reebok Question Mid 'Packer Shoes Take on Blacktop'</a></h3>
+                <div class="product-data">
+                  <div class="product-prices">
+                    <h2>159.99€</h2>
+                    <h3 class="old-price">164.99€</h3>
+                  </div>
+                  <button class="button-cart">
+                    <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+                      </path>
+                    </svg>
+                    <span class="button-cart-text">
+                      Do košíka
+                    </span>
+                  </button>
+                </div>
+            </div>
+
+          </div>
+          <section class="pagination">
+            <a href="/"><button class="pagination-button">‹</button></a>
+            <a href="/"><button class="pagination-button">1</button></a>
+            <a href="/"><button class="pagination-button">2</button></a>
+            <a href="/"><button class="pagination-button">3</button></a>
+            <a href="/"><button class="pagination-button">›</button></a>
+          </section>
+        </section>
+      </section>
+    </div>
+    </nav>
 
 
   </main>
@@ -173,39 +485,64 @@
           </ul>
         </div>
 
-        <div class="footer-box" id="newsletter" >
+        <div class="footer-box" id="newsletter">
           <h4>Newsletter</h4>
           <hr>
           <ul>
-            <li><p>Prihláste sa na odber noviniek.</p></li>
-            <li><form action=""><input type="email" placeholder="Email"><button>Odoberať</button></form></li>
+            <li>
+              <p>Prihláste sa na odber noviniek.</p>
+            </li>
+            <li>
+              <form action=""><input type="email" placeholder="Email"><button>Odoberať</button></form>
+            </li>
           </ul>
         </div>
 
       </div>
       <hr>
       <section id="bottom-footer">
-        <small><p>&copy; 2025 All rights reserved.</p></small>
+        <small>
+          <p>&copy; 2025 All rights reserved.</p>
+        </small>
         <ul class="socials">
           <li>
             <a href="">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="32"  height="32"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M16.5 7.5v.01" /></svg>
-          </a>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" />
+                <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                <path d="M16.5 7.5v.01" />
+              </svg>
+            </a>
           </li>
           <li><a href="">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="32"  height="32"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
-          </a>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+              </svg>
+            </a>
           </li>
           <li><a href="">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="32"  height="32"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
-          </a>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+              </svg>
+            </a>
           </li>
         </ul>
       </section>
-      </section>
-    </footer>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
-    <script src="../js/app.js"></script>
+    </section>
+  </footer>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+  <script src="../js/app.js"></script>
 
-  </body>
-  </html>
+</body>
+
+</html>

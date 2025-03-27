@@ -478,14 +478,15 @@ footer{
   border-bottom: 1px solid;
 }
 
+.cart div span{
+  padding: 10px 0px;
+}
+
 .cart div#first_div{
   padding-top: 10px;
   margin-top: 10px;
   border-top: 1px solid;
-}
-
-.cart div span button{
-  color: red;
+  font-weight: bold;
 }
 
 .cart div span input::-webkit-inner-spin-button{ /*toto zrusi sipky, ktore sa obycajne nachadzaju pri input type number*/
@@ -506,10 +507,19 @@ footer{
 }
 
 .cart div span button{
+  color: red;
   padding: 6px 12px;
   border-radius: 12px;
   border: 1px solid #444;
   margin: 0px;
+}
+
+.cart div span img{
+  width: 100%;
+  height: auto; /*toto tu asi nemusi byt*/
+  max-width: 200px;
+  max-height: 150px;
+  object-fit: contain;
 }
 
 /* STORE */

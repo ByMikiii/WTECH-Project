@@ -8,6 +8,16 @@
 } */
 
 /* RESET */
+/* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 ul {
   display: block;
   list-style-type: none;
@@ -63,7 +73,9 @@ main {
   margin-bottom: 128px;
 }
 .breadcrumb{
-  margin-bottom: 12px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  padding-left: 4px;
   display: flex;
   align-items: center;
 }
@@ -129,7 +141,7 @@ li a{
   width: 40px;
   height: 40px;
 }
-mobile-nav{
+#mobile-nav{
   display: none;
 }
 #mobile-nav ul li{
@@ -500,7 +512,115 @@ footer{
   margin: 0px;
 }
 
+/* STORE */
+.flex{
+  display: flex;
+  gap: 24px;
+}
+#filter{
+ width: 224px;
+ max-height: 640px;
+ border-radius: 12px;
+ border: 1px solid #444;
+ display: flex;
+ flex-direction: column;
+}
+#filter h3{
+  text-align: center;
+  padding: 8px 0;
+  margin: 0;
+}
+.darker-hr{
+  background-color: #444;
+}
+.filter-section{
+  padding: 0 28px;
+  margin-bottom: 32px;
+}
+#color-selection, #size-selection{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+#filter h4{
+  padding: 0 20px;
+  margin-bottom: 8px;
+  margin-top: 16px;
+  color: #333;
+}
+#filter-button{
+  display: block;
+  margin: auto;
+  margin-bottom: 8px;
+  width: 90%;
+  padding: 8px 16px;
+  border: 1px solid #444;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.price-input{
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 3px 8px;
+}
+.price-box{
+  width: 100px;
+}
+.price-input, .price-box label{
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+.color-select{
+  width: 36px;
+  height: 36px;
+  border-radius: 100%;
+  border: 1px solid #000;
+  opacity: 98%;
+}
+.color-select:hover{
+scale: 105%;
+}
+.color-select.selected {
+  scale: 110%;
+  position: relative;
+}
+.color-select.selected::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  background-image: url('data:image/svg+xml,%3Csvg%20data-slot%3D%22icon%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%20stroke%3D%22currentColor%22%20viewBox%3D%220%200%2024%2024%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20aria-hidden%3D%22true%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20d%3D%22m4.5%2012.75%206%206%209-13.5%22%3E%3C/path%3E%3C/svg%3E');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
+
+.size-select{
+  padding: 4px 8px;
+  border: 1px solid #444;
+  border-radius: 8px;
+}
+.size-select:hover{
+  scale: 105%;
+}
+.size-select.selected {
+  background: #333;
+  color: white;
+  border-color: #333;
+  scale: 115%;
+}
+
+#products{
+  flex: 1;
+  height: 800px;
+  background-color: #666;
+}
 
 
 /* RESPONSIVE */

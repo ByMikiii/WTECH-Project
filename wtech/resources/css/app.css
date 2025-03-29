@@ -532,6 +532,17 @@ footer {
   margin-top: 50px;
 }
 
+#logout_button button#logout{
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid #444;
+  display: block;
+  background-color: black;
+  justify-self: right;
+  color: white;
+  margin-bottom: 20px;
+}
+
 
 /*CART*/
 .cart {

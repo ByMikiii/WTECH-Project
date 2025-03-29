@@ -39,14 +39,41 @@ document.addEventListener("DOMContentLoaded", function () {
       this.classList.toggle("selected");
     });
   });
-});
 
-// color select buttons
-document.addEventListener("DOMContentLoaded", function () {
   const colorButtons = document.querySelectorAll(".color-select");
   colorButtons.forEach((button) => {
     button.addEventListener("click", function () {
       this.classList.toggle("selected");
     });
+  });
+
+  const buttons_ = document.querySelectorAll(".product-size-select");
+  buttons_.forEach((button) => {
+    button.addEventListener("click", function () {
+      buttons_.forEach((btn) => btn.classList.remove("selected"));
+      this.classList.add("selected");
+    });
+  });
+
+  const stars = document.querySelectorAll(".star");
+  let selectedRating = 1;
+
+  stars.forEach((s, index) => {
+    s.style.fill = index < selectedRating ? "gold" : "none";
+  });
+
+  stars.forEach((star) => {
+    star.addEventListener("click", function () {
+      selectedRating = this.getAttribute("data-value");
+      stars.forEach((s, index) => {
+        s.style.fill = index < selectedRating ? "gold" : "none";
+      });
+    });
+  });
+
+  document.getElementById("review-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const reviewText = document.getElementById("review-text").value;
+    console.log("Rating:", selectedRating, "Review:", reviewText);
   });
 });

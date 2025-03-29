@@ -146,6 +146,30 @@ li a {
   margin-left: 6px;
 }
 
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #444;
+}
+
+.search-input {
+  padding: 8px 16px;
+  width: 100%;
+}
+
+.search-button,
+.search-icon {
+  width: 32px;
+  height: 32px;
+  padding-top: 2px;
+  margin: 8px;
+}
+
 #nav-toggle {
   margin-left: 6px;
 }
@@ -190,6 +214,7 @@ li a {
 #mobile-nav-search button {
   margin-right: 24px;
 }
+
 
 
 
@@ -292,6 +317,7 @@ footer {
 #hot-product {
   /* height: 480px; */
   height: 70vh;
+  min-height: 464px;
   background-color: #CCD2DC;
   background-image: url("../images/products/air-jordan-1-retro-high-og-travis-scott/pexels-melvin-buezo-1253763-18946586.jpg");
   background-repeat: no-repeat;
@@ -1081,7 +1107,7 @@ footer {
     border: 1px solid #444;
     padding: 2px 4px;
     right: 64px;
-    top: 222px;
+    top: 284px;
   }
 
   .product-box {

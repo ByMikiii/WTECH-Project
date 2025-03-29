@@ -497,6 +497,13 @@ footer {
   margin-right: auto;
 }
 
+.container .login-form div select{
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid #444;
+  width: 220px;
+}
+
 /* PROFILE */
 .profile {
   max-width: 500px;

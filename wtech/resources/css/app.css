@@ -644,6 +644,20 @@ footer {
   object-fit: contain;
 }
 
+/*SUMMARY*/
+.cart#summary{
+  margin-bottom: 50px;
+}
+
+.cart#summary div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid;
+}
+
 /* STORE */
 .flex {
   display: flex;
@@ -1121,6 +1135,10 @@ footer {
 /* Cart */
 @media (max-width: 832px) and (min-width: 401px) {
   .cart div {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .cart#summary div {
     grid-template-columns: 1fr 1fr 1fr;
   }
 

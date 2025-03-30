@@ -78,60 +78,82 @@
       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
         <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
       </svg>
-      <li><a href="">Produkty</a></li>
+      <li><a href="">Muži</a></li>
       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
         <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
       </svg>
-      <li><a href="">Pridať produkt</a></li>
+      <li><a href="">Air Jordan 1 Retro High OG 'Travis Scott'</a></li>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+        <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+      </svg>
+      <li><a href="">Upraviť produkt</a></li>
     </ol>
 
 
     <form action="" class="add-product-form">
-      <h1>Nový produkt</h1>
+      <h1>Upraviť produkt</h1>
+
       <div class="add-form-input">
-        <label for="product-images">Obrázky produktu</label>
+        <label>Obrázky produktu</label>
+        <div class="existing-image">
+          <img src="" alt="Obrázok produktu 1">
+        </div>
+        <div class="existing-image">
+          <img src="" alt="Obrázok produktu 2">
+        </div>
+        <div class="existing-image">
+          <img src="" alt="Obrázok produktu 3">
+        </div>
+        <div class="existing-image">
+          <img src="" alt="Obrázok produktu 4">
+        </div>
+      </div>
+
+      <div class="add-form-input">
+        <label for="product-images">Pridať obrázky</label>
         <input name="product-images" type="file" name="product-image" accept="image/png, image/jpeg" required />
       </div>
 
       <div class="add-form-input">
         <label for="product-name">Názov produktu</label>
-        <input type="text" name="product-name" required>
+        <input type="text" name="product-name" required value="Air Jordan 1 Retro High OG 'Travis Scott'">
       </div>
 
       <div class="add-form-input">
         <label for="product-description">Popis</label>
         <br>
-        <textarea id="" name="product-description" required></textarea>
+        <textarea id="" name="product-description" required
+          spellcheck="false">Ikonická teniska, ktorá spája štýl, exkluzivitu a jedinečný dizajn. Tento model, vytvorený v spolupráci so svetoznámym rapperom Travisom Scottom, vyniká prémiovým koženým a semišovým zvrškom, charakteristickým otočeným Swoosh logom a skrytou kapsičkou na bočnej strane. Detaily s podpisom Cactus Jack dodávajú teniske autentický vzhľad. Vydaná v limitovanom množstve v roku 2019, táto edícia patrí medzi najžiadanejšie modely Air Jordan 1 a je nevyhnutným kúskom pre každého zberateľa a fanúšika streetwearu.</textarea>
       </div>
 
       <div class="add-form-input">
         <label for="product-price">Cena</label>
-        <input type="number" name="product-price" min="0" placeholder="0.00€" required>
+        <input type="text" name="product-price" min="0" placeholder="0.00€" required value="1199.99">
       </div>
 
       <div class="add-form-input">
         <label for="product-sale-price">Zľavnena cena</label>
-        <input type="number" name="product-sale-price" min="0" placeholder="0.00€" required>
+        <input type="text" name="product-sale-price" min="0" placeholder="0.00€" required value="899.99">
       </div>
 
       <div class="add-form-input">
         <label for="product-manufacturer">Výrobca</label>
-        <input type="text" name="product-manufacturer" required>
+        <input type="text" name="product-manufacturer" required value="Nike">
       </div>
 
       <div class="add-form-input">
         <label for="product-type">Typ</label>
-        <input type="text" name="product-type" required>
+        <input type="text" name="product-type" required value="Vysoké tenisky">
       </div>
 
       <div class="add-form-input">
         <label for="product-color">Farba</label>
-        <input type="text" name="product-color" required>
+        <input type="text" name="product-color" required value="Hnedá / Čierna / Biela">
       </div>
 
       <div class="add-form-input">
         <label for="product-date">Rok vydania</label>
-        <input type="number" min="1900" max="2099" step="1" value="2020" name="product-date" required />
+        <input type="number" min="1900" max="2099" step="1" value="2019" name="product-date" required />
       </div>
 
       <div class="add-form-input">
@@ -139,7 +161,7 @@
         <select name="product-gender">
           <option value="male">Muž</option>
           <option value="female">Žena</option>
-          <option value="unisex">Unisex</option>
+          <option value="unisex" selected>Unisex</option>
         </select>
       </div>
 
@@ -147,20 +169,24 @@
       <div class="add-form-input">
         <label for="product-size" class="size-label">Veľkosť (vyberte viacero)</label>
         <div class="size-options">
-          <label><input type="checkbox" name="product-size" value="38"><span>38</span></label>
-          <label><input type="checkbox" name="product-size" value="39"><span>39</span></label>
-          <label><input type="checkbox" name="product-size" value="40"><span>40</span></label>
-          <label><input type="checkbox" name="product-size" value="41"><span>41</span></label>
-          <label><input type="checkbox" name="product-size" value="42"><span>42</span></label>
-          <label><input type="checkbox" name="product-size" value="43"><span>43</span></label>
+          <label><input type="checkbox" name="product-size" value="38" checked><span>36</span></label>
+          <label><input type="checkbox" name="product-size" value="39" checked><span>37</span></label>
+          <label><input type="checkbox" name="product-size" value="38" checked><span>38</span></label>
+          <label><input type="checkbox" name="product-size" value="39" checked><span>39</span></label>
+          <label><input type="checkbox" name="product-size" value="40" checked><span>40</span></label>
+          <label><input type="checkbox" name="product-size" value="41" checked><span>41</span></label>
+          <label><input type="checkbox" name="product-size" value="42" checked><span>42</span></label>
+          <label><input type="checkbox" name="product-size" value="43" checked><span>43</span></label>
           <label><input type="checkbox" name="product-size" value="44"><span>44</span></label>
           <label><input type="checkbox" name="product-size" value="45"><span>45</span></label>
           <label><input type="checkbox" name="product-size" value="46"><span>46</span></label>
         </div>
       </div>
 
-
-      <button type="submit">Vytvoriť produkt</button>
+      <div class="flex">
+        <button class="remove-button">Odstraniť produkt</button>
+        <button type="submit">Uložiť zmeny</button>
+      </div>
     </form>
 
 

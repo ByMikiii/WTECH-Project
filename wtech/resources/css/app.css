@@ -93,9 +93,11 @@ main {
   padding-left: 4px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .breadcrumb li {
+  margin-right: 10px;
   /* text-decoration: underline; */
 }
 
@@ -319,7 +321,7 @@ footer {
   height: 70vh;
   min-height: 464px;
   background-color: #CCD2DC;
-  background-image: url("../images/products/air-jordan-1-retro-high-og-travis-scott/pexels-melvin-buezo-1253763-18946586.jpg");
+  background-image: url("../images/optimized_products/hot.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -439,6 +441,13 @@ footer {
   font-weight: bold;
 }
 
+.product-buttons {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 .button-cart {
   padding: 6px 12px;
   border-radius: 12px;
@@ -446,6 +455,24 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.button-edit {
+  height: 62px;
+  width: 128px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  border: 1px solid #444;
+}
+
+.button-edit a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-edit a:hover {
+  text-decoration: none;
 }
 
 .product-prices {
@@ -656,7 +683,7 @@ footer {
 }
 
 /*SUMMARY*/
-.cart#summary{
+.cart#summary {
   margin-bottom: 50px;
 }
 
@@ -669,8 +696,8 @@ footer {
   border-bottom: 1px solid;
 }
 
-.profile button#price_button{
-  font-size:20px;
+.profile button#price_button {
+  font-size: 20px;
   padding: 12px 24px;
   border-radius: 12px;
   border: 1px solid #444;
@@ -678,7 +705,7 @@ footer {
   background-color: black;
   justify-self: center;
   color: white;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 /* STORE */
@@ -935,7 +962,6 @@ footer {
 
 #product-button {
   width: 132px;
-  margin-top: 32px;
 }
 
 #product-button svg {
@@ -1046,7 +1072,8 @@ footer {
 }
 
 .add-form-input {
-  width: 264px;
+  width: 60%;
+  min-width: 264px;
   margin-bottom: 24px;
   display: block;
 }
@@ -1056,11 +1083,16 @@ footer {
 .add-form-input textarea,
 .add-form-input select {
   margin-top: 8px;
-  width: 264px;
+  width: 100%;
   border-radius: 12px;
   border: 1px solid #444;
   padding: 8px 16px;
 }
+
+.add-form-input textarea {
+  height: 224px;
+}
+
 
 .add-product-form button {
   border-radius: 12px;
@@ -1076,9 +1108,13 @@ footer {
   max-height: 150px;
   width: 78px;
   overflow-y: auto;
+  border-radius: 12px;
   border: 1px solid #444;
   padding-right: 24px;
   display: block;
+  margin-top: 8px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .size-options label {
@@ -1088,6 +1124,11 @@ footer {
   cursor: pointer;
 }
 
+/* EDIT PRODUCT */
+.remove-button {
+  margin-right: 24px;
+  color: red;
+}
 
 /* RESPONSIVE */
 /* Phone */
@@ -1220,13 +1261,13 @@ footer {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
-  .cart#summary div span:nth-child(4){
+  .cart#summary div span:nth-child(4) {
     grid-column: 2 / span 1;
-  }  
+  }
 
-  .cart#summary div span:nth-child(5){
+  .cart#summary div span:nth-child(5) {
     grid-column: 3 / span 1;
-  } 
+  }
 
   .product-box {
     width: 220px;
@@ -1330,7 +1371,7 @@ footer {
     grid-template-columns: 1fr 1fr;
   }
 
-  .cart#summary div span:nth-child(5){
+  .cart#summary div span:nth-child(5) {
     grid-column: 2 / span 1;
-  } 
+  }
 }

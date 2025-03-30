@@ -4,6 +4,11 @@
 
 Responzívne šablóny: [WTECH-Project/wtech/resources/html/](https://github.com/ByMikiii/WTECH-Project/tree/main/wtech/resources/html)
 
+CSS: [WTECH-Project/wtech/resources/css/](https://github.com/ByMikiii/WTECH-Project/tree/main/wtech/resources/css)
+
+Skice: [Wireframe](https://github.com/ByMikiii/WTECH-Project/tree/main/wtech/resources/wireframe.jpg)
+
+Návrh fyzického dátového modelu: [Class Diagram](https://github.com/ByMikiii/WTECH-Project/tree/main/wtech/resources/class_diagram.png)
 
 ### Zdroje
 #### Obrazky

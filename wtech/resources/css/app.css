@@ -414,8 +414,19 @@ footer {
   width: 240px;
   height: 164px;
   object-fit: cover;
-  background-color: grey;
   border-radius: 12px;
+}
+
+#add-product {
+  margin-bottom: 164px;
+}
+
+#add-product-image {
+  border-radius: 12px;
+  border: 1px solid #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -867,6 +878,7 @@ footer {
   margin-bottom: 64px;
 }
 
+
 .pagination-button {
   padding: 8px 16px;
   border: 1px solid #444;
@@ -1020,6 +1032,60 @@ footer {
   padding: 8px 16px;
   text-align: center;
   /* margin-bottom: 28px; */
+}
+
+/* ADD PRODUCT */
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-product-form h1 {
+  margin-bottom: 24px;
+}
+
+.add-form-input {
+  width: 264px;
+  margin-bottom: 24px;
+  display: block;
+}
+
+
+.add-form-input input,
+.add-form-input textarea,
+.add-form-input select {
+  margin-top: 8px;
+  width: 264px;
+  border-radius: 12px;
+  border: 1px solid #444;
+  padding: 8px 16px;
+}
+
+.add-product-form button {
+  border-radius: 12px;
+  border: 1px solid #444;
+  padding: 12px 24px;
+}
+
+.size-container {
+  max-width: 200px;
+}
+
+.size-options {
+  max-height: 150px;
+  width: 78px;
+  overflow-y: auto;
+  border: 1px solid #444;
+  padding-right: 24px;
+  display: block;
+}
+
+.size-options label {
+  display: flex;
+  align-items: end;
+  gap: 6px;
+  cursor: pointer;
 }
 
 

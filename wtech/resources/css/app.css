@@ -6,6 +6,7 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 } */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@400;700&display=swap');
 
 /* RESET */
 /* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
@@ -40,7 +41,20 @@ ul {
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #111;
 }
 
 a {
@@ -193,8 +207,13 @@ li a {
   height: 40px;
 }
 
+.login-nav {
+  margin: 0 20px;
+}
+
 #mobile-nav {
   display: none;
+  z-index: 4;
 }
 
 #mobile-nav ul li {
@@ -329,6 +348,7 @@ footer {
   justify-content: end;
   padding: 72px 32px;
   color: #fff;
+  margin-top: 8px;
 }
 
 #hot-product div {
@@ -420,7 +440,7 @@ footer {
 }
 
 #add-product {
-  margin-bottom: 164px;
+  margin-bottom: 198px;
 }
 
 #add-product-image {
@@ -433,7 +453,6 @@ footer {
 
 
 .view-more {
-  margin-top: 48px;
   padding: 12px 24px;
   border-radius: 16px;
   border: 1px solid #444;
@@ -483,7 +502,7 @@ footer {
 .product-name {
   text-align: left;
   margin-top: 2px;
-  height: 42px;
+  height: 56px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -511,6 +530,10 @@ footer {
 .button-cart-text {
   padding-left: 4px;
   font-weight: 500;
+}
+
+.cart-image {
+  border-radius: 12px;
 }
 
 /*LOGIN & REGISTER & Edit profile*/
@@ -612,6 +635,7 @@ footer {
   justify-self: right;
   color: white;
   margin-bottom: 20px;
+  margin-top: 24px;
 }
 
 
@@ -706,6 +730,8 @@ footer {
   justify-self: center;
   color: white;
   margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* STORE */
@@ -890,6 +916,7 @@ footer {
   align-items: end;
   flex-wrap: wrap;
   margin-bottom: 8px;
+  position: relative;
 }
 
 .store-top button {
@@ -970,6 +997,7 @@ footer {
 
 .prices h1 {
   margin: 0;
+  color: white;
 }
 
 .product-description {
@@ -1125,6 +1153,37 @@ footer {
   color: red;
 }
 
+.existing-image {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  margin: 16px 0;
+}
+
+.edit-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.edit-remove-button {
+  position: absolute;
+  color: red;
+  right: 12px;
+  top: 12px;
+  cursor: pointer;
+}
+
+.edit-remove-button:hover {
+  scale: 110%;
+}
+
+
+
 /* RESPONSIVE */
 /* Phone */
 @media (max-width: 770px) {
@@ -1192,6 +1251,10 @@ footer {
   #sort-label {
     display: none;
   }
+
+  .existing-image {
+    height: 160px;
+  }
 }
 
 /* Tablet */
@@ -1218,6 +1281,10 @@ footer {
   .product-main {
     grid-template-columns: 1fr;
   }
+
+  .existing-image {
+    height: 260px;
+  }
 }
 
 /* Desktop */
@@ -1243,6 +1310,10 @@ footer {
 
   .product-list {
     grid-template-columns: repeat(auto-fit, minmax(280px, 4fr));
+  }
+
+  .existing-image {
+    height: 400px;
   }
 }
 
@@ -1293,8 +1364,8 @@ footer {
     border-radius: 12px;
     border: 1px solid #444;
     padding: 2px 4px;
-    right: 64px;
-    top: 284px;
+    right: 12px;
+    top: 32px;
   }
 
   .product-box {

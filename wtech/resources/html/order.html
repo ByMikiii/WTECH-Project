@@ -4,13 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NaNohu</title>
+  <title>NaNohu - Domov</title>
+  <link rel="icon" href="../images/favicon.png" type="image/x-icon">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="../css/app.css">
 </head>
 
 <body>
   <nav id="main-nav">
-    <button id="nav-toggle">
+    <button id="nav-toggle" onclick="toggleMobileNav()">
       <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
           d="M4.75 5.75H19.25"></path>
@@ -20,35 +23,60 @@
           d="M4.75 12H19.25"></path>
       </svg>
     </button>
-    <a class="logo" href=""><img class="logo" src="../images/logo.png" alt="Logo"></a>
+    <a class="logo" href="./mainpage.html"><img class="logo" src="../images/logo.png" alt="Logo"></a>
     <ul id="center-nav">
-      <li><a href="">Novinky</a></li>
-      <li><a href="">Muži</a></li>
-      <li><a href="">Ženy</a></li>
-      <li><a href="">Výpredaj</a></li>
+      <li><a href="./store.html">Novinky</a></li>
+      <li><a href="./store.html">Muži</a></li>
+      <li><a href="./store.html">Ženy</a></li>
+      <li><a href="./store.html">Výpredaj</a></li>
+      <li><span class="login-nav">|</span></li>
+      <li><a href="./login.html">Prihlásiť sa</a></li>
+
     </ul>
     <ul id="right-nav">
-      <li class="li-icons"><a href=""><img id="search-icon" src="../images/Search Icon.png" alt="Search Icon"></a></li>
-      <li class="li-icons"><a href=""><img id="profile-icon" src="../images/Profile Icon.png" alt="Profile Icon"></a>
+      <li class="li-icons"><a href="./profile.html"><img id="profile-icon" src="../images/Profile Icon.png"
+            alt="Profile Icon"></a>
       </li>
-      <li><a href=""><img id="cart-icon" src="../images/Cart Shopping Bag.png" alt="Cart Icon"></a></li>
+      <li><a href="./cart.html"><img id="cart-icon" src="../images/Cart Shopping Bag.png" alt="Cart Icon"></a></li>
     </ul>
   </nav>
   <hr>
-
+  <nav id="mobile-nav">
+    <ul>
+      <li id="mobile-nav-search">
+        <input type="text" name="" id="" placeholder="Vyhladať...">
+        <button><img src="../images/Search Icon.png" alt="Search Icon" width="24" height="24"></button>
+      </li>
+      <hr>
+      <li><a href="./store.html">Novinky</a></li>
+      <hr>
+      <li><a href="./store.html">Muži</a></li>
+      <hr>
+      <li><a href="./store.html">Ženy</a></li>
+      <hr>
+      <li><a href="./store.html">Výpredaj</a></li>
+      <hr>
+      <li><a href="./profile.html">Profil</a></li>
+      <hr>
+      <li><a href="./login.html">Prihlásiť sa</a></li>
+      <hr>
+      <li><a href="./register.html">Zaregistrovať sa</a></li>
+      <hr>
+    </ul>
+  </nav>
 
   <main>
     <nav aria-label="Breadcrumb">
       <ol class="breadcrumb">
-        <li><a href="">Domov</a></li>
+        <li><a href="./mainpage.html">Domov</a></li>
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
           <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
         </svg>
-        <li><a href="">Košík</a></li>
+        <li><a href="./cart.html">Košík</a></li>
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
           <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
         </svg>
-        <li><a href="">Objednávka</a></li>
+        <li><a href="./order.html">Objednávka</a></li>
       </ol>
     </nav>
 
@@ -57,36 +85,36 @@
       <form class="login-form">
         <div>
           <label for="name">Meno a priezvisko</label>
-          <input type="text" name="name" required/>
+          <input type="text" name="name" required />
         </div>
         <div>
           <label for="email">Email</label>
-          <input type="text" name="email" value="example@example.com" required/>
+          <input type="text" name="email" value="example@example.com" required />
         </div>
         <div>
           <label for="number">Telefónne číslo</label>
-          <input type="tel" name="number" placeholder="v tvare +421xxxxxxxxx" required/>
+          <input type="tel" name="number" placeholder="v tvare +421xxxxxxxxx" required />
         </div>
         <div>
           <label for="address">Dodacia adresa</label>
-          <input type="text" name="address" placeholder="Ulica číslo, Mesto, PSČ" required/>
+          <input type="text" name="address" placeholder="Ulica číslo, Mesto, PSČ" required />
         </div>
         <div>
-            <label>Spôsob prepravy</label>
-            <select>
-                <option value="1">Kuriér</option>
-                <option value="2">Osobné prevzatie</option>
-                <option value="3">Poštovou službou</option>
-            </select>
+          <label>Spôsob prepravy</label>
+          <select>
+            <option value="1">Kuriér</option>
+            <option value="2">Osobné prevzatie</option>
+            <option value="3">Poštovou službou</option>
+          </select>
         </div>
         <div>
-            <label>Spôsob platby</label>
-            <select>
-                <option value="1">Bankovým prevodom</option>
-                <option value="2">Platba kartou</option>
-            </select>
+          <label>Spôsob platby</label>
+          <select>
+            <option value="1">Bankovým prevodom</option>
+            <option value="2">Platba kartou</option>
+          </select>
         </div>
-        <button type="submit">Dokončiť objednávku</button>
+        <button type="submit"><a href="./summary.html">Dokončiť objednávku</a></button>
       </form>
     </section>
 
@@ -96,15 +124,15 @@
 
   <footer>
     <section id="footer-content">
-      <a class="logo" href=""><img class="logo" src="../images/logo.png" alt="Logo"></a>
+      <a class="logo" href="./mainpage.html"><img class="logo" src="../images/logo.png" alt="Logo"></a>
       <div id="footer-boxes">
         <div class="footer-box">
           <h4>O nás</h4>
           <hr>
           <ul>
-            <li><a href="">Naša misia</a></li>
-            <li><a href="">Naše obchody</a></li>
-            <li><a href="">História spoločnosti</a></li>
+            <li><a href="./mainpage.html">Naša misia</a></li>
+            <li><a href="./mainpage.html">Naše obchody</a></li>
+            <li><a href="./mainpage.html">História spoločnosti</a></li>
           </ul>
         </div>
 
@@ -112,10 +140,10 @@
           <h4>FAQ</h4>
           <hr>
           <ul>
-            <li><a href="">Výber veľkosti</a></li>
-            <li><a href="">Vratenie tovaru</a></li>
-            <li><a href="">Doručenie</a></li>
-            <li><a href="">Osobné prevzatie</a></li>
+            <li><a href="./mainpage.html">Výber veľkosti</a></li>
+            <li><a href="./mainpage.html">Vratenie tovaru</a></li>
+            <li><a href="./mainpage.html">Doručenie</a></li>
+            <li><a href="./mainpage.html">Osobné prevzatie</a></li>
           </ul>
         </div>
 
@@ -130,6 +158,19 @@
           </ul>
         </div>
 
+        <div class="footer-box" id="newsletter">
+          <h4>Newsletter</h4>
+          <hr>
+          <ul>
+            <li>
+              <p>Prihláste sa na odber noviniek.</p>
+            </li>
+            <li>
+              <form action=""><input type="email" placeholder="Email"><button>Odoberať</button></form>
+            </li>
+          </ul>
+        </div>
+
       </div>
       <hr>
       <section id="bottom-footer">
@@ -138,7 +179,7 @@
         </small>
         <ul class="socials">
           <li>
-            <a href="">
+            <a href="./mainpage.html">
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="icon icon-tabler icons-tabler-outline icon-tabler-brand-instagram">
@@ -149,7 +190,7 @@
               </svg>
             </a>
           </li>
-          <li><a href="">
+          <li><a href="./mainpage.html">
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook">
@@ -158,7 +199,7 @@
               </svg>
             </a>
           </li>
-          <li><a href="">
+          <li><a href="./mainpage.html">
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x">
@@ -172,6 +213,9 @@
       </section>
     </section>
   </footer>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+  <script src="../js/app.js"></script>
+
 </body>
 
 </html>

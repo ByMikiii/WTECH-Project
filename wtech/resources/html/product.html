@@ -170,20 +170,30 @@
           </div>
         </div>
         <div class="details-bottom">
-          <div class="product-size-selection">
-            <h4>Veľkosť: </h4>
-            <div class="filter-section" id="size-selection">
-              <button class="product-size-select">36</button>
-              <button class="product-size-select">37</button>
-              <button class="product-size-select">38</button>
-              <button class="product-size-select">39</button>
-              <button class="product-size-select">40</button>
-              <button class="product-size-select">41</button>
-              <button class="product-size-select">42</button>
-              <button class="product-size-select">43</button>
+          <div class="product-stats">
+            <div class="product-size-selection">
+              <h4>Veľkosť: </h4>
+              <div class="filter-section" id="size-selection">
+                <button class="product-size-select">36</button>
+                <button class="product-size-select">37</button>
+                <button class="product-size-select">38</button>
+                <button class="product-size-select">39</button>
+                <button class="product-size-select">40</button>
+                <button class="product-size-select">41</button>
+                <button class="product-size-select">42</button>
+                <button class="product-size-select">43</button>
+              </div>
+            </div>
+            <div class="product-counter">
+              <h4>Počet kusov: </h4>
+              <div class="quantity-container">
+                <button class="quantity-button" id="decrease" onclick="this.nextElementSibling.stepDown()">-</button>
+                <input type="number" id="product-quantity" name="quantity" min="1" max="5" value="1" />
+                <button class="quantity-button" id="increase" onclick="this.previousElementSibling.stepUp()">+</button>
+              </div>
             </div>
           </div>
-          <div class="prices">
+          <div class="product-prices">
             <h1 class="old-price">1199.99€</h1>
             <h1>899.99€</h1>
           </div>

@@ -17,11 +17,13 @@ return new class extends Migration {
             $table->string('slug');
             $table->text('description');
             $table->string('manufacturer');
-            $table->string('gender');
+            $table->enum('gender', ['Men', 'Women', 'Unisex']);
             $table->string('color');
             $table->string('type');
             $table->double('price');
+            $table->boolean('isSale')->default(false);
             $table->double('salePrice');
+            $table->date('release_date');
         });
     }
 

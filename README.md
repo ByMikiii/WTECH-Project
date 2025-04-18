@@ -1,10 +1,13 @@
-# WTECH-Project
+# 👟 NaNohu.sk – Laravel e-shop s obuvou
+
+**NaNohu.sk** je jednoduchý e-shop s obuvou vytvorený ako semestrálny projekt pre predmet **Základy webových technológií**. Aplikácia je postavená na **Laravel frameworku** a využíva **PostgreSQL** databázu.
+
 
 ### 1. fáza projektu
 
-Responzívne šablóny: [WTECH-Project/wtech/resources/html/](https://github.com/ByMikiii/WTECH-Project/tree/main/wtech/resources/html)
+Responzívne šablóny: [WTECH-Project/wtech/public/html/](https://github.com/ByMikiii/WTECH-Project/tree/main/wtech/public/html)
 
-CSS: [WTECH-Project/wtech/resources/css/](https://github.com/ByMikiii/WTECH-Project/tree/main/wtech/resources/css)
+CSS: [WTECH-Project/wtech/public/css/](https://github.com/ByMikiii/WTECH-Project/tree/main/wtech/public/css)
 
 Skice: [Wireframe](https://github.com/ByMikiii/WTECH-Project/tree/main/wtech/resources/wireframe.jpg)
 

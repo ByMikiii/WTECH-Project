@@ -2,10 +2,18 @@
 
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Product;
 
 Route::get('/', function () {
-    return view('welcome');
+    $saleProducts = Product::where('isSale', true)->take(4)->get();
+    $newProducts = Product::latest()->take(4)->get();
+    $hotProduct = Product::orderByDesc('price')->first();
+    return view('pages.home', [
+        'title' => 'NaNohu - Domov',
+        'saleProducts' => $saleProducts,
+        'newProducts' => $newProducts,
+        'hotProduct' => $hotProduct
+    ]);
 });
 
 #Products REST

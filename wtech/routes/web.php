@@ -16,25 +16,49 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/login',function () {
+Route::get('/new', function () {
+    $products = Product::latest()->paginate(12);
+    return view('pages.store', [
+        'title' => 'NaNohu - Domov',
+        'products' => $products
+    ]);
+});
+
+
+
+Route::get('/login', function () {
     return view('pages.login', ['title' => 'NaNohu - Prihlásenie']);
 });
 
-Route::get('/register', function (){
+Route::get('/register', function () {
     return view('pages.register', ['title' => 'NaNohu - Registrácia']);
 });
 
-Route::get('/renew_password', function (){
+Route::get('/renew_password', function () {
     return view('pages.renew_password', ['title' => 'NaNohu - Obnova hesla']);
 });
 
-Route::get('/profile', function (){
+Route::get('/profile', function () {
     return view('pages.profile', ['title' => 'NaNohu - Profil']);
 });
 
-Route::get('/change_password', function (){
+Route::get('/change_password', function () {
     return view('pages.change_password', ['title' => 'NaNohu - Zmena hesla']);
 });
+
+
+
+
+
+Route::get('/{slug}', function ($slug) {
+    $product = Product::where('slug', $slug)->firstOrFail();
+
+    return view('pages.product', [
+        'title' => 'NaNohu - ' . $product->name,
+        'product' => $product
+    ]);
+});
+
 
 #Products REST
 Route::get('products', [ProductController::class, 'index']);

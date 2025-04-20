@@ -1,5 +1,5 @@
 <div class="product-box">
-    <a href="./product.html" class="product-image-box">
+    <a href="{{ $product->slug }}" class="product-image-box">
         <img class="product-image" src="../images/optimized_products/{{ $product->slug }}/1.jpg"
             alt="Image of {{$product->name}}" />
     </a>

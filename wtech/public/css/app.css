@@ -838,8 +838,7 @@ footer {
 
 #filter-button {
   display: block;
-  margin: auto;
-  margin-top: 32px;
+  margin: 32px auto;
   width: 90%;
   padding: 8px 16px;
   border: 1px solid #444;
@@ -951,6 +950,13 @@ footer {
   border-radius: 12px;
   margin: 0 2px;
 }
+
+.pagination-button.active {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+}
+
 
 .pagination-button:hover {
   scale: 105%;

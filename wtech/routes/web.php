@@ -16,6 +16,18 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/login',function () {
+    return view('pages.login', ['title' => 'NaNohu - Prihlásenie']);
+});
+
+Route::get('/register', function (){
+    return view('pages.register', ['title' => 'NaNohu - Registrácia']);
+});
+
+Route::get('/renew_password', function (){
+    return view('pages.renew_password', ['title' => 'NaNohu - Obnova hesla']);
+});
+
 #Products REST
 Route::get('products', [ProductController::class, 'index']);
 Route::get('products/{id}', [ProductController::class, 'show']);

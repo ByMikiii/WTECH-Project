@@ -50,8 +50,11 @@
         <hr>
     </ul>
 </nav>
+
+@if (!request()->is('login', 'register', 'renew_password'))
 <form action="" class="search-form">
     <input type="text" class="search-input" placeholder="Vyhladať...">
     <button type="submit" class="search-submit"><img class="search-icon" src="../images/Search Icon.png"
             alt="Search Icon"></button>
 </form>
+@endif

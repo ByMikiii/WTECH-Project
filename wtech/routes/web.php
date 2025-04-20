@@ -28,6 +28,14 @@ Route::get('/renew_password', function (){
     return view('pages.renew_password', ['title' => 'NaNohu - Obnova hesla']);
 });
 
+Route::get('/profile', function (){
+    return view('pages.profile', ['title' => 'NaNohu - Profil']);
+});
+
+Route::get('/change_password', function (){
+    return view('pages.change_password', ['title' => 'NaNohu - Zmena hesla']);
+});
+
 #Products REST
 Route::get('products', [ProductController::class, 'index']);
 Route::get('products/{id}', [ProductController::class, 'show']);

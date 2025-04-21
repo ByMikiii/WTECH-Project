@@ -14,7 +14,7 @@
 
         <section class="container">
             <h1>Registrácia</h1>
-            <form class="login-form">
+            <form id="registration-form" class="login-form" >
                 <div>
                     <label for="email">E-mail:</label>
                     <input type="email" name="email" required>
@@ -25,7 +25,7 @@
                 </div>
                 <div>
                     <label for="password">Potvrdiť heslo:</label>
-                    <input type="password" name="password" required>
+                    <input type="password" name="password_confirmation" required>
                 </div>
                 <button type="submit">Registrovať</button>
             </form>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
 use Illuminate\Support\Facades\File;
@@ -92,7 +93,7 @@ Route::get('/change_password', function () {
     return view('pages.change_password', ['title' => 'NaNohu - Zmena hesla']);
 });
 
-
+Route::post('/register', [RegisterController::class, 'register']);
 
 
 

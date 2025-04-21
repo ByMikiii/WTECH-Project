@@ -83,3 +83,45 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Rating:", selectedRating, "Review:", reviewText);
   });
 });
+
+const reg_form = document.getElementById('registration-form');
+if (reg_form) {
+  reg_form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(reg_form);
+    const data = {
+      email: formData.get('email'),
+      password: formData.get('password'),
+      password_confirmation: formData.get('password_confirmation'),
+    };
+
+    if (data.password !== data.password_confirmation) {
+      alert("Zadané heslá nie sú rovnaké.");
+    } 
+    else {
+      fetch('/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        return response.json().then(result => {
+          if (response.ok) {
+            alert(result.message);
+            window.location.href = '/login';
+          } else {
+            alert('Chyba pri registrácii: ' + (result.message || 'Skontrolujte údaje.'));
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Chyba pri fetchi:', error);
+        alert('Chyba spojenia so serverom.');
+      });
+    }
+  });
+}

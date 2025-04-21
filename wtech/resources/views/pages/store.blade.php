@@ -3,15 +3,15 @@
 @section('content')
     <main>
         <ol class="breadcrumb">
-            <li><a href="./mainpage.html">Domov</a></li>
+            <li><a href="/">Domov</a></li>
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
                 <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
             </svg>
-            <li><a href="./store.html">Produkty</a></li>
+            <li><a href="/">Produkty</a></li>
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
                 <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
             </svg>
-            <li><a href="./store.html">Muži</a></li>
+            <li><a href="{{ url()->current() }}">{{ $category }}</a></li>
         </ol>
 
         <section id="mobile-filter">
@@ -143,7 +143,7 @@
 
             <section id="products">
                 <div class="store-top">
-                    <h1>Muži</h1>
+                    <h1>{{ $category }}</h1>
                     <div>
                         <label for="sort" id="sort-label">Zoradiť podľa:</label>
                         <select id="sort" name="sort">
@@ -169,7 +169,7 @@
                         @forelse($products as $product)
                             @include('components.product', ['product' => $product])
                         @empty
-                            <p>Neboli nájdene žiadné nové produkty!</p>
+                            <p>Neboli nájdene žiadné produkty!</p>
                         @endforelse
 
                     </div>

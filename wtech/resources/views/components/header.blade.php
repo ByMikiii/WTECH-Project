@@ -52,9 +52,10 @@
 </nav>
 
 @if (!request()->is('login', 'register', 'renew_password', 'profile', 'change_password'))
-<form action="" class="search-form">
-    <input type="text" class="search-input" placeholder="Vyhladať...">
-    <button type="submit" class="search-submit"><img class="search-icon" src="../images/Search Icon.png"
-            alt="Search Icon"></button>
-</form>
+    <form action="{{ route('search') }}" method="GET" class="search-form">
+        <input type="text" name="search" class="search-input" placeholder="Vyhladať..." @if (!empty($search))
+        value="{{ $search }}" @endif>
+        <button type="submit" class="search-submit"><img class="search-icon" src="../images/Search Icon.png"
+                alt="Search Icon"></button>
+    </form>
 @endif

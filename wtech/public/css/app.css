@@ -397,11 +397,14 @@ footer {
   font-weight: bold;
 }
 
+.page-prices {
+  margin-left: 6px;
+}
+
 .old-price {
   text-decoration: line-through;
   opacity: 70%;
 }
-
 
 .product-section {
   margin-top: 24px;

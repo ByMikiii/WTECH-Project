@@ -3,8 +3,8 @@
         <img class="product-image" src="../images/optimized_products/{{ $product->slug }}/1.jpg"
             alt="Image of {{$product->name}}" />
     </a>
-    <h3 class="product-name"><a href="./product.html">{{ $product->name }}</a></h3>
-    <div class="product-data">
+    <h3 class="product-name"><a href="{{ $product->slug }}">{{ $product->name }}</a></h3>
+    <div class=" product-data">
         <div class="product-prices">
             @if ($product->isSale)
                 <h3 class="old-price">{{ $product->price }}€</h3>

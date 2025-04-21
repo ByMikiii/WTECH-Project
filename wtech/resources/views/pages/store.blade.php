@@ -14,7 +14,7 @@
             <li><a href="{{ url()->current() }}">{{ $category }}</a></li>
         </ol>
 
-        <section id="mobile-filter">
+        <form id="mobile-filter">
             <div class="mobile-filter-header">
                 <h1>Filter</h1>
                 <button onclick="toggleMobileFilter()">
@@ -73,12 +73,13 @@
                 </div>
             </div>
             <button id="filter-button">Filtrovať</button>
-        </section>
+        </form>
 
         <div class="flex" id="store-container">
-            <section id="filter">
+            <form id="filter" method="POST" action="{{ route('store.filter') }}">
+                @csrf
                 <h1>Filter</h1>
-                <hr class="darker-hr">
+                <hr class=" darker-hr">
 
 
                 <h4>Cena</h4>
@@ -99,25 +100,23 @@
 
 
                 <h4>Farba</h4>
+                <input type="hidden" name="colors" id="selected-colors">
                 <div class="filter-section padding-filter" id="color-selection">
-                    <button class="color-select" style="background-color: red;"></button>
-                    <button class="color-select" style="background-color: blue;"></button>
-                    <button class="color-select" style="background-color: yellow;"></button>
-                    <button class="color-select" style="background-color: magenta;"></button>
+                    <button type="button" class="color-select" style="background-color: red;"></button>
+                    <button type="button" class="color-select" style="background-color: blue;"></button>
+                    <button type="button" class="color-select" style="background-color: yellow;"></button>
+                    <button type="button" class="color-select" style="background-color: magenta;"></button>
                 </div>
 
 
 
                 <h4>Veľkosť</h4>
                 <div class="filter-section padding-filter" id="size-selection">
-                    <button class="size-select">36</button>
-                    <button class="size-select">37</button>
-                    <button class="size-select">38</button>
-                    <button class="size-select">39</button>
-                    <button class="size-select">40</button>
-                    <button class="size-select">41</button>
-                    <button class="size-select">42</button>
-                    <button class="size-select">43</button>
+                    @foreach(range(36, 43) as $size)
+                        <label>
+                            <input type="checkbox" name="sizes[]" value="{{ $size }}"> {{ $size }}
+                        </label>
+                    @endforeach
                 </div>
 
 
@@ -138,7 +137,7 @@
                 </div>
 
                 <button id="filter-button">Filtrovať</button>
-            </section>
+            </form>
 
 
             <section id="products">

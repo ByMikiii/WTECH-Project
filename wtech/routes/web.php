@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
 use Illuminate\Support\Facades\File;
@@ -57,6 +58,9 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
     ]);
 })->name('search');
 
+Route::post('/filter', [ProductController::class, 'filter'])->name('store.filter');
+
+
 Route::get('/sale', function () {
     $products = Product::where('isSale', true)->paginate(12);
     return view('pages.store', [
@@ -110,7 +114,7 @@ Route::get('/{slug}', function ($slug) {
     ]);
 });
 
-
+Route::post('/cart/add/{productId}', [CartController::class, 'addProduct'])->name('cart.add');
 #Products REST
 Route::get('products', [ProductController::class, 'index']);
 Route::get('products/{id}', [ProductController::class, 'show']);

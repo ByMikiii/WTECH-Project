@@ -57,4 +57,36 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         return $product->delete();
     }
+
+    public function filter(Request $request)
+    {
+        $query = Product::query();
+
+        if ($request->filled('price-from')) {
+            $query->where('price', '>=', $request->input('price-from'));
+        }
+        if ($request->filled('price-to')) {
+            $query->where('price', '<=', $request->input('price-to'));
+        }
+
+        $brands = [];
+        if ($request->has('brand-nike'))
+            $brands[] = 'Nike';
+        if ($request->has('brand-Reebok'))
+            $brands[] = 'Reebok';
+        if ($request->has('brand-Adidas'))
+            $brands[] = 'Adidas';
+        if (!empty($brands)) {
+            $query->whereIn('manufacturer', $brands);
+        }
+
+        // color & size still missing
+
+        $products = $query->paginate(12);
+        return view('pages.store', [
+            'title' => 'NaNohu - Filter',
+            'category' => 'Filter',
+            'products' => $products
+        ]);
+    }
 }

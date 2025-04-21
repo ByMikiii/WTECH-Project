@@ -44,6 +44,12 @@ document.addEventListener("DOMContentLoaded", function () {
   colorButtons.forEach((button) => {
     button.addEventListener("click", function () {
       this.classList.toggle("selected");
+      if (selectedColors.includes(color)) {
+        selectedColors = selectedColors.filter((c) => c !== color);
+      } else {
+        selectedColors.push(color);
+      }
+      colorInput.value = selectedColors.join(",");
     });
   });
 

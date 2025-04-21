@@ -671,6 +671,11 @@ footer {
   margin-bottom: 50px;
 }
 
+.empty-cart {
+  text-align: center;
+  margin-top: 128px;
+}
+
 .cart div {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -702,6 +707,7 @@ footer {
   width: 30px;
 }
 
+.cart a,
 .cart button {
   padding: 6px 12px;
   border-radius: 12px;
@@ -723,7 +729,7 @@ footer {
   /*toto tu asi nemusi byt*/
   max-width: 200px;
   max-height: 150px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 /*SUMMARY*/

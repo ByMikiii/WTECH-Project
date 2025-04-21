@@ -77,20 +77,25 @@ Route::get('/sale', function () {
 });
 
 Route::get('/cart', function () {
-    $cartItems = [];
-
+    $cartItems = collect();
     if (Auth::check()) {
-        $cartItems = Cart::where('user_id', Auth::id())->get();
+        $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
     } else {
         $sessionCart = session()->get('cart', []);
-        foreach ($sessionCart as $item) {
-            $cartItems[] = (object) $item;
-        }
-    }return view('pages.cart', [
+        $cartItems = collect($sessionCart)->map(function ($item) {
+            return (object) $item;
+        });
+    }
+
+    return view('pages.cart', [
         'title' => 'NaNohu - Košík',
         'cartItems' => $cartItems
     ]);
 });
+
+Route::get('/cart/increment/{productId}/{size}', [CartController::class, 'incrementItem'])->name('cart.increment');
+Route::get('/cart/decrement/{productId}/{size}', [CartController::class, 'decrementItem'])->name('cart.decrement');
+Route::get('/cart/remove/{productId}/{size}', [CartController::class, 'removeItem'])->name('cart.remove');
 
 
 

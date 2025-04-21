@@ -22,7 +22,7 @@ class ProductSizesTableSeeder extends Seeder
                 DB::table('product_sizes')->insert([
                     'product_id' => $product->id,
                     'size' => $size,
-                    'stock' => rand(0, 12),
+                    'stock' => rand(4, 12),
                 ]);
             }
         }

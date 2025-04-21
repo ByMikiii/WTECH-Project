@@ -28,10 +28,10 @@
                     @for ($i = 1; $i <= $imagesCount; $i++)
                         <div
                             class="carousel-item
-                                                                                                                                                                                                                                        @if ($i == 1)
-                                                                                                                                                                                                                                            active
-                                                                                                                                                                                                                                        @endif
-                                                                                                                                                                                                                                        ">
+                                                                                                                                                                                                                                                @if ($i == 1)
+                                                                                                                                                                                                                                                    active
+                                                                                                                                                                                                                                                @endif
+                                                                                                                                                                                                                                                ">
                             <img src="../images/optimized_products/{{ $product->slug }}/{{ $i }}.jpg"
                                 class="d-block product-photo" alt="Obrázok produktu {{ $i }}">
                         </div>
@@ -103,10 +103,10 @@
                         <div class="product-counter">
                             <h4>Počet kusov: </h4>
                             <div class="quantity-container">
-                                <button class="quantity-button" id="decrease"
+                                <button type="button" class="quantity-button" id="decrease"
                                     onclick="this.nextElementSibling.stepDown()">-</button>
                                 <input type="number" id="product-quantity" name="quantity" min="1" max="5" value="1" />
-                                <button class="quantity-button" id="increase"
+                                <button type="button" class="quantity-button" id="increase"
                                     onclick="this.previousElementSibling.stepUp()">+</button>
                             </div>
                         </div>

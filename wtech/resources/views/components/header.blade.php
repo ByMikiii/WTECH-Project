@@ -15,14 +15,18 @@
         <li><a href="/men">Muži</a></li>
         <li><a href="/women">Ženy</a></li>
         <li><a href="/sale">Výpredaj</a></li>
-        <li><span class="login-nav">|</span></li>
-        <li><a href="/login">Prihlásiť sa</a></li>
+        @if (!Auth::check())
+            <li><span class="login-nav">|</span></li>
+            <li><a href="/login">Prihlásiť sa</a></li>
+        @endif
 
     </ul>
     <ul id="right-nav">
-        <li class="li-icons"><a href="/profile"><img id="profile-icon" src="../images/Profile Icon.png"
-                    alt="Profile Icon"></a>
-        </li>
+        @if (Auth::check())
+            <li class="li-icons"><a href="/profile"><img id="profile-icon" src="../images/Profile Icon.png"
+                        alt="Profile Icon"></a>
+            </li>
+        @endif
         <li><a href="/cart"><img id="cart-icon" src="../images/Cart Shopping Bag.png" alt="Cart Icon"></a></li>
     </ul>
 </nav>
@@ -42,15 +46,17 @@
         <hr>
         <li><a href="/sale">Výpredaj</a></li>
         <hr>
-        <li><a href="/profile">Profil</a></li>
-        <hr>
-        <li><a href="/login">Prihlásiť sa</a></li>
-        <hr>
-        <li><a href="/register">Zaregistrovať sa</a></li>
-        <hr>
+        @if (Auth::check())
+            <li><a href="/profile">Profil</a></li>
+            <hr>
+        @else
+            <li><a href="/login">Prihlásiť sa</a></li>
+            <hr>
+            <li><a href="/register">Zaregistrovať sa</a></li>
+            <hr>
+        @endif
     </ul>
 </nav>
-
 @if (!request()->is('login', 'register', 'renew_password', 'profile', 'change_password'))
     <form action="{{ route('search') }}" method="GET" class="search-form">
         <input type="text" name="search" class="search-input" placeholder="Vyhladať..." @if (!empty($search))

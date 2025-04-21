@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 class RegisterController extends Controller
 {
     public function register(Request $request)
-    {   
+    {
         $validated = $request->validate([
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
@@ -22,11 +22,11 @@ class RegisterController extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'username' => null,
-            'first_name' => null, 
-            'last_name' => null,  
-            'phone' => null,      
-            'street' => null,     
-            'city' => null,       
+            'first_name' => null,
+            'last_name' => null,
+            'phone' => null,
+            'street' => null,
+            'city' => null,
             'postal_code' => null,
         ]);
 

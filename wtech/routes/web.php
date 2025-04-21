@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\ProductSizes;
@@ -93,9 +94,9 @@ Route::get('/cart', function () {
 
 
 
-Route::get('/login', function () {
-    return view('pages.login', ['title' => 'NaNohu - Prihlásenie']);
-});
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
 Route::get('/register', function () {
     return view('pages.register', ['title' => 'NaNohu - Registrácia']);

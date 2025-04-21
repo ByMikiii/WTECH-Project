@@ -14,7 +14,8 @@
 
         <section class="container">
             <h1>Prihlásenie</h1>
-            <form class="login-form">
+            <form id="login-form" class="login-form" method="POST" action="{{ route('login') }}">
+                @csrf
                 <div>
                     <label for="email">Email</label>
                     <input type="text" name="email" required />

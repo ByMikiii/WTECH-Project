@@ -12,17 +12,17 @@ return new class extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique();
+            $table->string('username')->nullable();
             $table->string('password');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('phone')->unique();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('phone')->nullable();
             $table->string('email')->unique();
-            $table->string('street');
-            $table->string('city');
-            $table->string('postal_code');
-            $table->enum('role', ['admin', 'customer']);
-            $table->timestamp('signed_at')->useCurrent();
+            $table->string('street')->nullable();
+            $table->string('city')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->enum('role', ['admin', 'customer'])->default('customer');
+            $table->timestamps();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

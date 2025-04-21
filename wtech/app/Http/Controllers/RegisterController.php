@@ -28,7 +28,6 @@ class RegisterController extends Controller
             'street' => null,     
             'city' => null,       
             'postal_code' => null,
-            'role' => 'customer', 
         ]);
 
         return response()->json(['message' => 'Používateľ zaregistrovaný!']);

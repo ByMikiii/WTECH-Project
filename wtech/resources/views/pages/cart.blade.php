@@ -35,7 +35,6 @@
                         Odstrániť z košíka
                     </span>
                 </div>
-
                 @foreach ($cartItems as $productSizes)
                     @foreach ($productSizes as $cartItem)
                         <div>

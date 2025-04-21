@@ -79,7 +79,27 @@ Route::get('/sale', function () {
 Route::get('/cart', function () {
     $cartItems = collect();
     if (Auth::check()) {
-        $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
+        $items = Cart::where('user_id', Auth::id())->with('product')->get();
+
+        // map to session format
+        $cartItems = $items->mapWithKeys(function ($item) {
+            $productId = $item->product->id;
+            $size = $item->size;
+            return [
+                (string) $productId => [
+                    (string) $size => [
+                        'product_id' => (string) $productId,
+                        'name' => $item->product->name,
+                        'price' => $item->product->price,
+                        'isSale' => $item->product->isSale,
+                        'salePrice' => $item->product->salePrice,
+                        'quantity' => $item->quantity,
+                        'image' => $item->product->slug,
+                        'size' => (string) $size
+                    ]
+                ]
+            ];
+        });
     } else {
         $sessionCart = session()->get('cart', []);
         $cartItems = collect($sessionCart)->map(function ($item) {

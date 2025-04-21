@@ -26,11 +26,12 @@
                 </div>
                 <div class="carousel-inner">
                     @for ($i = 1; $i <= $imagesCount; $i++)
-                        <div class="carousel-item
-                                                                                                                        @if ($i == 1)
-                                                                                                                            active
-                                                                                                                        @endif
-                                                                                                                        ">
+                        <div
+                            class="carousel-item
+                                                                                                                                                                                                                                        @if ($i == 1)
+                                                                                                                                                                                                                                            active
+                                                                                                                                                                                                                                        @endif
+                                                                                                                                                                                                                                        ">
                             <img src="../images/optimized_products/{{ $product->slug }}/{{ $i }}.jpg"
                                 class="d-block product-photo" alt="Obrázok produktu {{ $i }}">
                         </div>
@@ -84,19 +85,19 @@
                         <span>5 / 5</span>
                     </div>
                 </div>
-                <div class="details-bottom">
+                <form class="details-bottom" method="POST" action="{{ route('cart.add', ['productId' => $product->id]) }}">
+                    @csrf
                     <div class="product-stats">
                         <div class="product-size-selection">
                             <h4>Veľkosť: </h4>
                             <div class="filter-section" id="size-selection">
-                                <button class="product-size-select">36</button>
-                                <button class="product-size-select">37</button>
-                                <button class="product-size-select">38</button>
-                                <button class="product-size-select">39</button>
-                                <button class="product-size-select">40</button>
-                                <button class="product-size-select">41</button>
-                                <button class="product-size-select">42</button>
-                                <button class="product-size-select">43</button>
+                                <input type="hidden" name="size" id="selected-size" value="{{ $sizes[0]->size }}">
+                                @foreach ($sizes as $size)
+                                    @if ($size->stock > 0)
+                                        <button type="button"
+                                            class="product-size-select {{ $loop->first ? 'selected' : '' }}">{{ $size->size }}</button>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                         <div class="product-counter">
@@ -124,7 +125,7 @@
                         </h1>
                     </div>
                     <div class="product-buttons">
-                        <button class="button-cart" id="product-button">
+                        <button type="submit" class="button-cart" id="product-button">
                             <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5"
                                 stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                 aria-hidden="true">
@@ -151,7 +152,7 @@
                             </a>
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </section>
 

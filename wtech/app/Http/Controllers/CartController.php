@@ -12,18 +12,25 @@ class CartController extends Controller
 {
     public function addProduct(Request $request, $productId)
     {
+        $request->validate([
+            'size' => 'required|numeric',
+            'quantity' => 'required|integer|min:1|max:5',
+        ]);
+        $size = $request->input('size');
+        $quantity = $request->input('quantity');
         $product = Product::findOrFail($productId);
         if (Auth::check()) {
             $cartItem = Cart::firstOrNew([
                 'user_id' => Auth::id(),
-                'product_id' => $productId
+                'product_id' => $productId,
+                'size' => $size
             ]);
-            $cartItem->quantity += 1;
+            $cartItem->quantity += $quantity || 1;
             $cartItem->save();
         } else {
             $cart = session()->get('cart', []);
             if (isset($cart[$productId])) {
-                $cart[$productId]['quantity'] += 1;
+                $cart[$productId]['quantity'] += $quantity || 1;
             } else {
                 $cart[$productId] = [
                     'product_id' => $productId,
@@ -31,8 +38,9 @@ class CartController extends Controller
                     'price' => $product->price,
                     'isSale' => $product->isSale,
                     'salePrice' => $product->salePrice,
-                    'quantity' => 1,
+                    'quantity' => $quantity || 1,
                     'image' => $product->slug,
+                    'size' => $size
                 ];
             }
             session()->put('cart', $cart);

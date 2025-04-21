@@ -58,6 +58,9 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", function () {
       buttons_.forEach((btn) => btn.classList.remove("selected"));
       this.classList.add("selected");
+
+      const sizeInput = document.querySelector('input[name="size"]');
+      sizeInput.value = this.dataset.size || this.innerText;
     });
   });
 

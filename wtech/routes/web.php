@@ -3,9 +3,13 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\RegisterController;
-use Illuminate\Support\Facades\Route;
 use App\Models\Product;
+use App\Models\Cart;
+use App\Models\ProductSizes;
+use Database\Seeders\ProductSizesTableSeeder;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $saleProducts = Product::where('isSale', true)->take(4)->get();
@@ -71,6 +75,22 @@ Route::get('/sale', function () {
     ]);
 });
 
+Route::get('/cart', function () {
+    $cartItems = [];
+
+    if (Auth::check()) {
+        $cartItems = Cart::where('user_id', Auth::id())->get();
+    } else {
+        $sessionCart = session()->get('cart', []);
+        foreach ($sessionCart as $item) {
+            $cartItems[] = (object) $item;
+        }
+    }return view('pages.cart', [
+        'title' => 'NaNohu - Košík',
+        'cartItems' => $cartItems
+    ]);
+});
+
 
 
 Route::get('/login', function () {
@@ -99,7 +119,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/{slug}', function ($slug) {
     $product = Product::where('slug', $slug)->firstOrFail();
-
+    $sizes = ProductSizes::where('product_id', $product->id)->get();
     $path = public_path('images/optimized_products/' . $slug);
 
     $count = 0;
@@ -111,7 +131,8 @@ Route::get('/{slug}', function ($slug) {
     return view('pages.product', [
         'title' => $product->name . ' - NaNohu',
         'product' => $product,
-        'imagesCount' => $count
+        'imagesCount' => $count,
+        'sizes' => $sizes
     ]);
 });
 

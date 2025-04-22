@@ -141,7 +141,7 @@ Route::get('/profile', function () {
         'name' => $user->first_name . ' ' . $user->last_name,
         'phone' => $user->phone,
         'address' => $user->postal_code,]);
-});
+})->middleware('auth');
 
 Route::get('/change_password', function () {
     return view('pages.change_password', ['title' => 'NaNohu - Zmena hesla']);
@@ -150,8 +150,13 @@ Route::get('/change_password', function () {
 Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/edit_profile', function () {
-    return view('pages.edit_profile', ['title' => 'NaNohu - Úprava profilu']);
-});
+    $user = Auth::user();
+    return view('pages.edit_profile', ['title' => 'NaNohu - Úprava profilu',
+        'email' => $user->email,
+        'name' => $user->first_name . ' ' . $user->last_name,
+        'phone' => $user->phone,
+        'address' => $user->postal_code,]);
+})->middleware('auth');
 
 
 

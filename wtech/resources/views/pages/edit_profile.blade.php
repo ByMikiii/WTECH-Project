@@ -21,19 +21,19 @@
       <form class="login-form">
         <div>
           <label for="name">Meno a priezvisko</label>
-          <input type="text" name="name" />
+          <input type="text" name="name" value="{{ $name }}"/>
         </div>
         <div>
           <label for="email">Email</label>
-          <input type="text" name="email" value="example@example.com" />
+          <input type="text" name="email" value="{{ $email }}" />
         </div>
         <div>
           <label for="number">Telefónne číslo</label>
-          <input type="tel" name="number" placeholder="v tvare +421xxxxxxxxx" />
+          <input type="tel" name="number" placeholder="v tvare +421xxxxxxxxx" value="{{ $phone }}"/>
         </div>
         <div>
           <label for="address">Adresa</label>
-          <input type="text" name="address" placeholder="Ulica číslo, Mesto, PSČ" />
+          <input type="text" name="address" placeholder="Ulica číslo, Mesto, PSČ" value="{{ $address }}"/>
         </div>
         <button type="submit">Uložiť zmeny</button>
       </form>

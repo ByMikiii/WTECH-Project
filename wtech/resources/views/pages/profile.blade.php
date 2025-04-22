@@ -20,19 +20,19 @@
             <h1>Profil používateľa</h1>
             <div>
                 <label for="name">Meno</label>
-                <span name="name">Príklad</span>
+                <span name="name">{{ $name }}</span>
             </div>
             <div>
                 <label for="e-mail">E-mail</label>
-                <span name="e-mail">example@example.com</span>
+                <span name="e-mail">{{ $email }}</span>
             </div>
             <div>
                 <label for="phone">Telefónne číslo</label>
-                <span name="phone">+421 900 000 000</span>
+                <span name="phone">{{ $phone }}</span>
             </div>
             <div>
                 <label for="address">Adresa</label>
-                <span name="address">Fiktívna 99, Bratislava, 999 99</span>
+                <span name="address">{{ $address }}</span>
             </div>
             <button onclick="location.href='/edit_profile';">Upraviť profil</button>
             <button onclick="location.href='/change_password';">Zmena hesla</button>

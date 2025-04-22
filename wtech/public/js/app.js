@@ -143,5 +143,4 @@ document.getElementById("logout").addEventListener("click", () => {
       window.location.href = response.url;
     }
   })
-  .catch(error => console.error('Chyba pri odhlasovaní:', error));
 });

@@ -134,7 +134,13 @@ Route::get('/renew_password', function () {
 });
 
 Route::get('/profile', function () {
-    return view('pages.profile', ['title' => 'NaNohu - Profil']);
+    $user = Auth::user();
+
+    return view('pages.profile', ['title' => 'NaNohu - Profil',
+        'email' => $user->email,
+        'name' => $user->first_name . ' ' . $user->last_name,
+        'phone' => $user->phone,
+        'address' => $user->postal_code,]);
 });
 
 Route::get('/change_password', function () {

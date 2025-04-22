@@ -145,15 +145,16 @@
             <section id="products">
                 <div class="store-top">
                     <h1>{{ $category }}</h1>
-                    <div>
+                    <form id="sortBy" method="GET" action="{{ route('store.filter') }}">
                         <label for="sort" id="sort-label">Zoradiť podľa:</label>
-                        <select id="sort" name="sort">
-                            <option value="price-asc">Cena: od najnižšej</option>
-                            <option value="price-desc">Cena: od najvyššej</option>
-                            <option value="alphabetical">Abecedne</option>
-                            <option value="newest">Najnovšie</option>
+                        <select id="sort" name="sort" onchange="document.getElementById('sortBy').submit()">
+                            <option value="price-asc" {{ $sort == 'price-asc' ? 'selected' : '' }}>Cena: od najnižšej</option>
+                            <option value="price-desc" {{ $sort == 'price-desc' ? 'selected' : '' }}>Cena: od najvyššej
+                            </option>
+                            <option value="alphabetical" {{ $sort == 'alphabetical' ? 'selected' : '' }}>Abecedne</option>
+                            <option value="newest" {{ $sort == 'newest' ? 'selected' : '' }}>Najnovšie</option>
                         </select>
-                    </div>
+                    </form>
                     <button onclick="toggleMobileFilter()">
                         <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34">

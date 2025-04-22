@@ -62,6 +62,7 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
+
         // prices
         if ($request->filled('price-from')) {
             $query->where('price', '>=', $request->input('price-from'));
@@ -100,6 +101,23 @@ class ProductController extends Controller
             });
         }
 
+        if ($request->filled('sort')) {
+            switch ($request->input('sort')) {
+                case 'price-asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price-desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'alphabetical':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'newest':
+                    $query->orderBy('release_date', 'desc');
+                    break;
+            }
+        }
+
         $products = $query->paginate(12);
         return view('pages.store', [
             'title' => 'NaNohu - Filter',
@@ -111,7 +129,8 @@ class ProductController extends Controller
             'sizes' => $sizes,
             'colorString' => $request->input('color'),
             'sizeString' => $request->input('size'),
-            'brands' => $brands
+            'brands' => $brands,
+            'sort' => $request->input('sort')
         ]);
     }
 }

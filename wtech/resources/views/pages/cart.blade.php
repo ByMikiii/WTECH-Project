@@ -59,9 +59,9 @@
                             </span>
                             <span>
                                 @if ($cartItem['isSale'])
-                                    {{ $cartItem['salePrice'] }}
+                                    {{ $cartItem['salePrice'] * $cartItem['quantity']}}
                                 @else
-                                    {{ $cartItem['price']  }}
+                                    {{ $cartItem['price'] * $cartItem['quantity']  }}
                                 @endif
                             </span>
                             <span>

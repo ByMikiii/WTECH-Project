@@ -128,3 +128,20 @@ if (reg_form) {
     }
   });
 }
+
+document.getElementById("logout").addEventListener("click", () => {
+  fetch('/logout', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    }
+  })
+  .then(response => {
+    if (response.redirected) {
+      alert("Odhlásenie prebehlo úspešne!");
+      window.location.href = response.url;
+    }
+  })
+  .catch(error => console.error('Chyba pri odhlasovaní:', error));
+});

@@ -13,7 +13,7 @@
         </nav>
 
         <section id="logout_button">
-            <button id="logout"><a href="/login">Odhlásiť sa</a></button>
+            <button id="logout">Odhlásiť sa</button>
         </section>
 
         <section class="profile">

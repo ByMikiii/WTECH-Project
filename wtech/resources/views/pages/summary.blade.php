@@ -9,12 +9,20 @@
                     <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
                 </svg>
                 <li><a href="/cart">Košík</a></li>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                    <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+                </svg>
+                <li><a href="/order">Dodacie údaje</a></li>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                    <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+                </svg>
+                <li><a href="/summary">Zhrnutie</a></li>
             </ol>
         </nav>
 
         @if (!$cartItems->isEmpty())
             <section class="cart">
-                <h1>Nákupný košík</h1>
+                <h1>Zhrnutie objednávky</h1>
                 <div id="first_div">
                     <span>
                         Obrázok
@@ -31,9 +39,6 @@
                     <span>
                         Cena
                     </span>
-                    <span>
-                        Odstrániť z košíka
-                    </span>
                 </div>
                 @foreach ($cartItems as $productSizes)
                     @foreach ($productSizes as $cartItem)
@@ -46,33 +51,29 @@
                                 {{$cartItem['name']}}
                             </a>
                             <span>
-                                <a class="qua-button"
-                                    href="{{ route('cart.decrement', ['productId' => $cartItem['product_id'], 'size' => $cartItem['size']]) }}">−</a>
+
                                 <input type="number" value="{{$cartItem['quantity']}}" placeholder="1" required>
-                                <a class="qua-button"
-                                    href="{{ route('cart.increment', ['productId' => $cartItem['product_id'], 'size' => $cartItem['size']]) }}">+</a>
+
                             </span>
                             <span>
                                 <!-- <button onclick="this.nextElementSibling.stepDown()">−</button> -->
                                 <input type="number" value="{{$cartItem['size']}}" disabled required>
                                 <!-- <button onclick="this.previousElementSibling.stepUp()">+</button> -->
                             </span>
+
                             <span>
                                 @if ($cartItem['isSale'])
-                                    {{ $cartItem['salePrice'] * $cartItem['quantity']}}
+                                    {{ $cartItem['salePrice'] * $cartItem['quantity']}}€
                                 @else
-                                    {{ $cartItem['price'] * $cartItem['quantity']  }}
+                                    {{ $cartItem['price'] * $cartItem['quantity']}}€
                                 @endif
-                            </span>
-                            <span>
-                                <a class="qua-button"
-                                    href="{{ route('cart.remove', ['productId' => $cartItem['product_id'], 'size' => $cartItem['size']]) }}">X</a>
                             </span>
                         </div>
                     @endforeach
                 @endforeach
 
-                <button onclick="location.href='/order';">Prejsť na objednávku</button>
+                <button onclick="location.href='/';">Dokončiť objednávku</button>
+                <h2>{{ $total }}€</h2>
             </section>
         @else
             <h1 class="empty-cart">Nakupný košík je prázdny!</h1>

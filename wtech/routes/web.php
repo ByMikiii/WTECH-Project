@@ -115,6 +115,66 @@ Route::get('/cart', function () {
         'cartItems' => $cartItems
     ]);
 });
+
+Route::get('/order', function () {
+    $user = Auth::user();
+
+    return view('pages.order', [
+        'title' => 'NaNohu - Dodacie údaje',
+        'email' => $user?->email ?? null,
+        'name' => $user ? $user->first_name . ' ' . $user->last_name : null,
+        'phone' => $user?->phone ?? null,
+        'address' => $user?->postal_code ?? null
+    ]);
+});
+
+
+Route::get('/summary', function () {
+    $cartItems = collect();
+    if (Auth::check()) {
+        $items = Cart::where('user_id', Auth::id())->with('product')->get();
+
+        // map to session format
+        $cartItems = $items->mapWithKeys(function ($item) {
+            $productId = $item->product->id;
+            $size = $item->size;
+            return [
+                (string) $productId => [
+                    (string) $size => [
+                        'product_id' => (string) $productId,
+                        'name' => $item->product->name,
+                        'price' => $item->product->price,
+                        'isSale' => $item->product->isSale,
+                        'salePrice' => $item->product->salePrice,
+                        'quantity' => $item->quantity,
+                        'image' => $item->product->slug,
+                        'size' => (string) $size
+                    ]
+                ]
+            ];
+        });
+    } else {
+        $sessionCart = session()->get('cart', []);
+        $cartItems = collect($sessionCart)->map(function ($item) {
+            return (object) $item;
+        });
+    }
+
+    $total = 0;
+
+    foreach ($cartItems as $product) {
+        foreach ($product as $item) {
+            $price = $item['isSale'] ? $item['salePrice'] : $item['price'];
+            $total += $price * $item['quantity'];
+        }
+    }
+
+    return view('pages.summary', [
+        'title' => 'NaNohu - Košík',
+        'cartItems' => $cartItems,
+        'total' => $total
+    ]);
+});
 Route::post('/cart/add/{productId}', [CartController::class, 'addProduct'])->name('cart.add');
 Route::get('/cart/increment/{productId}/{size}', [CartController::class, 'incrementItem'])->name('cart.increment');
 Route::get('/cart/decrement/{productId}/{size}', [CartController::class, 'decrementItem'])->name('cart.decrement');
@@ -139,11 +199,13 @@ Route::get('/renew_password', function () {
 Route::get('/profile', function () {
     $user = Auth::user();
 
-    return view('pages.profile', ['title' => 'NaNohu - Profil',
+    return view('pages.profile', [
+        'title' => 'NaNohu - Profil',
         'email' => $user->email,
         'name' => $user->first_name . ' ' . $user->last_name,
         'phone' => $user->phone,
-        'address' => $user->postal_code,]);
+        'address' => $user->postal_code,
+    ]);
 })->middleware('auth');
 
 Route::get('/change_password', function () {
@@ -154,11 +216,13 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/edit_profile', function () {
     $user = Auth::user();
-    return view('pages.edit_profile', ['title' => 'NaNohu - Úprava profilu',
+    return view('pages.edit_profile', [
+        'title' => 'NaNohu - Úprava profilu',
         'email' => $user->email,
         'name' => $user->first_name . ' ' . $user->last_name,
         'phone' => $user->phone,
-        'address' => $user->postal_code,]);
+        'address' => $user->postal_code,
+    ]);
 })->middleware('auth');
 
 

@@ -148,11 +148,15 @@
                     <form id="sortBy" method="GET" action="{{ route('store.filter') }}">
                         <label for="sort" id="sort-label">Zoradiť podľa:</label>
                         <select id="sort" name="sort" onchange="document.getElementById('sortBy').submit()">
-                            <option value="price-asc" {{ $sort == 'price-asc' ? 'selected' : '' }}>Cena: od najnižšej</option>
-                            <option value="price-desc" {{ $sort == 'price-desc' ? 'selected' : '' }}>Cena: od najvyššej
+                            <option value="price-asc" {{ isset($sort) && $sort == 'price-asc' ? 'selected' : '' }}>Cena: od
+                                najnižšej</option>
+                            <option value="price-desc" {{ isset($sort) && $sort == 'price-desc' ? 'selected' : '' }}>Cena: od
+                                najvyššej
                             </option>
-                            <option value="alphabetical" {{ $sort == 'alphabetical' ? 'selected' : '' }}>Abecedne</option>
-                            <option value="newest" {{ $sort == 'newest' ? 'selected' : '' }}>Najnovšie</option>
+                            <option value="alphabetical" {{ isset($sort) && $sort == 'alphabetical' ? 'selected' : '' }}>
+                                Abecedne</option>
+                            <option value="newest" {{ isset($sort) && $sort == 'newest' ? 'selected' : '' }}>Najnovšie
+                            </option>
                         </select>
                     </form>
                     <button onclick="toggleMobileFilter()">

@@ -38,23 +38,23 @@
                 @foreach ($cartItems as $productSizes)
                     @foreach ($productSizes as $cartItem)
                         <div>
-                            <span>
+                            <a href="{{$cartItem['image']}}">
                                 <img class="cart-image" src="../images/optimized_products/{{$cartItem['image']}}/1.jpg"
                                     alt="Air Jordan 1">
-                            </span>
-                            <span>
+                            </a>
+                            <a href="{{$cartItem['image']}}">
                                 {{$cartItem['name']}}
-                            </span>
+                            </a>
                             <span>
-                                <a
+                                <a class="qua-button"
                                     href="{{ route('cart.decrement', ['productId' => $cartItem['product_id'], 'size' => $cartItem['size']]) }}">−</a>
                                 <input type="number" value="{{$cartItem['quantity']}}" placeholder="1" required>
-                                <a
+                                <a class="qua-button"
                                     href="{{ route('cart.increment', ['productId' => $cartItem['product_id'], 'size' => $cartItem['size']]) }}">+</a>
                             </span>
                             <span>
                                 <!-- <button onclick="this.nextElementSibling.stepDown()">−</button> -->
-                                <input type="number" value="{{$cartItem['size']}}" placeholder="40" required>
+                                <input type="number" value="{{$cartItem['size']}}" disabled required>
                                 <!-- <button onclick="this.previousElementSibling.stepUp()">+</button> -->
                             </span>
                             <span>
@@ -65,7 +65,7 @@
                                 @endif
                             </span>
                             <span>
-                                <a
+                                <a class="qua-button"
                                     href="{{ route('cart.remove', ['productId' => $cartItem['product_id'], 'size' => $cartItem['size']]) }}">X</a>
                             </span>
                         </div>

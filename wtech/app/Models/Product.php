@@ -2,7 +2,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
+use App\Models\ProductSizes;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -21,4 +21,9 @@ class Product extends Model
         'salePrice',
         'release_date',
     ];
+
+    public function sizes()
+    {
+        return $this->hasMany(ProductSizes::class);
+    }
 }

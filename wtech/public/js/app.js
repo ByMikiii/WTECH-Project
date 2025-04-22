@@ -41,17 +41,35 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const colorButtons = document.querySelectorAll(".color-select");
+  const colorContainer = document.getElementById("selected-colors-container");
+
+  let selectedColors = [];
+
   colorButtons.forEach((button) => {
+    const color = button.style.backgroundColor;
+
     button.addEventListener("click", function () {
       this.classList.toggle("selected");
+
       if (selectedColors.includes(color)) {
         selectedColors = selectedColors.filter((c) => c !== color);
       } else {
         selectedColors.push(color);
       }
-      colorInput.value = selectedColors.join(",");
+
+      colorContainer.innerHTML = "";
+
+      selectedColors.forEach((clr) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "color[]";
+        input.value = clr;
+        colorContainer.appendChild(input);
+      });
     });
   });
+
+
 
   const buttons_ = document.querySelectorAll(".product-size-select");
   buttons_.forEach((button) => {
@@ -65,6 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const stars = document.querySelectorAll(".star");
+  const rating_number = document.getElementsByName("rating");
   let selectedRating = 1;
 
   stars.forEach((s, index) => {
@@ -74,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
   stars.forEach((star) => {
     star.addEventListener("click", function () {
       selectedRating = this.getAttribute("data-value");
+      rating_number.value = selectedRating;
       stars.forEach((s, index) => {
         s.style.fill = index < selectedRating ? "gold" : "none";
       });
@@ -101,7 +121,7 @@ if (reg_form) {
 
     if (data.password !== data.password_confirmation) {
       alert("Zadané heslá nie sú rovnaké.");
-    } 
+    }
     else {
       fetch('/register', {
         method: 'POST',
@@ -111,20 +131,20 @@ if (reg_form) {
         },
         body: JSON.stringify(data)
       })
-      .then(response => {
-        return response.json().then(result => {
-          if (response.ok) {
-            alert(result.message);
-            window.location.href = '/login';
-          } else {
-            alert('Chyba pri registrácii: ' + (result.message || 'Skontrolujte údaje.'));
-          }
+        .then(response => {
+          return response.json().then(result => {
+            if (response.ok) {
+              alert(result.message);
+              window.location.href = '/login';
+            } else {
+              alert('Chyba pri registrácii: ' + (result.message || 'Skontrolujte údaje.'));
+            }
+          });
+        })
+        .catch(error => {
+          console.error('Chyba pri fetchi:', error);
+          alert('Chyba spojenia so serverom.');
         });
-      })
-      .catch(error => {
-        console.error('Chyba pri fetchi:', error);
-        alert('Chyba spojenia so serverom.');
-      });
     }
   });
 }

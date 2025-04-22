@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\ProductSizes;
+use App\Models\Review;
 use Database\Seeders\ProductSizesTableSeeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +66,8 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
     ]);
 })->name('search');
 
-Route::post('/filter', [ProductController::class, 'filter'])->name('store.filter');
+Route::get('/filter', [ProductController::class, 'filter'])->name('store.filter');
+
 
 
 Route::get('/sale', function () {
@@ -112,7 +115,7 @@ Route::get('/cart', function () {
         'cartItems' => $cartItems
     ]);
 });
-
+Route::post('/cart/add/{productId}', [CartController::class, 'addProduct'])->name('cart.add');
 Route::get('/cart/increment/{productId}/{size}', [CartController::class, 'incrementItem'])->name('cart.increment');
 Route::get('/cart/decrement/{productId}/{size}', [CartController::class, 'decrementItem'])->name('cart.decrement');
 Route::get('/cart/remove/{productId}/{size}', [CartController::class, 'removeItem'])->name('cart.remove');
@@ -165,6 +168,13 @@ Route::get('/{slug}', function ($slug) {
     $sizes = ProductSizes::where('product_id', $product->id)->get();
     $path = public_path('images/optimized_products/' . $slug);
 
+    $ownReview = Review::where('user_id', Auth::id())
+        ->where('product_id', $product->id)
+        ->first();
+    $otherReviews = Review::where('user_id', '!=', Auth::id())
+        ->where('product_id', $product->id)
+        ->get();
+
     $count = 0;
     if (File::exists($path)) {
         $count = collect(File::files($path))
@@ -175,11 +185,15 @@ Route::get('/{slug}', function ($slug) {
         'title' => $product->name . ' - NaNohu',
         'product' => $product,
         'imagesCount' => $count,
-        'sizes' => $sizes
+        'sizes' => $sizes,
+        'ownReview' => $ownReview,
+        'otherReviews' => $otherReviews
     ]);
 });
 
-Route::post('/cart/add/{productId}', [CartController::class, 'addProduct'])->name('cart.add');
+Route::post('review/create/{productId}', [ReviewController::class, 'createReview']);
+
+
 #Products REST
 Route::get('products', [ProductController::class, 'index']);
 Route::get('products/{id}', [ProductController::class, 'show']);

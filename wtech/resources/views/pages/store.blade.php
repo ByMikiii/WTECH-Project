@@ -75,9 +75,10 @@
             <button id="filter-button">Filtrovať</button>
         </form>
 
+
+
         <div class="flex" id="store-container">
-            <form id="filter" method="POST" action="{{ route('store.filter') }}">
-                @csrf
+            <form id="filter" method="GET" action="{{ route('store.filter') }}">
                 <h1>Filter</h1>
                 <hr class=" darker-hr">
 
@@ -86,35 +87,36 @@
                 <div class="filter-section">
                     <div class="flex">
                         <div class="price-box">
-                            <input class="price-input" name="price-from" type="number" value="0" min="0" max="9999">
+                            <input class="price-input" name="price-from" type="number"
+                                value="{{isset($priceFrom) ? $priceFrom : 0}}" min="0" max="9999">
                             <label for="price-from">od</label>
                         </div>
                         <span>-</span>
                         <div class="price-box">
-                            <input class="price-input" name="price-to" type="number" value="1400" min="0" max="9999">
+                            <input class="price-input" name="price-to" type="number"
+                                value="{{isset($priceTo) ? $priceTo : 1400}}" min="0" max="9999">
                             <label for="price-to">do</label>
                         </div>
                     </div>
                 </div>
-
-
-
                 <h4>Farba</h4>
-                <input type="hidden" name="colors" id="selected-colors">
+                <div id="selected-colors-container"></div>
                 <div class="filter-section padding-filter" id="color-selection">
-                    <button type="button" class="color-select" style="background-color: red;"></button>
-                    <button type="button" class="color-select" style="background-color: blue;"></button>
-                    <button type="button" class="color-select" style="background-color: yellow;"></button>
-                    <button type="button" class="color-select" style="background-color: magenta;"></button>
+                    <button type="button" class="color-select {{ in_array('red', $colors ?? []) ? 'selected' : '' }}"
+                        style="background-color: red;"></button>
+                    <button type="button" class="color-select {{ in_array('blue', $colors ?? []) ? 'selected' : '' }}"
+                        style="background-color: blue;"></button>
+                    <button type="button" class="color-select {{ in_array('yellow', $colors ?? []) ? 'selected' : '' }}"
+                        style="background-color: yellow;"></button>
+                    <button type="button" class="color-select {{ in_array('magenta', $colors ?? []) ? 'selected' : '' }}"
+                        style="background-color: magenta;"></button>
                 </div>
-
-
 
                 <h4>Veľkosť</h4>
                 <div class="filter-section padding-filter" id="size-selection">
                     @foreach(range(36, 43) as $size)
                         <label>
-                            <input type="checkbox" name="sizes[]" value="{{ $size }}"> {{ $size }}
+                            <input type="checkbox" name="size[]" value="{{ $size }}" {{ in_array($size, $sizes ?? []) ? 'checked' : '' }}> {{ $size }}
                         </label>
                     @endforeach
                 </div>
@@ -123,15 +125,15 @@
                 <h4>Značka</h4>
                 <div class="filter-section">
                     <div>
-                        <input type="checkbox" class="brand-nike" name="brand-nike" />
+                        <input type="checkbox" class="brand-nike" name="brand[]" value="Nike" {{ in_array('Nike', $brands ?? []) ? 'checked' : '' }} />
                         <label for="brand-nike">Nike</label>
                     </div>
                     <div>
-                        <input type="checkbox" class="brand-Reebok" name="brand-Reebok" />
+                        <input type="checkbox" class="brand-Reebok" name="brand[]" value="Reebok" {{ in_array('Reebok', $brands ?? []) ? 'checked' : '' }} />
                         <label for="brand-Reebok">Reebok</label>
                     </div>
                     <div>
-                        <input type="checkbox" class="brand-Adidas" name="brand-Adidas" />
+                        <input type="checkbox" class="brand-Adidas" name="brand[]" value="Adidas" {{ in_array('Adidas', $brands ?? []) ? 'checked' : '' }} />
                         <label for="brand-Adidas">Adidas</label>
                     </div>
                 </div>
@@ -168,7 +170,7 @@
                         @forelse($products as $product)
                             @include('components.product', ['product' => $product])
                         @empty
-                            <p>Neboli nájdene žiadné produkty!</p>
+                            <h2 class="no-products">Neboli nájdene žiadné produkty!</h2>
                         @endforelse
 
                     </div>

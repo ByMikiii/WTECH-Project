@@ -3,15 +3,20 @@
 @section('content')
     <section href="" id="hot-product">
         <div>
-            <a href="./product.html" class="hot-name">{{$hotProduct->name}}</a>
+            <a href="/{{ $hotProduct->slug }}" class="hot-name">{{$hotProduct->name}}</a>
             <div id="hot-sale">
                 <div class="prices">
                     <h1 class="old-price">{{$hotProduct->price}}€</h1>
                     <h1>{{$hotProduct->salePrice}}€</h1>
                 </div>
-                <button id="hot-button">
-                    Vložiť do košíka
-                </button>
+                <form method="POST" action="{{ route('cart.add', ['productId' => $hotProduct->id]) }}">
+                    @csrf
+                    <input type="hidden" name="size" value="36">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" id="hot-button">
+                        Vložiť do košíka
+                    </button>
+                </form>
             </div>
         </div>
     </section>

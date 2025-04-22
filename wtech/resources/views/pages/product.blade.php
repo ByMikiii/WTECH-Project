@@ -28,10 +28,10 @@
                     @for ($i = 1; $i <= $imagesCount; $i++)
                         <div
                             class="carousel-item
-                                                                                                                                                                                                                                                @if ($i == 1)
-                                                                                                                                                                                                                                                    active
-                                                                                                                                                                                                                                                @endif
-                                                                                                                                                                                                                                                ">
+                                                                                                                                                                                                                                                                                                                                                                                @if ($i == 1)
+                                                                                                                                                                                                                                                                                                                                                                                    active
+                                                                                                                                                                                                                                                                                                                                                                                @endif
+                                                                                                                                                                                                                                                                                                                                                                                ">
                             <img src="../images/optimized_products/{{ $product->slug }}/{{ $i }}.jpg"
                                 class="d-block product-photo" alt="Obrázok produktu {{ $i }}">
                         </div>
@@ -224,18 +224,19 @@
                                 </path>
                             </svg>
                         </div>
+                        {{ isset($ownReview) ? $ownReview->created_at : "" }}
                     </div>
 
-                    <form action="" class="review-form">
-                        <textarea name="review-input" class="review-input"
-                            placeholder="Sem môžete napísať svoju recenziu..."></textarea>
+                    <form method="POST" action="/review/create/{{ $product->id}}" class="review-form">
+                        @csrf
+                        <input type="hidden" name="rating" value="{{ isset($ownReview) ? $ownReview->rating : "1"}}">
+                        <textarea name="text" class="review-input" {{ isset($ownReview) ? "disabled " : ""}}
+                            placeholder="Sem môžete napísať svoju recenziu...">{{ isset($ownReview) ? $ownReview->text : ""}}</textarea>
                         <span class="review-author" id="review-submit">
-                            <button type="submit">Odoslať</button>
+                            <button type="submit">{{ isset($ownReview) ? "Zmazať " : "Odoslať"}}</button>
                         </span>
                     </form>
                 </div>
-
-
                 <div class="reviews">
                     <div class="review-box">
                         <div class="review-header">

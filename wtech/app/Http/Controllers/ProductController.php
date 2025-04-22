@@ -62,6 +62,7 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
+        // prices
         if ($request->filled('price-from')) {
             $query->where('price', '>=', $request->input('price-from'));
         }
@@ -69,24 +70,48 @@ class ProductController extends Controller
             $query->where('price', '<=', $request->input('price-to'));
         }
 
-        $brands = [];
-        if ($request->has('brand-nike'))
-            $brands[] = 'Nike';
-        if ($request->has('brand-Reebok'))
-            $brands[] = 'Reebok';
-        if ($request->has('brand-Adidas'))
-            $brands[] = 'Adidas';
+        // brands
+        $brands = $request->input('brand', []);
         if (!empty($brands)) {
             $query->whereIn('manufacturer', $brands);
         }
 
-        // color & size still missing
+        // color
+        $colors = [];
+        if ($request->has('color')) {
+            $colorParam = $request->input('color');
+            $colors = is_array($colorParam) ? $colorParam : explode(',', $colorParam);
+            $query->whereIn('color', $colors);
+        }
+
+        // size
+        $sizes = $request->input('size', []); // Default to an empty array if not provided
+
+        // If the 'size' input is a string (comma-separated), convert it into an array
+        if (is_string($sizes)) {
+            $sizes = explode(',', $sizes);
+        }
+
+        // Ensure that the 'sizes' array is not empty
+        if (!empty($sizes)) {
+            // Update the query to filter based on multiple sizes
+            $query->whereHas('sizes', function ($q) use ($sizes) {
+                $q->whereIn('size', $sizes);  // Use whereIn to check for multiple sizes
+            });
+        }
 
         $products = $query->paginate(12);
         return view('pages.store', [
             'title' => 'NaNohu - Filter',
             'category' => 'Filter',
-            'products' => $products
+            'products' => $products,
+            'priceFrom' => $request->input('price-from'),
+            'priceTo' => $request->input('price-to'),
+            'colors' => $colors,
+            'sizes' => $sizes,
+            'colorString' => $request->input('color'),
+            'sizeString' => $request->input('size'),
+            'brands' => $brands
         ]);
     }
 }

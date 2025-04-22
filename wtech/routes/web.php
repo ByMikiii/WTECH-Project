@@ -143,6 +143,10 @@ Route::get('/change_password', function () {
 
 Route::post('/register', [RegisterController::class, 'register']);
 
+Route::get('/edit_profile', function () {
+    return view('pages.edit_profile', ['title' => 'NaNohu - Úprava profilu']);
+});
+
 
 
 Route::get('/{slug}', function ($slug) {

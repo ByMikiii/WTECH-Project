@@ -93,12 +93,14 @@ document.addEventListener("DOMContentLoaded", function () {
   stars.forEach((star) => {
     star.addEventListener("click", function () {
       selectedRating = this.getAttribute("data-value");
-      rating_number.value = selectedRating;
+      rating_number[0].value = selectedRating;
       stars.forEach((s, index) => {
         s.style.fill = index < selectedRating ? "gold" : "none";
       });
     });
   });
+
+
 
   document.getElementById("review-form").addEventListener("submit", function (event) {
     event.preventDefault();
@@ -157,10 +159,10 @@ document.getElementById("logout").addEventListener("click", () => {
       'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     }
   })
-  .then(response => {
-    if (response.redirected) {
-      alert("Odhlásenie prebehlo úspešne!");
-      window.location.href = response.url;
-    }
-  })
+    .then(response => {
+      if (response.redirected) {
+        alert("Odhlásenie prebehlo úspešne!");
+        window.location.href = response.url;
+      }
+    })
 });

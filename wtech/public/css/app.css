@@ -999,10 +999,6 @@ footer {
   align-items: end;
 }
 
-.product-rating svg {
-  fill: gold;
-}
-
 .product-rating span {
   margin-left: 8px;
 }
@@ -1097,6 +1093,10 @@ footer {
   text-align: justify;
 }
 
+.under-desc {
+  margin-top: 12px;
+}
+
 .description-param {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1135,11 +1135,9 @@ footer {
   justify-content: space-between;
 }
 
-.review-header div svg {
-  fill: gold;
-}
-
 .review-text {
+  max-height: 124px;
+  overflow: scroll;
   padding: 8px
 }
 
@@ -1312,7 +1310,7 @@ footer {
 
   .product-box {
     width: 280px;
-    height: 308px;
+    height: 332px;
   }
 
   .product-image,
@@ -1390,7 +1388,7 @@ footer {
 
   .product-box {
     width: 280px;
-    height: 308px;
+    height: 332px;
   }
 
   .product-image,
@@ -1428,6 +1426,7 @@ footer {
 
   .product-box {
     width: 220px;
+    height: 292px;
   }
 
   .product-image,
@@ -1462,7 +1461,7 @@ footer {
 
   .product-box {
     width: 280px;
-    height: 308px;
+    height: 332px;
   }
 
   .product-image,

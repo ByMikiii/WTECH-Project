@@ -28,4 +28,14 @@ class ReviewController extends Controller
         }
         return redirect()->back()->withErrors(['You must be logged in to leave a review.']);
     }
+    public function deleteReview($productId)
+    {
+        if (Auth::check()) {
+            Review::where('user_id', Auth::id())
+                ->where('product_id', $productId)
+                ->delete();
+            return redirect()->back()->with('success');
+        }
+        return redirect()->back()->withErrors(['You must be logged in to leave a review.']);
+    }
 }

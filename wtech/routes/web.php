@@ -237,7 +237,17 @@ Route::get('/{slug}', function ($slug) {
         ->first();
     $otherReviews = Review::where('user_id', '!=', Auth::id())
         ->where('product_id', $product->id)
+        ->with('user')
+        ->orderByDesc('created_at')
         ->get();
+
+    $ratings = $otherReviews->pluck('rating')->toArray();
+
+    if ($ownReview) {
+        $ratings[] = $ownReview->rating;
+    }
+
+    $averageRating = !empty($ratings) ? round(array_sum($ratings) / count($ratings), 1) : 0;
 
     $count = 0;
     if (File::exists($path)) {
@@ -251,11 +261,13 @@ Route::get('/{slug}', function ($slug) {
         'imagesCount' => $count,
         'sizes' => $sizes,
         'ownReview' => $ownReview,
-        'otherReviews' => $otherReviews
+        'otherReviews' => $otherReviews,
+        'averageRating' => $averageRating
     ]);
 });
 
 Route::post('review/create/{productId}', [ReviewController::class, 'createReview']);
+Route::post('review/delete/{productId}', [ReviewController::class, 'deleteReview']);
 
 
 #Products REST

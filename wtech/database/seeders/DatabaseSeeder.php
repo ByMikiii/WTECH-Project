@@ -8,23 +8,24 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
-    {
-        $this->call([ProductsTableSeeder::class]);
-        $this->call([ProductSizesTableSeeder::class]);
-        $this->call([ProductsTableSeeder::class]);
-        $this->call([ProductsTableSeeder::class]);
+  /**
+   * Seed the application's database.
+   */
+  public function run(): void
+  {
+    $this->call([ProductsTableSeeder::class]);
+    $this->call([ProductSizesTableSeeder::class]);
+    $this->call([ProductsTableSeeder::class]);
+    $this->call([ProductsTableSeeder::class]);
+    $this->call([UsersTableSeeder::class]);
 
-        // \App\Models\Product::factory()->count(16)->create();
+    // \App\Models\Product::factory()->count(16)->create();
 
-        // User::factory(10)->create();
+    // User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-    }
+    // User::factory()->create([
+    //     'name' => 'Test User',
+    //     'email' => 'test@example.com',
+    // ]);
+  }
 }

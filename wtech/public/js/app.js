@@ -20,6 +20,13 @@ function toggleMobileFilter() {
   console.log(filterElement.style.display)
 }
 
+function removeImage(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.remove();
+  }
+}
+
 // automatically hide nav & filter when resizing
 window.addEventListener("resize", () => {
   if (window.innerWidth > 770) {

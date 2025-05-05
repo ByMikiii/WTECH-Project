@@ -458,10 +458,10 @@ footer {
   transform: scale(1.10);
 }
 
-
+/*
 #add-product {
   margin-bottom: 198px;
-}
+} */
 
 #add-product-image {
   border-radius: 12px;
@@ -1304,8 +1304,9 @@ footer {
 
   .product-box {
     width: 280px;
-    height: 332px;
+    height: 300px;
   }
+
 
   .product-image,
   .product-image-box {
@@ -1365,6 +1366,17 @@ footer {
 
   .existing-image {
     height: 260px;
+  }
+
+  .product-box {
+    width: 260px;
+    height: 320px;
+  }
+
+  .product-image,
+  .product-image-box {
+    width: 260px;
+    height: 186px;
   }
 }
 
@@ -1476,11 +1488,20 @@ footer {
     margin-left: 0;
     margin-bottom: 15px;
   }
+
+  .add-form-input {
+    width: 90%;
+  }
+
+  .existing-image {
+    height: 200px;
+  }
 }
 
 @media (max-width: 600px) and (min-width: 525px) {
   .product-box {
     width: 200px;
+    height: 256px;
   }
 
   .product-image,

@@ -21,9 +21,13 @@ function toggleMobileFilter() {
 }
 
 function removeImage(id) {
-  const element = document.getElementById(id);
+  const element = document.getElementById(`product-image-${id}`);
   if (element) {
-    element.remove();
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'images-to-delete[]';
+    input.value = id;
+    element.replaceWith(input);
   }
 }
 

@@ -24,19 +24,84 @@ class ProductController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      'name' => 'required|string|max:255',
-      'slug' => 'required|string|max:255',
-      'description' => 'required|string',
-      'manufacturer' => 'required|string|max:255',
-      'gender' => 'required|in:Men,Women,Unisex',
-      'color' => 'required|string|max:255',
-      'type' => 'required|string|max:255',
-      'price' => 'required|numeric|min:0',
-      'isSale' => 'required|boolean',
-      'salePrice' => 'required_if:isSale,true|numeric|min:0',
-      'release_date' => 'required|date|before_or_equal:today'
+      'product-name' => 'required|string',
+      'product-description' => 'required|string',
+      'product-price' => 'required|numeric',
+      'product-sale-price' => 'nullable|numeric',
+      'product-manufacturer' => 'required|string',
+      'product-type' => 'required|string',
+      'product-color' => 'required|string',
+      'product-date' => 'required|integer',
+      'product-gender' => 'required|string',
+      'product-images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
     ]);
-    return Product::create($validated);
+
+    $slug = Str::slug($request->input('product-name'));
+
+    $product = Product::where('slug', $slug)->first();
+    if (
+      isset($product) ||
+      !$request->hasFile('product-images') ||
+      count($request->file('product-images')) < 2
+    ) {
+      return redirect()->back()->withInput();
+    }
+
+    $product = Product::create([
+      'slug' => $slug,
+      'name' => $request->input('product-name'),
+      'description' => $request->input('product-description'),
+      'price' => $request->input('product-price'),
+      'salePrice' => $request->input('product-sale-price'),
+      'isSale' => $request->input('product-sale-price') > 0,
+      'manufacturer' => $request->input('product-manufacturer'),
+      'type' => $request->input('product-type'),
+      'color' => $request->input('product-color'),
+      'release_date' => $request->input('product-date') . '-01-01',
+      'gender' => $request->input('product-gender'),
+    ]);
+
+    $count = 1;
+    if ($request->hasFile('product-images')) {
+      foreach ($request->file('product-images') as $image) {
+        $img = $image->getRealPath();
+
+        // convert to jpg
+        switch ($image->getClientOriginalExtension()) {
+          case 'jpeg':
+          case 'jpg':
+            $sourceImage = imagecreatefromjpeg($img);
+            break;
+          case 'png':
+            $sourceImage = imagecreatefrompng($img);
+            break;
+          default:
+            continue 2;
+        }
+
+        $imageName = $count . '.jpg';
+        $imagePath = public_path('images/optimized_products/' . $slug . '/');
+        if (!File::exists($imagePath)) {
+          File::makeDirectory($imagePath, 0755, true);
+        }
+
+        $imageName = $count . '.jpg';
+        imagejpeg($sourceImage, $imagePath . $imageName, 90);
+        imagedestroy($sourceImage);
+        $count++;
+      }
+    }
+
+    $selectedSizes = $request->input('sizes', []);
+    foreach ($selectedSizes as $selectedSize) {
+      ProductSizes::create([
+        'product_id' => $product->id,
+        'size' => $selectedSize,
+        'stock' => 5
+      ]);
+    }
+
+    return redirect('/' . $slug);
   }
 
   public function update(Request $request, $id)
@@ -56,6 +121,7 @@ class ProductController extends Controller
 
     $product = Product::find($id);
 
+    // rename images if new name
     $newSlug = $product->slug;
     if ($product->name != $request->input('product-name')) {
       $oldPath = 'optimized_products/' . $newSlug;
@@ -67,12 +133,14 @@ class ProductController extends Controller
       }
     }
 
+    // update product
     $product->update([
       'slug' => $newSlug,
       'name' => $request->input('product-name'),
       'description' => $request->input('product-description'),
       'price' => $request->input('product-price'),
       'salePrice' => $request->input('product-sale-price'),
+      'isSale' => $request->input('product-sale-price') > 0,
       'manufacturer' => $request->input('product-manufacturer'),
       'type' => $request->input('product-type'),
       'color' => $request->input('product-color'),
@@ -80,6 +148,7 @@ class ProductController extends Controller
       'gender' => $request->input('product-gender'),
     ]);
 
+    // update sizes
     $sizes = [36, 38, 39, 40, 41, 42, 43, 44];
     $selectedSizes = $request->input('sizes', []);
     foreach ($sizes as $size) {
@@ -88,13 +157,12 @@ class ProductController extends Controller
         ProductSizes::create([
           'product_id' => $product->id,
           'size' => $size,
-          'quantity' => 5
+          'stock' => 5
         ]);
       } else if (!in_array($size, $selectedSizes) && isset($productSize)) {
         $productSize->delete();
       }
     }
-
 
     $path = public_path('images/optimized_products/' . $newSlug);
     $count = 0;
@@ -104,37 +172,74 @@ class ProductController extends Controller
         ->count();
     }
 
+    $deletedImages = $request->input('images-to-delete', []);
+
     if ($request->hasFile('product-images')) {
-      foreach ($request->file('product-images') as $image) {
-        $img = $image->getRealPath();
+      $numNew = count($request->file('product-images'));
+    } else {
+      $numNew = 0;
+    }
+    $numDeleted = count($deletedImages);
 
-        switch ($image->getClientOriginalExtension()) {
-          case 'jpeg':
-          case 'jpg':
-            $sourceImage = imagecreatefromjpeg($img);
-            break;
-          case 'png':
-            $sourceImage = imagecreatefrompng($img);
-            break;
-          default:
-            continue 2;
+
+    if (count($deletedImages) != $count && $count + $numNew - $numDeleted >= 2) {
+      // delete images
+      foreach ($deletedImages as $deletedImage) {
+        File::delete(public_path('/images/optimized_products/' . $newSlug . '/' . $deletedImage . '.jpg'));
+      }
+
+      // reorder images
+      $directory = public_path('/images/optimized_products/' . $newSlug);
+      $files = File::files($directory);
+
+      $jpgFiles = collect($files)
+        ->filter(fn($file) => $file->getExtension() === 'jpg')
+        ->sortBy(fn($file) => $file->getFilename());
+
+      $index = 1;
+      foreach ($jpgFiles as $file) {
+        $newName = $index . '.jpg';
+        $newPath = $directory . '/' . $newName;
+        if ($file->getFilename() !== $newName) {
+          File::move($file->getPathname(), $newPath);
         }
+        $index++;
+      }
 
-        $imageName = $count + 1 . '.jpg';
-        $imagePath = public_path('images/optimized_products/' . $newSlug . '/');
+      if ($request->hasFile('product-images')) {
+        foreach ($request->file('product-images') as $image) {
+          $img = $image->getRealPath();
 
-        imagejpeg($sourceImage, $imagePath . $imageName, 90);
-        imagedestroy($sourceImage);
-        $count++;
+          // convert to jpg
+          switch ($image->getClientOriginalExtension()) {
+            case 'jpeg':
+            case 'jpg':
+              $sourceImage = imagecreatefromjpeg($img);
+              break;
+            case 'png':
+              $sourceImage = imagecreatefrompng($img);
+              break;
+            default:
+              continue 2;
+          }
+
+          $imageName = $count + 1 . '.jpg';
+          $imagePath = public_path('images/optimized_products/' . $newSlug . '/');
+
+          imagejpeg($sourceImage, $imagePath . $imageName, 90);
+          imagedestroy($sourceImage);
+          $count++;
+        }
       }
     }
 
     return redirect('/' . $product->slug);
   }
-  public function delete($slug)
+  public function delete($id)
   {
-    $product = Product::where('slug', $slug)->first();
+    $product = Product::where('id', $id)->first();
     $product->delete();
+    // File::delete(public_path('/images/optimized_products/' . $product->slug));
 
     return redirect()->route('men');
   }
@@ -167,21 +272,19 @@ class ProductController extends Controller
     }
 
     // size
-    $sizes = $request->input('size', []); // Default to an empty array if not provided
+    $sizes = $request->input('size', []);
 
-    // If the 'size' input is a string (comma-separated), convert it into an array
     if (is_string($sizes)) {
       $sizes = explode(',', $sizes);
     }
 
-    // Ensure that the 'sizes' array is not empty
     if (!empty($sizes)) {
-      // Update the query to filter based on multiple sizes
       $query->whereHas('sizes', function ($q) use ($sizes) {
-        $q->whereIn('size', $sizes);  // Use whereIn to check for multiple sizes
+        $q->whereIn('size', $sizes);
       });
     }
 
+    // sort
     if ($request->filled('sort')) {
       switch ($request->input('sort')) {
         case 'price-asc':

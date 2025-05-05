@@ -227,6 +227,39 @@ Route::get('/edit_profile', function () {
 
 
 
+Route::post('review/create/{productId}', [ReviewController::class, 'createReview']);
+Route::post('review/delete/{productId}', [ReviewController::class, 'deleteReview']);
+
+Route::get('/add_product', function () {
+  return view('pages.add_product', [
+    'title' => 'Nový produkt - NaNohu',
+  ]);
+});
+
+Route::get('/{slug}/edit', function ($slug) {
+  $product = Product::where('slug', $slug)->firstOrFail();
+  $sizesArray = ProductSizes::where('product_id', $product->id)->get();
+  $sizes = collect($sizesArray)->pluck('size')->all();
+  $path = public_path('images/optimized_products/' . $slug);
+  $count = 0;
+  if (File::exists($path)) {
+    $count = collect(File::files($path))
+      ->filter(fn($file) => in_array(strtolower($file->getExtension()), ['jpg', 'jpeg', 'png', 'webp', 'gif']))
+      ->count();
+  }
+  return view('pages.edit_product', [
+    'title' => $product->name . ' - NaNohu',
+    'product' => $product,
+    'sizes' => $sizes,
+    'imagesCount' => $count
+  ]);
+});
+
+Route::post('products/{id}/remove', [ProductController::class, 'delete']);
+Route::post('products/{id}/edit', [ProductController::class, 'update']);
+Route::post('products/create', [ProductController::class, 'store']);
+
+
 Route::get('/{slug}', function ($slug) {
   $product = Product::where('slug', $slug)->firstOrFail();
   $sizes = ProductSizes::where('product_id', $product->id)->get();
@@ -262,27 +295,3 @@ Route::get('/{slug}', function ($slug) {
     'averageRating' => $averageRating
   ]);
 });
-Route::post('review/create/{productId}', [ReviewController::class, 'createReview']);
-Route::post('review/delete/{productId}', [ReviewController::class, 'deleteReview']);
-
-Route::get('/{slug}/edit', function ($slug) {
-  $product = Product::where('slug', $slug)->firstOrFail();
-  $sizesArray = ProductSizes::where('product_id', $product->id)->get();
-  $sizes = collect($sizesArray)->pluck('size')->all();
-  $path = public_path('images/optimized_products/' . $slug);
-  $count = 0;
-  if (File::exists($path)) {
-    $count = collect(File::files($path))
-      ->filter(fn($file) => in_array(strtolower($file->getExtension()), ['jpg', 'jpeg', 'png', 'webp', 'gif']))
-      ->count();
-  }
-  return view('pages.edit_product', [
-    'title' => $product->name . ' - NaNohu',
-    'product' => $product,
-    'sizes' => $sizes,
-    'imagesCount' => $count
-  ]);
-});
-
-Route::post('products/{id}/remove', [ProductController::class, 'delete']);
-Route::post('products/{id}/edit', [ProductController::class, 'update']);

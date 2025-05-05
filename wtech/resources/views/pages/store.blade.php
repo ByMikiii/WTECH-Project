@@ -173,41 +173,54 @@
       <section class="product-section">
       <div class="product-list">
 
+        @if(Auth::check() && Auth::user()->role == 'admin')
+      <div class="product-box" id="add-product">
+      <a href="/add_product">
+        <div class="product-image" id="add-product-image">
+        <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="gray" viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="72" height="72" class="add-icon">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+        </svg>
+        </div>
+      </a>
+      </div>
+      @endif
+
         @forelse($products as $product)
       @include('components.product', ['product' => $product])
-    @empty
-    <h2 class="no-products">Neboli nájdene žiadné produkty!</h2>
-  @endforelse
+      @empty
+      <h2 class="no-products">Neboli nájdene žiadné produkty!</h2>
+      @endforelse
 
       </div>
 
       @if ($products->lastPage() > 1)
       <section class="pagination">
-      @if ($products->onFirstPage())
+        @if ($products->onFirstPage())
       <button class="pagination-button" disabled>‹</button>
-    @else
+      @else
       <a href="{{ $products->previousPageUrl() }}">
       <button class="pagination-button">‹</button>
       </a>
-    @endif
+      @endif
 
-      @for ($i = 1; $i <= $products->lastPage(); $i++)
-      @if ($i == $products->currentPage())
+        @for ($i = 1; $i <= $products->lastPage(); $i++)
+        @if ($i == $products->currentPage())
       <button class="pagination-button active">{{ $i }}</button>
-    @else
+      @else
       <a href="{{ $products->url($i) }}">
       <button class="pagination-button">{{ $i }}</button>
       </a>
-    @endif
-    @endfor
+      @endif
+      @endfor
 
-      @if ($products->hasMorePages())
+        @if ($products->hasMorePages())
       <a href="{{ $products->nextPageUrl() }}">
       <button class="pagination-button">›</button>
       </a>
-    @else
+      @else
       <button class="pagination-button" disabled>›</button>
-    @endif
+      @endif
       </section>
     @endif
 

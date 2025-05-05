@@ -29,7 +29,7 @@
       <div class="existing-image" id="product-image-{{ $i }}">
       <img class="edit-product-image" src="../images/optimized_products/{{ $product->slug }}/{{ $i }}.jpg"
       alt="Obrázok produktu {{ $i }}">
-      <button type="button" class="edit-remove-button" onclick="removeImage('product-image-{{ $i }}')">
+      <button type="button" class="edit-remove-button" onclick="removeImage('{{ $i }}')">
       <svg width="40" height="40" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
       viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
@@ -115,7 +115,7 @@
       <button type="submit" class="button">Uložiť zmeny</button>
     </div>
     </form>
-    <form method="POST" action="/products{{ $product->id }}/remove" class="remove-form">
+    <form method="POST" action="/products/{{ $product->id }}/remove" class="remove-form">
     @csrf
     <button type="submit" class="remove-button button">Odstraniť produkt</button>
     </form>

@@ -107,8 +107,9 @@
         </div>
 
 
-        @if(isset($sizes[0]->size))
+
         <div class="product-buttons">
+        @if(isset($sizes[0]->size))
           <button type="submit" class="button-cart" id="product-button">
             <svg class="button-cart-icon" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -120,7 +121,14 @@
               Vložiť do košíka
             </span>
           </button>
-          @if (Auth::check() && Auth::user()->role == 'admin')
+          @endif
+      </form>
+    </div>
+    @if(!isset($sizes[0]))
+      <h3>Produkt momentálne nie je dostupný.</h3>
+    @endif
+
+    @if (Auth::check() && Auth::user()->role == 'admin')
         <button class="button-edit">
         <a href="/{{$product->slug}}/edit">
           <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
@@ -134,15 +142,9 @@
           </span>
         </a>
         </button>
-      @endif
-        </div>
 
         @endif
-      </form>
     </div>
-    @if(!isset($sizes[0]))
-      <h3>Produkt momentálne nie je dostupný.</h3>
-    @endif
   </section>
 
 

@@ -53,22 +53,7 @@ Route::get('/women', function () {
   ]);
 })->name('men');
 
-Route::get('/search', function (\Illuminate\Http\Request $request) {
-  $query = strtolower($request->input('search'));
-  $products = Product::whereRaw('LOWER(name) LIKE ?', ['%' . $query . '%'])
-    ->orWhereRaw('LOWER(description) LIKE ?', ['%' . $query . '%'])
-    ->paginate(12);
-  return view('pages.store', [
-    'title' => 'NaNohu - ' . $query,
-    'category' => 'Vyhladávanie',
-    'search' => $query,
-    'products' => $products
-  ]);
-})->name('search');
-
 Route::get('/filter', [ProductController::class, 'filter'])->name('store.filter');
-
-
 
 Route::get('/sale', function () {
   $products = Product::where('isSale', true)->paginate(12);

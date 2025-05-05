@@ -33,11 +33,6 @@
 <hr>
 <nav id="mobile-nav">
   <ul>
-    <li id="mobile-nav-search">
-      <input type="text" name="" id="" placeholder="Vyhladať...">
-      <button><img src="../images/Search Icon.png" alt="Search Icon" width="24" height="24"></button>
-    </li>
-    <hr>
     <li><a href="/new">Novinky</a></li>
     <hr>
     <li><a href="/men">Muži</a></li>
@@ -50,15 +45,15 @@
     <li><a href="/profile">Profil</a></li>
     <hr>
   @else
-  <li><a href="/login">Prihlásiť sa</a></li>
-  <hr>
-  <li><a href="/register">Zaregistrovať sa</a></li>
-  <hr>
-@endif
+    <li><a href="/login">Prihlásiť sa</a></li>
+    <hr>
+    <li><a href="/register">Zaregistrovať sa</a></li>
+    <hr>
+  @endif
   </ul>
 </nav>
 @if (!request()->is('login', 'register', 'renew_password', 'profile', 'change_password', 'edit_profile'))
-  <form action="{{ route('search') }}" method="GET" class="search-form">
+  <form method="GET" action="/filter" class="search-form" id="search-form">
     <input type="text" name="search" class="search-input" placeholder="Vyhladať..." @if (!empty($search))
   value="{{ $search }}" @endif>
     <button type="submit" class="search-submit"><img class="search-icon" src="../images/Search Icon.png"

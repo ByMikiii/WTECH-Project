@@ -8,18 +8,21 @@ function toggleMobileNav() {
   }
 }
 
-// toggle mobile filter with button
+// toggle mobile filter with buttons
 function toggleMobileFilter() {
-  const filterElement = document.getElementById("mobile-filter");
-  console.log(filterElement.style.display)
-  if (filterElement.style.display === "none") {
-    filterElement.style.display = "flex";
-  } else {
+  const filterElement = document.getElementById("filter");
+  const productsElement = document.getElementById("products");
+
+  if (filterElement.style.display === "flex") {
     filterElement.style.display = "none";
+    productsElement.style.display = "block";
+  } else {
+    filterElement.style.display = "flex";
+    productsElement.style.display = "none";
   }
-  console.log(filterElement.style.display)
 }
 
+// replaces image element with hidden input including id to remvoe
 function removeImage(id) {
   const element = document.getElementById(`product-image-${id}`);
   if (element) {
@@ -31,93 +34,158 @@ function removeImage(id) {
   }
 }
 
+function sortSubmit() {
+  const sort = document.getElementById('sort').value;
+  const sortInput = document.getElementById('sort-input');
+  sortInput.value = sort;
+  submitCombinedForm();
+}
+
+// merge filter and search form
+function submitCombinedForm() {
+  const filterForm = document.getElementById('filter');
+  const searchForm = document.getElementById('search-form');
+
+  const formData = new FormData();
+
+  // filter params
+  if (filterForm) {
+    new FormData(filterForm).forEach((value, key) => {
+      formData.append(key, value);
+    });
+  }
+
+  // search param
+  if (searchForm) {
+    new FormData(searchForm).forEach((value, key) => {
+      formData.append(key, value);
+    });
+  }
+
+  const params = new URLSearchParams(formData).toString();
+  window.location.href = `/filter?${params}`;
+}
+
 // automatically hide nav & filter when resizing
 window.addEventListener("resize", () => {
   if (window.innerWidth > 770) {
     document.getElementById("mobile-nav").style.display = "none";
   }
-  if (window.innerWidth > 600) {
-    document.getElementById("mobile-filter").style.display = "none";
+  if (window.innerWidth <= 600) {
+    document.getElementById("filter").style.display = "none";
+    document.getElementById("products").style.display = "block";
+  } else {
+    document.getElementById("filter").style.display = "block";
+    document.getElementById("products").style.display = "block";
   }
 });
 
 
 // size select buttons
 document.addEventListener("DOMContentLoaded", function () {
-  const buttons = document.querySelectorAll(".size-select");
-  buttons.forEach((button) => {
-    button.addEventListener("click", function () {
-      this.classList.toggle("selected");
+  // on forms submit call combined submit function
+  const searchForm = document.getElementById('search-form');
+  const filterForm = document.getElementById('filter');
+
+  if (searchForm) {
+    searchForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      submitCombinedForm();
     });
-  });
+  }
+  if (filterForm) {
+    filterForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      submitCombinedForm();
+    });
+  }
 
-  const colorButtons = document.querySelectorAll(".color-select");
-  const colorContainer = document.getElementById("selected-colors-container");
 
-  let selectedColors = [];
 
-  colorButtons.forEach((button) => {
-    const color = button.style.backgroundColor;
-
-    button.addEventListener("click", function () {
-      this.classList.toggle("selected");
-
-      if (selectedColors.includes(color)) {
-        selectedColors = selectedColors.filter((c) => c !== color);
-      } else {
-        selectedColors.push(color);
-      }
-
-      colorContainer.innerHTML = "";
-
-      selectedColors.forEach((clr) => {
-        const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = "color[]";
-        input.value = clr;
-        colorContainer.appendChild(input);
+  // size select buttons
+  const buttons = document.querySelectorAll(".size-select");
+  if (buttons.length) {
+    buttons.forEach((button) => {
+      button.addEventListener("click", function () {
+        this.classList.toggle("selected");
       });
     });
-  });
+  }
 
 
+  // filter colors
+  const colorButtons = document.querySelectorAll(".color-select");
+  const colorContainer = document.getElementById("selected-colors-container");
+  let selectedColors = [];
+  if (colorButtons.length && colorContainer) {
+    // saves selected colors from backend
+    const items = document.querySelectorAll('#selected-colors-container input');
+    items.forEach(item => {
+      selectedColors.push(item.value);
+    })
 
-  const buttons_ = document.querySelectorAll(".product-size-select");
-  buttons_.forEach((button) => {
-    button.addEventListener("click", function () {
-      buttons_.forEach((btn) => btn.classList.remove("selected"));
-      this.classList.add("selected");
+    // onclick color
+    colorButtons.forEach((button) => {
+      const color = button.style.backgroundColor;
+      button.addEventListener("click", function () {
+        this.classList.toggle("selected");
 
-      const sizeInput = document.querySelector('input[name="size"]');
-      sizeInput.value = this.dataset.size || this.innerText;
+        // push/remove from array
+        if (selectedColors.includes(color)) {
+          selectedColors = selectedColors.filter((c) => c !== color);
+        } else {
+          selectedColors.push(color);
+        }
+
+        // foreach selected color create hidden input in form
+        colorContainer.innerHTML = "";
+        selectedColors.forEach((clr) => {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = "color[]";
+          input.value = clr;
+          colorContainer.appendChild(input);
+        });
+      });
     });
-  });
+  }
 
+
+  // onclick change size
+  const buttons_ = document.querySelectorAll(".product-size-select");
+  const sizeInput = document.querySelector('input[name="size"]');
+  if (buttons_.length && sizeInput) {
+    buttons_.forEach((button) => {
+      button.addEventListener("click", function () {
+        buttons_.forEach((btn) => btn.classList.remove("selected"));
+        this.classList.add("selected");
+        sizeInput.value = this.dataset.size || this.innerText;
+      });
+    });
+  }
+
+
+  // review clickable stars
   const stars = document.querySelectorAll(".star");
   const rating_number = document.getElementsByName("rating");
   let selectedRating = 1;
+  if (stars.length && rating_number.length) {
+    // color
+    stars.forEach((s, index) => {
+      s.style.fill = index < selectedRating ? "gold" : "none";
+    });
 
-  stars.forEach((s, index) => {
-    s.style.fill = index < selectedRating ? "gold" : "none";
-  });
-
-  stars.forEach((star) => {
-    star.addEventListener("click", function () {
-      selectedRating = this.getAttribute("data-value");
-      rating_number[0].value = selectedRating;
-      stars.forEach((s, index) => {
-        s.style.fill = index < selectedRating ? "gold" : "none";
+    // onclick
+    stars.forEach((star) => {
+      star.addEventListener("click", function () {
+        selectedRating = this.getAttribute("data-value");
+        rating_number[0].value = selectedRating;
+        stars.forEach((s, index) => {
+          s.style.fill = index < selectedRating ? "gold" : "none";
+        });
       });
     });
-  });
-
-
-
-  document.getElementById("review-form").addEventListener("submit", function (event) {
-    event.preventDefault();
-    const reviewText = document.getElementById("review-text").value;
-    console.log("Rating:", selectedRating, "Review:", reviewText);
-  });
+  }
 });
 
 const reg_form = document.getElementById('registration-form');
@@ -162,18 +230,22 @@ if (reg_form) {
   });
 }
 
-document.getElementById("logout").addEventListener("click", () => {
-  fetch('/logout', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    }
-  })
-    .then(response => {
-      if (response.redirected) {
-        alert("Odhlásenie prebehlo úspešne!");
-        window.location.href = response.url;
+// fetch logout
+const logoutButton = document.getElementById("logout");
+if (logoutButton) {
+  document.getElementById("logout").addEventListener("click", () => {
+    fetch('/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       }
     })
-});
+      .then(response => {
+        if (response.redirected) {
+          alert("Odhlásenie prebehlo úspešne!");
+          window.location.href = response.url;
+        }
+      })
+  })
+};

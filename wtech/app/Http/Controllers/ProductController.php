@@ -248,6 +248,15 @@ class ProductController extends Controller
   {
     $query = Product::query();
 
+    $searchPhrase = "";
+    if ($request->filled('search')) {
+      $searchPhrase = strtolower(string: $request->input('search'));
+      $query->where(function ($q) use ($searchPhrase) {
+        $q->whereRaw('LOWER(name) LIKE ?', ['%' . $searchPhrase . '%'])
+          ->orWhereRaw('LOWER(description) LIKE ?', ['%' . $searchPhrase . '%']);
+      });
+    }
+
 
     // prices
     if ($request->filled('price-from')) {
@@ -304,8 +313,8 @@ class ProductController extends Controller
 
     $products = $query->paginate(12);
     return view('pages.store', [
-      'title' => 'NaNohu - Filter',
-      'category' => 'Filter',
+      'title' => 'NaNohu - Výsledky vyhľadávania',
+      'category' => 'Výsledky',
       'products' => $products,
       'priceFrom' => $request->input('price-from'),
       'priceTo' => $request->input('price-to'),
@@ -314,7 +323,8 @@ class ProductController extends Controller
       'colorString' => $request->input('color'),
       'sizeString' => $request->input('size'),
       'brands' => $brands,
-      'sort' => $request->input('sort')
+      'sort' => $request->input('sort'),
+      'search' => $searchPhrase
     ]);
   }
 }

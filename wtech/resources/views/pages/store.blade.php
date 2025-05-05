@@ -14,74 +14,20 @@
     <li><a href="{{ url()->current() }}">{{ $category }}</a></li>
     </ol>
 
-    <form id="mobile-filter">
-    <div class="mobile-filter-header">
+    <div class="flex" id="store-container">
+    <form id="filter" method="GET" action="/filter">
+      <div class=" mobile-filter-header">
       <h1>Filter</h1>
-      <button onclick="toggleMobileFilter()">
-      <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
+      <button id="filter-close" type="button" onclick="toggleMobileFilter()">
+        <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="38" height="38">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
-      </svg>
+        </svg>
       </button>
-    </div>
-    <hr class="darker-hr">
-    <h4>Cena</h4>
-    <div class="filter-section">
-      <div class="flex">
-      <div class="price-box">
-        <input class="price-input" name="price-from" type="number" value="0" min="0" max="9999">
-        <label for="price-from">od</label>
       </div>
-      <span>-</span>
-      <div class="price-box">
-        <input class="price-input" name="price-to" type="number" value="1400" min="0" max="9999">
-        <label for="price-to">do</label>
-      </div>
-      </div>
-    </div>
-    <h4>Farba</h4>
-    <div class="filter-section" id="color-selection">
-      <button class="color-select" style="background-color: red;"></button>
-      <button class="color-select" style="background-color: blue;"></button>
-      <button class="color-select" style="background-color: yellow;"></button>
-      <button class="color-select" style="background-color: magenta;"></button>
-    </div>
-    <h4>Veľkosť</h4>
-    <div class="filter-section" id="size-selection">
-      <button class="size-select">36</button>
-      <button class="size-select">37</button>
-      <button class="size-select">38</button>
-      <button class="size-select">39</button>
-      <button class="size-select">40</button>
-      <button class="size-select">41</button>
-      <button class="size-select">42</button>
-      <button class="size-select">43</button>
-    </div>
-    <h4>Značka</h4>
-    <div class="filter-section">
-      <div>
-      <input type="checkbox" class="brand-nike" name="brand-nike" />
-      <label for="brand-nike">Nike</label>
-      </div>
-      <div>
-      <input type="checkbox" class="brand-Reebok" name="brand-Reebok" />
-      <label for="brand-Reebok">Reebok</label>
-      </div>
-      <div>
-      <input type="checkbox" class="brand-Adidas" name="brand-Adidas" />
-      <label for="brand-Adidas">Adidas</label>
-      </div>
-    </div>
-    <button id="filter-button">Filtrovať</button>
-    </form>
-
-
-
-    <div class="flex" id="store-container">
-    <form id="filter" method="GET" action="{{ route('store.filter') }}">
-      <h1>Filter</h1>
       <hr class=" darker-hr">
 
+      <input type="hidden" name="sort" id="sort-input" value="newest">
 
       <h4>Cena</h4>
       <div class="filter-section">
@@ -93,14 +39,20 @@
         </div>
         <span>-</span>
         <div class="price-box">
-        <input class="price-input" name="price-to" type="number" value="{{isset($priceTo) ? $priceTo : 1400}}"
+        <input class="price-input" name="price-to" type="number" value="{{isset($priceTo) ? $priceTo : 1999}}"
           min="0" max="9999">
         <label for="price-to">do</label>
         </div>
       </div>
       </div>
       <h4>Farba</h4>
-      <div id="selected-colors-container"></div>
+      <div id="selected-colors-container">
+      @if(isset($colors))
+      @foreach ($colors as $clr)
+      <input type="hidden" name="color[]" value="{{$clr}}">
+      @endforeach
+    @endif
+      </div>
       <div class="filter-section padding-filter" id="color-selection">
       <button type="button" class="color-select {{ in_array('red', $colors ?? []) ? 'selected' : '' }}"
         style="background-color: red;"></button>
@@ -146,9 +98,10 @@
     <section id="products">
       <div class="store-top">
       <h1>{{ $category }}</h1>
-      <form id="sortBy" method="GET" action="{{ route('store.filter') }}">
+      <div id="sortBy">
         <label for="sort" id="sort-label">Zoradiť podľa:</label>
-        <select id="sort" name="sort" onchange="document.getElementById('sortBy').submit()">
+        <select id="sort" name="sort" onchange="sortSubmit()">
+        <option value="newest" {{ isset($sort) && $sort == 'newest' ? 'selected' : '' }}>Najnovšie
         <option value="price-asc" {{ isset($sort) && $sort == 'price-asc' ? 'selected' : '' }}>Cena: od
           najnižšej</option>
         <option value="price-desc" {{ isset($sort) && $sort == 'price-desc' ? 'selected' : '' }}>Cena: od
@@ -156,10 +109,9 @@
         </option>
         <option value="alphabetical" {{ isset($sort) && $sort == 'alphabetical' ? 'selected' : '' }}>
           Abecedne</option>
-        <option value="newest" {{ isset($sort) && $sort == 'newest' ? 'selected' : '' }}>Najnovšie
         </option>
         </select>
-      </form>
+      </div>
       <button onclick="toggleMobileFilter()">
         <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34">
@@ -194,12 +146,18 @@
 
       </div>
 
+
+      @php
+      #without this the other params would disappear
+      $queryParams = request()->except('page');
+    @endphp
+
       @if ($products->lastPage() > 1)
       <section class="pagination">
         @if ($products->onFirstPage())
       <button class="pagination-button" disabled>‹</button>
       @else
-      <a href="{{ $products->previousPageUrl() }}">
+      <a href="{{ $products->previousPageUrl() . '&' . http_build_query($queryParams) }}">
       <button class="pagination-button">‹</button>
       </a>
       @endif
@@ -208,14 +166,14 @@
         @if ($i == $products->currentPage())
       <button class="pagination-button active">{{ $i }}</button>
       @else
-      <a href="{{ $products->url($i) }}">
+      <a href="{{ $products->url($i) . '&' . http_build_query($queryParams) }}">
       <button class="pagination-button">{{ $i }}</button>
       </a>
       @endif
       @endfor
 
         @if ($products->hasMorePages())
-      <a href="{{ $products->nextPageUrl() }}">
+      <a href="{{ $products->nextPageUrl() . '&' . http_build_query($queryParams) }}">
       <button class="pagination-button">›</button>
       </a>
       @else

@@ -241,7 +241,7 @@ button:hover {
 
 /* FOOTER */
 footer {
-  width: 100vw;
+  width: 96vw;
   height: 256px;
   border-top: 1px solid lightgray;
   /* background-color: green; */
@@ -379,6 +379,10 @@ footer {
 
 .prices {
   max-width: 124px;
+}
+
+.prices h1 {
+  font-size: 28px;
 }
 
 #hot-sale div {
@@ -777,6 +781,10 @@ footer {
   flex-direction: column;
 }
 
+#filter-close {
+  display: none;
+}
+
 .no-products {
   margin-top: 48px;
 }
@@ -808,6 +816,10 @@ footer {
   width: 224px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.mobile-filter-header {
+  position: relative;
 }
 
 .mobile-filter-header button {
@@ -1448,7 +1460,17 @@ footer {
 
 @media (max-width: 600px) {
   #filter {
+    width: 100%;
     display: none;
+  }
+
+  #filter-close {
+    display: block;
+  }
+
+  .filter-section {
+    margin: auto;
+    margin-left: 0;
   }
 
   .store-top {

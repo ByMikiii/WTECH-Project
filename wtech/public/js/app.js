@@ -188,6 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+//fetch registration
 const reg_form = document.getElementById('registration-form');
 if (reg_form) {
   reg_form.addEventListener('submit', (e) => {
@@ -200,33 +201,38 @@ if (reg_form) {
       password_confirmation: formData.get('password_confirmation'),
     };
 
-    if (data.password !== data.password_confirmation) {
-      alert("Zadané heslá nie sú rovnaké.");
+    if(data.password.length < 6){
+      alert("Heslo musí obsahovať aspoň 6 znakov");
     }
-    else {
-      fetch('/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify(data)
-      })
-        .then(response => {
-          return response.json().then(result => {
-            if (response.ok) {
-              alert(result.message);
-              window.location.href = '/login';
-            } else {
-              alert('Chyba pri registrácii: ' + (result.message || 'Skontrolujte údaje.'));
-            }
-          });
+    else{
+      if (data.password !== data.password_confirmation) {
+        alert("Zadané heslá nie sú rovnaké.");
+      }
+      else {
+        fetch('/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          },
+          body: JSON.stringify(data)
         })
-        .catch(error => {
-          console.error('Chyba pri fetchi:', error);
-          alert('Chyba spojenia so serverom.');
-        });
-    }
+          .then(response => {
+            return response.json().then(result => {
+              if (response.ok) {
+                alert(result.message);
+                window.location.href = '/login';
+              } else {
+                alert('Chyba pri registrácii: ' + (result.message || 'Skontrolujte údaje.'));
+              }
+            });
+          })
+          .catch(error => {
+            console.error('Chyba pri fetchi:', error);
+            alert('Chyba spojenia so serverom.');
+          });
+        }
+      }
   });
 }
 
@@ -250,7 +256,7 @@ if (logoutButton) {
   })
 };
 
-
+//fetch editing profile
 const edit_profile_form = document.getElementById("edit_profile-form");
 if (edit_profile_form){
   edit_profile_form.addEventListener("submit", (e) =>{
@@ -285,4 +291,50 @@ if (edit_profile_form){
       alert("Vami zadané údaje (e-mail, telefónne číslo alebo prezývka) už niekto vlastní");
     })
   })
+}
+
+//fetch change of password
+const change_passwordForm = document.getElementById("change_password-form");
+if (change_passwordForm){
+  change_passwordForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(change_passwordForm);
+    const data = {
+      current_password: formData.get('current_password'),
+      new_password: formData.get('new_password'),
+      password_confirmation: formData.get('retype_password'),
+    };
+
+    if (data.new_password.length<6){
+      alert("Nové heslo musí obsahovať aspoň 6 znakov");
+    }
+
+    else{
+      if (data.new_password != data.password_confirmation){
+        alert("Nové heslo nie je zhodné s položkou Potvrdiť heslo!");
+      }
+
+      else{
+        if (data.new_password == data.current_password){
+          alert("Nové heslo nemôže byť rovnaké ako to aktuálne");
+        }
+
+        else{
+          fetch('/change_password',{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then(data => {
+            alert(data.message);
+          })
+        }
+      }
+    }
+  });
 }

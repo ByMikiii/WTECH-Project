@@ -218,6 +218,8 @@ Route::get('/edit_profile', function () {
 
 Route::post('/edit_profile', [ProfileController::class, 'edit_profile'])->middleware('auth');
 
+Route::post('/change_password', [ProfileController::class, 'change_password'])->middleware('auth');
+
 Route::post('review/create/{productId}', [ReviewController::class, 'createReview']);
 Route::post('review/delete/{productId}', [ReviewController::class, 'deleteReview']);
 

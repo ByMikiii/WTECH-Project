@@ -40,4 +40,24 @@ class ProfileController extends Controller
         
         return response()->json(['message' => 'Úspešná zmena údajov']);
     }
+
+    public function change_password(Request $request){
+        
+        $request->validate([
+            'current_password' => ['required'],
+            'new_password' => ['required', 'min:6'],
+        ]);
+        
+        $user = Auth::user();
+    
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json(['message' => 'Nesprávne aktuálne heslo']);
+        }
+        
+        $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+    
+        return response()->json(['message' => 'Heslo bolo úspešne zmenené']);
+    }
 }

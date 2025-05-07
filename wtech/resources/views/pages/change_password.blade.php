@@ -18,18 +18,19 @@
 
     <section class="container">
     <h1>Zmena hesla</h1>
-    <form class="login-form">
+    <form class="login-form" id="change_password-form">
+      @csrf
       <div>
-      <label for="current_password">Aktuálne heslo</label>
-      <input type="password" name="current_password" required />
+        <label for="current_password">Aktuálne heslo</label>
+        <input type="password" name="current_password" required />
       </div>
       <div>
-      <label for="new_password">Nové heslo</label>
-      <input type="password" name="new_password" required />
+        <label for="new_password">Nové heslo</label>
+        <input type="password" name="new_password" required />
       </div>
       <div>
-      <label for="retype_password">Potvrdiť heslo</label>
-      <input type="password" name="retype_password" required />
+        <label for="retype_password">Potvrdiť heslo</label>
+        <input type="password" name="retype_password" required />
       </div>
       <button type="submit">Uložiť zmenu</button>
     </form>

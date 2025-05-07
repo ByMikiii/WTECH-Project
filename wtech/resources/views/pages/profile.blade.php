@@ -34,6 +34,10 @@
       <label for="address">Adresa</label>
       <span name="address">{{ $address }}</span>
     </div>
+    <div>
+      <label for="username">Prezývka</label>
+      <span name="username">{{ $username }}</span>
+    </div>
     <button onclick="location.href='/edit_profile';">Upraviť profil</button>
     <button onclick="location.href='/change_password';">Zmena hesla</button>
     </section>

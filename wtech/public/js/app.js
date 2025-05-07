@@ -249,3 +249,40 @@ if (logoutButton) {
       })
   })
 };
+
+
+const edit_profile_form = document.getElementById("edit_profile-form");
+if (edit_profile_form){
+  edit_profile_form.addEventListener("submit", (e) =>{
+    e.preventDefault();
+    
+    const formData = new FormData(edit_profile_form);
+    const data = {
+      email: formData.get('email'),
+      first_name: formData.get('first_name'),
+      last_name: formData.get('last_name'),
+      phone: formData.get('phone'),
+      postal_code: formData.get('postal_code'),
+      city: formData.get('city'),
+      street: formData.get('street'),
+      username: formData.get('username'),
+    }
+
+    fetch('/edit_profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert(data.message);
+      window.location.href = '/profile';
+    })
+    .catch(error => {
+      alert("Vami zadané údaje (e-mail, telefónne číslo alebo prezývka) už niekto vlastní");
+    })
+  })
+}

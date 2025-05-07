@@ -5,6 +5,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ProfileController;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\ProductSizes;
@@ -189,7 +190,8 @@ Route::get('/profile', function () {
     'email' => $user->email,
     'name' => $user->first_name . ' ' . $user->last_name,
     'phone' => $user->phone,
-    'address' => $user->postal_code,
+    'address' => $user->street . ' ' . $user->city . ' ' . $user->postal_code ,
+    'username' => $user->username,
   ]);
 })->middleware('auth');
 
@@ -204,13 +206,17 @@ Route::get('/edit_profile', function () {
   return view('pages.edit_profile', [
     'title' => 'NaNohu - Úprava profilu',
     'email' => $user->email,
-    'name' => $user->first_name . ' ' . $user->last_name,
+    'first_name' => $user->first_name,
+    'last_name' => $user->last_name,
+    'username' => $user->username,
     'phone' => $user->phone,
-    'address' => $user->postal_code,
+    'postal_code' => $user->postal_code,
+    'city' => $user->city,
+    'street' => $user->street,
   ]);
 })->middleware('auth');
 
-
+Route::post('/edit_profile', [ProfileController::class, 'edit_profile'])->middleware('auth');
 
 Route::post('review/create/{productId}', [ReviewController::class, 'createReview']);
 Route::post('review/delete/{productId}', [ReviewController::class, 'deleteReview']);

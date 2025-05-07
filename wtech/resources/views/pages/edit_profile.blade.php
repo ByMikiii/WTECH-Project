@@ -18,22 +18,39 @@
 
     <section class="container">
     <h1>Upraviť profil</h1>
-    <form class="login-form">
+    <form class="login-form" id="edit_profile-form">
+      @csrf
       <div>
-      <label for="name">Meno a priezvisko</label>
-      <input type="text" name="name" value="{{ $name }}" />
+        <label for="first_name">Krstné meno</label>
+        <input type="text" name="first_name" value="{{ $first_name }}" />
       </div>
       <div>
-      <label for="email">Email</label>
-      <input type="text" name="email" value="{{ $email }}" />
+        <label for="last_name">Priezvisko</label>
+        <input type="text" name="last_name" value="{{ $last_name }}" />
       </div>
       <div>
-      <label for="number">Telefónne číslo</label>
-      <input type="tel" name="number" placeholder="v tvare +421xxxxxxxxx" value="{{ $phone }}" />
+        <label for="username">Prezývka</label>
+        <input type="text" name="username" value="{{ $username }}" />
       </div>
       <div>
-      <label for="address">Adresa</label>
-      <input type="text" name="address" placeholder="Ulica číslo, Mesto, PSČ" value="{{ $address }}" />
+        <label for="email">Email</label>
+        <input type="text" name="email" value="{{ $email }}" required/>
+      </div>
+      <div>
+        <label for="phone">Telefónne číslo</label>
+        <input type="tel" name="phone" placeholder="v tvare +421xxxxxxxxx" value="{{ $phone }}" />
+      </div>
+      <div>
+        <label for="city">Mesto</label>
+        <input type="text" name="city" value="{{ $city }}" />
+      </div>
+      <div>
+        <label for="postal_code">PSČ</label>
+        <input type="text" name="postal_code" value="{{ $postal_code }}" />
+      </div>
+      <div>
+        <label for="street">Ulica a číslo domu</label>
+        <input type="text" name="street" value="{{ $street }}" />
       </div>
       <button type="submit">Uložiť zmeny</button>
     </form>

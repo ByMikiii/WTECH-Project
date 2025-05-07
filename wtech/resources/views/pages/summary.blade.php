@@ -70,7 +70,35 @@
     </div>
   @endforeach
   @endforeach
-
+  </section>
+  <!-- nedoriesene -->
+  <section class="profile">
+  <h1>Dodacie údaje</h1>
+  <div>
+    <label for="name">Meno</label>
+    <span name="name">{{ $order_data['first_name'] }} {{ $order_data['last_name'] }}</span>
+  </div>
+  <div>
+    <label for="e-mail">E-mail</label>
+    <span name="e-mail">{{ $order_data['email'] }}</span>
+  </div>
+  <div>
+    <label for="phone">Telefónne číslo</label>
+    <span name="phone">{{ $order_data['phone'] }}</span>
+  </div>
+  <div>
+    <label for="address">Adresa</label>
+    <span name="address">{{ $order_data['street'] }}, {{ $order_data['city'] }}, {{ $order_data['postal_code'] }}</span>
+  </div>
+<!-- nedokoncene -->
+  <div>
+    <label for="transport">Spôsob prepravy</label>
+    <span name="transport">Kuriér</span>
+  </div>
+  <div>
+    <label for="pay">Spôsob platby</label>
+    <span name="pay">Platba kartou</span>
+  </div>
     <button onclick="location.href='/';">Dokončiť objednávku</button>
     <h2>{{ $total }}€</h2>
     </section>

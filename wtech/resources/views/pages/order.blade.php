@@ -18,39 +18,53 @@
 
     <section class="container">
     <h1>Dodacie údaje</h1>
-    <form class="login-form" method="GET" action="/summary">
+    <form class="login-form" method="POST" action="/order">
+    @csrf
       <div>
-      <label for="name">Meno a priezvisko</label>
-      <input type="text" name="name" value="{{ $name }}" required />
+        <label for="first_name">Krstné meno</label>
+        <input type="text" name="first_name" value="{{ $first_name }}" required />
       </div>
       <div>
-      <label for="email">Email</label>
-      <input type="text" name="email" value="{{ $email }}" required />
+        <label for="last_name">Priezvisko</label>
+        <input type="text" name="last_name" value="{{ $last_name }}" required />
       </div>
       <div>
-      <label for="number">Telefónne číslo</label>
-      <input type="tel" name="number" placeholder="v tvare +421xxxxxxxxx" value="{{ $phone }}" required />
+        <label for="email">E-mail</label>
+        <input type="text" name="email" value="{{ $email }}" required />
       </div>
       <div>
-      <label for="address">Dodacia adresa</label>
-      <input type="text" name="address" placeholder="Ulica číslo, Mesto, PSČ" value="{{ $address }}" required />
+        <label for="phone">Telefónne číslo</label>
+        <input type="tel" name="phone" placeholder="v tvare +421xxxxxxxxx" value="{{ $phone }}" required />
       </div>
       <div>
-      <label>Spôsob prepravy</label>
-      <select>
-        <option value="1">Kuriér</option>
-        <option value="2">Osobné prevzatie</option>
-        <option value="3">Poštovou službou</option>
-      </select>
+        <label>Spôsob prepravy</label>
+        <select>
+          <option value="1">Kuriér</option>
+          <option value="2">Osobné prevzatie</option>
+          <option value="3">Poštovou službou</option>
+        </select>
       </div>
       <div>
-      <label>Spôsob platby</label>
-      <select>
-        <option value="1">Bankovým prevodom</option>
-        <option value="2">Platba kartou</option>
-      </select>
+        <label>Spôsob platby</label>
+        <select>
+          <option value="1">Bankovým prevodom</option>
+          <option value="2">Platba kartou</option>
+        </select>
+        </div>
+      <div>
+        <label for="city">Mesto</label>
+        <input type="text" name="city" value="{{ $city }}" required />
       </div>
-      <button type="submit"><a href="/summary">Dokončiť objednávku</a></button>
+      <div>
+        <label for="postal_code">PSČ</label>
+        <input type="text" name="postal_code" value="{{ $postal_code }}" required />
+      </div>
+      <div>
+        <label for="street">Ulica a číslo domu</label>
+        <input type="text" name="street" value="{{ $street }}" required />
+      </div>
+
+      <button type="submit">Dokončiť objednávku</a></button>
     </form>
     </section>
   </main>

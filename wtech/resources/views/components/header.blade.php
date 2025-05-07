@@ -52,7 +52,7 @@
   @endif
   </ul>
 </nav>
-@if (!request()->is('login', 'register', 'renew_password', 'profile', 'change_password', 'edit_profile'))
+@if (!request()->is('login', 'register', 'renew_password', 'profile', 'change_password', 'edit_profile', 'cart', 'order', 'summary'))
   <form method="GET" action="/filter" class="search-form" id="search-form">
     <input type="text" name="search" class="search-input" placeholder="Vyhladať..." @if (!empty($search))
   value="{{ $search }}" @endif>

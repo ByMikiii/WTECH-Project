@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ProfileController;
@@ -14,6 +15,8 @@ use Database\Seeders\ProductSizesTableSeeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
 
 Route::get('/', function () {
   $saleProducts = Product::where('isSale', true)->take(4)->get();
@@ -108,14 +111,38 @@ Route::get('/order', function () {
   return view('pages.order', [
     'title' => 'NaNohu - Dodacie údaje',
     'email' => $user?->email ?? null,
-    'name' => $user ? $user->first_name . ' ' . $user->last_name : null,
+    'first_name' => $user ? $user->first_name :null,
+    'last_name' => $user ? $user->last_name : null,
     'phone' => $user?->phone ?? null,
-    'address' => $user?->postal_code ?? null
+    'postal_code' => $user?->postal_code ?? null,
+    'city' => $user?->city ?? null,
+    'street' => $user?->street ?? null,
   ]);
 });
 
+Route::post('/order', function(Request $request){
+  $validated = $request->validate([
+    'first_name' => 'required|string',
+    'last_name' => 'required|string',
+    'street' => 'required|string',
+    'city' => 'required|string',
+    'postal_code' => 'required|string',
+    'phone' => 'required|string',
+    'email' => 'required|string',
+  ]);
+
+  session(['order_data' => $validated]);
+
+  return redirect('/summary');
+});
 
 Route::get('/summary', function () {
+  $orderData = session('order_data');
+  
+  if (!$orderData) {
+      return redirect('/order')->withErrors('Chýbajú údaje o objednávke.');
+  }
+
   $cartItems = collect();
   if (Auth::check()) {
     $items = Cart::where('user_id', Auth::id())->with('product')->get();
@@ -158,7 +185,8 @@ Route::get('/summary', function () {
   return view('pages.summary', [
     'title' => 'NaNohu - Košík',
     'cartItems' => $cartItems,
-    'total' => $total
+    'total' => $total,
+    'order_data' => $orderData,
   ]);
 });
 Route::post('/cart/add/{productId}', [CartController::class, 'addProduct'])->name('cart.add');

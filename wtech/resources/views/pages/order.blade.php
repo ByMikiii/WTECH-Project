@@ -38,19 +38,19 @@
       </div>
       <div>
         <label>Spôsob prepravy</label>
-        <select>
-          <option value="1">Kuriér</option>
-          <option value="2">Osobné prevzatie</option>
-          <option value="3">Poštovou službou</option>
+        <select name="delivery">
+          <option value="Kuriér">Kuriér</option>
+          <option value="Osobné prevzatie">Osobné prevzatie</option>
+          <option value="Poštovou službou">Poštovou službou</option>
         </select>
       </div>
       <div>
         <label>Spôsob platby</label>
-        <select>
-          <option value="1">Bankovým prevodom</option>
-          <option value="2">Platba kartou</option>
+        <select name="pay">
+          <option value="Bankovým prevodom">Bankovým prevodom</option>
+          <option value="Platba kartou">Platba kartou</option>
         </select>
-        </div>
+      </div>
       <div>
         <label for="city">Mesto</label>
         <input type="text" name="city" value="{{ $city }}" required />

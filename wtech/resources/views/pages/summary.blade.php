@@ -90,17 +90,17 @@
     <label for="address">Adresa</label>
     <span name="address">{{ $order_data['street'] }}, {{ $order_data['city'] }}, {{ $order_data['postal_code'] }}</span>
   </div>
-<!-- nedokoncene -->
   <div>
-    <label for="transport">Spôsob prepravy</label>
-    <span name="transport">Kuriér</span>
+    <label for="delivery">Spôsob prepravy</label>
+    <span name="delivery">{{ $order_data['delivery'] }}</span>
   </div>
   <div>
     <label for="pay">Spôsob platby</label>
-    <span name="pay">Platba kartou</span>
+    <span name="pay">{{ $order_data['pay'] }}</span>
   </div>
-    <button onclick="location.href='/';">Dokončiť objednávku</button>
-    <h2>{{ $total }}€</h2>
+    <!--<button onclick="location.href='/';">Dokončiť objednávku | {{ $total }}€</button>-->
+    <button onclick="location.href='/card_pay';" id="price_button">Prejsť k platbe | <span id="price">{{ $total }}€</span></button>
+    <!--<h2>{{ $total }}€</h2>-->
     </section>
   @else
   <h1 class="empty-cart">Nakupný košík je prázdny!</h1>

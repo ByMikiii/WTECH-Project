@@ -129,6 +129,8 @@ Route::post('/order', function(Request $request){
     'postal_code' => 'required|string',
     'phone' => 'required|string',
     'email' => 'required|string',
+    'delivery' => 'required',
+    'pay' => 'required',
   ]);
 
   session(['order_data' => $validated]);
@@ -183,7 +185,7 @@ Route::get('/summary', function () {
   }
 
   return view('pages.summary', [
-    'title' => 'NaNohu - Košík',
+    'title' => 'NaNohu - Zhrnutie objednávky',
     'cartItems' => $cartItems,
     'total' => $total,
     'order_data' => $orderData,
@@ -194,7 +196,9 @@ Route::get('/cart/increment/{productId}/{size}', [CartController::class, 'increm
 Route::get('/cart/decrement/{productId}/{size}', [CartController::class, 'decrementItem'])->name('cart.decrement');
 Route::get('/cart/remove/{productId}/{size}', [CartController::class, 'removeItem'])->name('cart.remove');
 
-
+Route::get('/card_pay', function () {
+  return view('pages.card_pay', ['title' => 'NaNohu - Platba kartou']);
+});
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 

@@ -184,6 +184,8 @@ Route::get('/summary', function () {
     }
   }
 
+  session(['total' => $total]);
+
   return view('pages.summary', [
     'title' => 'NaNohu - Zhrnutie objednávky',
     'cartItems' => $cartItems,
@@ -197,7 +199,29 @@ Route::get('/cart/decrement/{productId}/{size}', [CartController::class, 'decrem
 Route::get('/cart/remove/{productId}/{size}', [CartController::class, 'removeItem'])->name('cart.remove');
 
 Route::get('/card_pay', function () {
+  $orderData = session('order_data');
+
+  if (!$orderData) {
+    return redirect('/order')->withErrors('Chýbajú údaje o objednávke.');
+  }
+
   return view('pages.card_pay', ['title' => 'NaNohu - Platba kartou']);
+});
+
+Route::get('/bank_pay', function () {
+  $orderData = session('order_data');
+
+  if (!$orderData) {
+    return redirect('/order')->withErrors('Chýbajú údaje o objednávke.');
+  }
+
+  $total = session('total');
+
+  return view('pages.bank_pay', [
+    'title' => 'NaNohu - Platba bankovým prevodom',
+    'order_data' => $orderData,
+    'total' => $total,
+  ]);
 });
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

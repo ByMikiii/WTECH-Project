@@ -99,7 +99,8 @@
     <span name="pay">{{ $order_data['pay'] }}</span>
   </div>
     <!--<button onclick="location.href='/';">Dokončiť objednávku | {{ $total }}€</button>-->
-    <button onclick="location.href='/card_pay';" id="price_button">Prejsť k platbe | <span id="price">{{ $total }}€</span></button>
+    <button onclick="location.href='{{ $order_data['pay'] == 'Platba kartou' ? '/card_pay' : '/bank_pay' }}';"
+      id="price_button">Prejsť k platbe | <span id="price">{{ $total }}€</span></button>
     <!--<h2>{{ $total }}€</h2>-->
     </section>
   @else

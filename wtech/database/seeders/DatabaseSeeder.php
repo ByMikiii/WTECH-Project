@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
   {
     $this->call([ProductsTableSeeder::class]);
     $this->call([ProductSizesTableSeeder::class]);
-    $this->call([ProductsTableSeeder::class]);
-    $this->call([ProductsTableSeeder::class]);
+    // $this->call([ProductsTableSeeder::class]);
+    // $this->call([ProductsTableSeeder::class]);
     $this->call([UsersTableSeeder::class]);
 
     // \App\Models\Product::factory()->count(16)->create();

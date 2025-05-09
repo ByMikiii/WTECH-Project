@@ -196,6 +196,84 @@ class ProductsTableSeeder extends Seeder
         'salePrice' => 0.00,
         'release_date' => '2019-04-22',
       ],
+      [
+        "name" => "Nike Air Max 97 'Silver Bullet'",
+        "slug" => "nike-air-max-97-silver-bullet",
+        "description" => "'Silver Bullet' je klasická verzia Air Max 97 s reflexným strieborným zvrškom a červenými akcentmi, ktorá ponúka štýl aj pohodlie.",
+        "manufacturer" => "Nike",
+        "gender" => "Unisex",
+        "color" => "silver/red",
+        "type" => "Sneaker",
+        "price" => 179.99,
+        "isSale" => true,
+        "salePrice" => 159.99,
+        "release_date" => "2017-11-01"
+      ],
+      [
+        "name" => "Adidas Ultra Boost 2020 'White'",
+        "slug" => "adidas-ultra-boost-2020-white",
+        "description" => "Ultra Boost 2020 s Primeknit zvrškom a reakčným Boost tlmením ponúka pohodlný a tesný strih, ideálny pre bežcov.",
+        "manufacturer" => "Adidas",
+        "gender" => "Women",
+        "color" => "white",
+        "type" => "Running Shoe",
+        "price" => 179.99,
+        "isSale" => true,
+        "salePrice" => 159.99,
+        "release_date" => "2020-01-01"
+      ],
+      [
+        "name" => "Puma RS-X 'Re-Invention'",
+        "slug" => "puma-rs-x-re-invention",
+        "description" => "RS-X 'Re-Invention' kombinuje retro dizajn s modernými prvkami, pričom ponúka výrazné farby a robustnú siluetu.",
+        "manufacturer" => "Puma",
+        "gender" => "Unisex",
+        "color" => "multicolor",
+        "type" => "Sneaker",
+        "price" => 129.99,
+        "isSale" => true,
+        "salePrice" => 109.99,
+        "release_date" => "2019-10-15"
+      ],
+      [
+        "name" => "Asics Gel-Lyte III 'OG'",
+        "slug" => "asics-gel-lyte-iii-og",
+        "description" => "Gel-Lyte III 'OG' je vybavený rozdeleným jazykom a Gel tlmením, ktoré poskytuje pohodlný strih a klasický dizajn.",
+        "manufacturer" => "Asics",
+        "gender" => "Unisex",
+        "color" => "grey/white",
+        "type" => "Sneaker",
+        "price" => 109.99,
+        "isSale" => true,
+        "salePrice" => 89.99,
+        "release_date" => "1990-01-01"
+      ],
+      [
+        "name" => "New Balance 574 'Classic'",
+        "slug" => "new-balance-574-classic",
+        "description" => "574 'Classic' kombinuje zvršok zo semišu a sieťoviny s ENCAP tlmením, čo poskytuje nadčasový vzhľad a pohodlie.",
+        "manufacturer" => "New Balance",
+        "gender" => "Unisex",
+        "color" => "navy/white",
+        "type" => "Sneaker",
+        "price" => 89.99,
+        "isSale" => true,
+        "salePrice" => 69.99,
+        "release_date" => "1988-01-01"
+      ],
+      [
+        "name" => "Converse Chuck Taylor All Star 'Black'",
+        "slug" => "converse-chuck-taylor-all-star-black",
+        "description" => "Chuck Taylor All Star 'Black' ponúka klasický plátený zvršok a gumovú podrážku, čo poskytuje univerzálny a ikonický štýl.",
+        "manufacturer" => "Converse",
+        "gender" => "Unisex",
+        "color" => "black",
+        "type" => "Sneaker",
+        "price" => 59.99,
+        "isSale" => true,
+        "salePrice" => 49.99,
+        "release_date" => "1917-01-01"
+      ]
     ];
 
 

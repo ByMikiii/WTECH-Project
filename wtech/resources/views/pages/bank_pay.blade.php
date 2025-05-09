@@ -42,7 +42,7 @@
       <label for="price">Poznámka pre príjemcu</label>
       <span name="price">{{ $order_data['first_name'] }} {{ $order_data['last_name'] }}</span>
     </div>
-    <button type="submit">Potvrdiť objednávku s povinnosťou platby</button>
+    <button onclick="location.href='/create_order';">Potvrdiť objednávku s povinnosťou platby</button>
     </section>
   </main>
 @endsection

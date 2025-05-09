@@ -40,7 +40,7 @@
       <label for="cvv">CVV</label>
       <input type="text" name="cvv" required />
       </div>
-      <button type="submit">Potvrdiť objednávku a platbu</button>
+      <button onclick="location.href='/create_order';">Potvrdiť objednávku a platbu</button>
     </form>
     </section>
   </main>

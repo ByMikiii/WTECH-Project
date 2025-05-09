@@ -12,11 +12,18 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->enum('status', ['pending', 'processing', 'shipped', 'delivered', 'cancelled']);
             $table->timestamp('created_at')->useCurrent();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('street');
+            $table->string('city');
+            $table->string('postal_code');
+            $table->string('pay');
+            $table->string('delivery');
         });
     }
 

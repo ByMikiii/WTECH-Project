@@ -85,24 +85,27 @@ Route::get('/cart', function () {
     $items = Cart::where('user_id', Auth::id())->with('product')->get();
 
     // map to session format
-    $cartItems = $items->mapWithKeys(function ($item) {
-      $productId = $item->product->id;
-      $size = $item->size;
-      return [
-        (string) $productId => [
-          (string) $size => [
-            'product_id' => (string) $productId,
-            'name' => $item->product->name,
-            'price' => $item->product->price,
-            'isSale' => $item->product->isSale,
-            'salePrice' => $item->product->salePrice,
-            'quantity' => $item->quantity,
-            'image' => $item->product->slug,
-            'size' => (string) $size
-          ]
-        ]
+    $cartItems = [];
+
+    foreach ($items as $item) {
+      $productId = (string) $item->product->id;
+      $size = (string) $item->size;
+
+      if (!isset($cartItems[$productId])) {
+        $cartItems[$productId] = [];
+      }
+
+      $cartItems[$productId][$size] = [
+        'product_id' => $productId,
+        'name' => $item->product->name,
+        'price' => $item->product->price,
+        'isSale' => $item->product->isSale,
+        'salePrice' => $item->product->salePrice,
+        'quantity' => $item->quantity,
+        'image' => $item->product->slug,
+        'size' => $size,
       ];
-    });
+    }
   } else {
     $sessionCart = session()->get('cart', []);
     $cartItems = collect($sessionCart)->map(function ($item) {
@@ -110,9 +113,19 @@ Route::get('/cart', function () {
     });
   }
 
+  $total = 0;
+
+  foreach ($cartItems as $product) {
+    foreach ($product as $item) {
+      $price = $item['isSale'] ? $item['salePrice'] : $item['price'];
+      $total += $price * $item['quantity'];
+    }
+  }
+
   return view('pages.cart', [
     'title' => 'NaNohu - Košík',
-    'cartItems' => $cartItems
+    'cartItems' => $cartItems,
+    'total' => $total
   ]);
 });
 

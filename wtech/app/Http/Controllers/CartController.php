@@ -71,7 +71,7 @@ class CartController extends Controller
       }
     }
 
-    return redirect()->back();
+    return redirect()->back()->with('notification', 'Počet kusov bol úspešne zvýšený.');
   }
 
   public function decrementItem($productId, $size)
@@ -86,17 +86,23 @@ class CartController extends Controller
       if ($cartItem && $cartItem->quantity > 1) {
         $cartItem->quantity--;
         $cartItem->save();
+      } else {
+        return redirect()->back();
       }
     } else {
       $cart = session()->get('cart', []);
       if (isset($cart[$productId][$size]) && $cart[$productId][$size]['quantity'] > 1) {
         $cart[$productId][$size]['quantity']--;
         session()->put('cart', $cart);
+      } else {
+        return redirect()->back();
       }
     }
 
-    return redirect()->back();
+    return redirect()->back()->with('notification', 'Počet kusov bol úspešne znížený.');
   }
+
+
   public function removeItem($productId, $size)
   {
     if (Auth::check()) {

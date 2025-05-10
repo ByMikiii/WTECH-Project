@@ -11,8 +11,7 @@
       <li><a href="/cart">Košík</a></li>
     </ol>
     </nav>
-
-    @if (!$cartItems->isEmpty())
+    @if (count($cartItems))
     <section class="cart">
     <h1>Nákupný košík</h1>
     <div id="first_div">
@@ -29,15 +28,15 @@
       Veľkosť
       </span>
       <span>
-      Cena
+      Cena (celkom)
       </span>
       <span>
       Odstrániť z košíka
       </span>
     </div>
     @foreach ($cartItems as $productSizes)
-    @foreach ($productSizes as $cartItem)
-    <div>
+      @foreach ($productSizes as $cartItem)
+      <div>
       <a href="{{$cartItem['image']}}">
       <img class="cart-image" src="../images/optimized_products/{{$cartItem['image']}}/1.jpg" alt="Air Jordan 1">
       </a>
@@ -52,31 +51,31 @@
       href="{{ route('cart.increment', ['productId' => $cartItem['product_id'], 'size' => $cartItem['size']]) }}">+</a>
       </span>
       <span>
-      <!-- <button onclick="this.nextElementSibling.stepDown()">−</button> -->
       <input type="number" value="{{$cartItem['size']}}" disabled required>
-      <!-- <button onclick="this.previousElementSibling.stepUp()">+</button> -->
       </span>
       <span>
       @if ($cartItem['isSale'])
       {{ $cartItem['salePrice'] * $cartItem['quantity']}}
-    @else
+      @else
       {{ $cartItem['price'] * $cartItem['quantity']  }}
-    @endif
+      @endif
+      €
       </span>
       <span>
       <a class="qua-button"
       href="{{ route('cart.remove', ['productId' => $cartItem['product_id'], 'size' => $cartItem['size']]) }}">X</a>
       </span>
-    </div>
-  @endforeach
-  @endforeach
-
-    <button onclick="location.href='/order';">Prejsť na objednávku</button>
+      </div>
+      @endforeach
+    @endforeach
+    <section class="total">
+      <h3>Súčet: <span>{{ $total }}€</span></h3>
     </section>
-  @else
-  <h1 class="empty-cart">Nakupný košík je prázdny!</h1>
-@endif
-
+    <button onclick="location.href='/order';">Prejsť na objednávku </button>
+    </section>
+    @else
+    <h1 class="empty-cart">Nakupný košík je prázdny!</h1>
+    @endif
 
 
   </main>

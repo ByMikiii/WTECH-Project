@@ -4,7 +4,7 @@
   <main>
     <nav aria-label="Breadcrumb">
     <ol class="breadcrumb">
-    <li><a href="/">Domov</a></li>
+      <li><a href="/">Domov</a></li>
       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
       <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
       </svg>
@@ -30,7 +30,7 @@
       @csrf
       <div>
       <label for="card_number">Číslo karty</label>
-      <input type="number" name="card_number" placeholder="v tvare 1111222233334444"required />
+      <input type="number" name="card_number" placeholder="v tvare 1111222233334444" required />
       </div>
       <div>
       <label for="duration">Platnosť karty</label>

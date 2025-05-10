@@ -596,6 +596,7 @@ footer {
   padding: 6px 12px;
   border-radius: 12px;
   border: 1px solid #444;
+  width: 180px;
 }
 
 .container p a {
@@ -616,7 +617,7 @@ footer {
 }
 
 .container .login-form div {
-  width: 220px;
+  width: 248px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -729,7 +730,18 @@ footer {
   padding: 6px 12px;
   border-radius: 12px;
   border: 1px solid #444;
-  margin-top: 50px;
+}
+
+.cart .total {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin-top: 42px;
+  margin-bottom: 8px;
+}
+
+.cart h3 span {
+  font-weight: 500;
 }
 
 .cart div span button {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Cart;
 
 class OrderController extends Controller{
     public function control_card_data(Request $request){
@@ -32,23 +33,42 @@ class OrderController extends Controller{
             'delivery' => $orderData['delivery'],
         ]);
 
-        $cart = session('cart');
+        if(Auth::check()){
+            $userId = Auth::id();
+            $cartItems = Cart::where('user_id', $userId)->get();
 
-        foreach ($cart as $productId => $sizes) {
-            foreach ($sizes as $size => $item) {
+            foreach ($cartItems as $item) {
                 $order->items()->create([
-                    'product_id' => $item['product_id'],
+                    'product_id' => $item->product_id,
                     'order_id' => $order->id,
-                    'quantity' => $item['quantity'],
-                    'size' => $item['size'],
+                    'quantity' => $item->quantity,
+                    'size' => $item->size,
                 ]);
             }
+            
+            Cart::where('user_id', $userId)->delete();
+            session()->forget('orderData');
+            return redirect('/');
         }
+        else{
+            $cart = session('cart');
 
-        session()->forget('cart');
+            foreach ($cart as $productId => $sizes) {
+                foreach ($sizes as $size => $item) {
+                    $order->items()->create([
+                        'product_id' => $item['product_id'],
+                        'order_id' => $order->id,
+                        'quantity' => $item['quantity'],
+                        'size' => $item['size'],
+                    ]);
+                }
+            }
 
-        session()->forget('orderData');
+            session()->forget('cart');
 
-        return redirect('/');
+            session()->forget('orderData');
+
+            return redirect('/');
+        }
     }
 }

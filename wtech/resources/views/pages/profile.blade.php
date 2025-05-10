@@ -12,9 +12,10 @@
     </ol>
     </nav>
 
-    <section id="logout_button">
+    <form id="logout_button" method="POST" action="/logout">
+    @csrf
     <button id="logout">Odhlásiť sa</button>
-    </section>
+    </form>
 
     <section class="profile">
     <h1>Profil používateľa</h1>

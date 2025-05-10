@@ -101,7 +101,7 @@ class ProductController extends Controller
       ]);
     }
 
-    return redirect('/' . $slug);
+    return redirect('/' . $slug)->with('notification', 'Produkt bol úspešne vytvorený!');
   }
 
   public function update(Request $request, $id)
@@ -233,7 +233,7 @@ class ProductController extends Controller
       }
     }
 
-    return redirect('/' . $product->slug);
+    return redirect('/' . $product->slug)->with('notification', 'Produkt bol úspešne upravený!');
   }
   public function delete($id)
   {
@@ -241,7 +241,8 @@ class ProductController extends Controller
     $product->delete();
     // File::delete(public_path('/images/optimized_products/' . $product->slug));
 
-    return redirect()->route('men');
+    return redirect()->route('men')->with('notification', 'Produkt bol úspešne odstranený!');
+    ;
   }
 
   public function filter(Request $request)

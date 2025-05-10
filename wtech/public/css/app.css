@@ -237,14 +237,27 @@ button:hover {
 }
 
 
-
-
 /* FOOTER */
 footer {
   width: 96vw;
   height: 256px;
   border-top: 1px solid lightgray;
   /* background-color: green; */
+}
+
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 4px;
+  border: #444 solid 1px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  z-index: 10;
 }
 
 #footer-content {

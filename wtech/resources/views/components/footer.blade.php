@@ -88,6 +88,27 @@
       </ul>
     </section>
   </section>
+  @php
+  $notification = session()->pull('notification');
+@endphp
+  <div id="notification" class="notification" style="display: {{ $notification ? 'block' : 'none' }};">
+    {{ $notification }}
+  </div>
+
+  <script>
+    if (document.getElementById('notification').style.display !== 'none') {
+      setTimeout(() => {
+        const el = document.getElementById('notification');
+        if (el) {
+          el.style.opacity = '0';
+          setTimeout(() => {
+            el.style.display = 'none';
+          }, 500);
+        }
+      }, 5000);
+    }
+  </script>
+
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ProfileController;
@@ -112,7 +113,7 @@ Route::get('/order', function () {
   return view('pages.order', [
     'title' => 'NaNohu - Dodacie údaje',
     'email' => $user?->email ?? null,
-    'first_name' => $user ? $user->first_name :null,
+    'first_name' => $user ? $user->first_name : null,
     'last_name' => $user ? $user->last_name : null,
     'phone' => $user?->phone ?? null,
     'postal_code' => $user?->postal_code ?? null,
@@ -121,7 +122,7 @@ Route::get('/order', function () {
   ]);
 });
 
-Route::post('/order', function(Request $request){
+Route::post('/order', function (Request $request) {
   $validated = $request->validate([
     'first_name' => 'required|string',
     'last_name' => 'required|string',
@@ -141,9 +142,9 @@ Route::post('/order', function(Request $request){
 
 Route::get('/summary', function () {
   $orderData = session('order_data');
-  
+
   if (!$orderData) {
-      return redirect('/order')->withErrors('Chýbajú údaje o objednávke.');
+    return redirect('/order')->withErrors('Chýbajú údaje o objednávke.');
   }
 
   $cartItems = collect();
@@ -257,7 +258,7 @@ Route::get('/profile', function () {
     'email' => $user->email,
     'name' => $user->first_name . ' ' . $user->last_name,
     'phone' => $user->phone,
-    'address' => $user->street . ' ' . $user->city . ' ' . $user->postal_code ,
+    'address' => $user->street . ' ' . $user->city . ' ' . $user->postal_code,
     'username' => $user->username,
   ]);
 })->middleware('auth');
@@ -319,6 +320,7 @@ Route::post('products/{id}/remove', [ProductController::class, 'delete']);
 Route::post('products/{id}/edit', [ProductController::class, 'update']);
 Route::post('products/create', [ProductController::class, 'store']);
 
+Route::post('/set_session_notification', [SessionController::class, 'setSessionNotification']);
 
 Route::get('/{slug}', function ($slug) {
   $product = Product::where('slug', $slug)->firstOrFail();

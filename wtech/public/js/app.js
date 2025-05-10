@@ -66,6 +66,23 @@ function submitCombinedForm() {
   window.location.href = `/filter?${params}`;
 }
 
+// set & show notification message
+function showNotification(message) {
+  const el = document.getElementById('notification');
+  if (el) {
+    el.textContent = message;
+    el.style.display = 'block';
+    el.style.opacity = '1';
+
+    setTimeout(() => {
+      el.style.opacity = '0';
+      setTimeout(() => {
+        el.style.display = 'none';
+      }, 500);
+    }, 5000);
+  }
+}
+
 // automatically hide nav & filter when resizing
 window.addEventListener("resize", () => {
   if (window.innerWidth > 770) {
@@ -201,12 +218,12 @@ if (reg_form) {
       password_confirmation: formData.get('password_confirmation'),
     };
 
-    if(data.password.length < 6){
-      alert("Heslo musí obsahovať aspoň 6 znakov");
+    if (data.password.length < 6) {
+      showNotification("Heslo musí obsahovať aspoň 6 znakov.");
     }
-    else{
+    else {
       if (data.password !== data.password_confirmation) {
-        alert("Zadané heslá nie sú rovnaké.");
+        showNotification("Zadané heslá nie sú rovnaké.");
       }
       else {
         fetch('/register', {
@@ -220,48 +237,28 @@ if (reg_form) {
           .then(response => {
             return response.json().then(result => {
               if (response.ok) {
-                alert(result.message);
+                showNotification(result.message);
                 window.location.href = '/login';
               } else {
-                alert('Chyba pri registrácii: ' + (result.message || 'Skontrolujte údaje.'));
+                showNotification('Chyba pri registrácii: ' + (result.message || 'Skontrolujte údaje.'));
               }
             });
           })
           .catch(error => {
             console.error('Chyba pri fetchi:', error);
-            alert('Chyba spojenia so serverom.');
+            showNotification('Chyba spojenia so serverom.');
           });
-        }
       }
+    }
   });
 }
 
-// fetch logout
-const logoutButton = document.getElementById("logout");
-if (logoutButton) {
-  document.getElementById("logout").addEventListener("click", () => {
-    fetch('/logout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      }
-    })
-      .then(response => {
-        if (response.redirected) {
-          alert("Odhlásenie prebehlo úspešne!");
-          window.location.href = response.url;
-        }
-      })
-  })
-};
-
 //fetch editing profile
 const edit_profile_form = document.getElementById("edit_profile-form");
-if (edit_profile_form){
-  edit_profile_form.addEventListener("submit", (e) =>{
+if (edit_profile_form) {
+  edit_profile_form.addEventListener("submit", (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData(edit_profile_form);
     const data = {
       email: formData.get('email'),
@@ -282,20 +279,20 @@ if (edit_profile_form){
       },
       body: JSON.stringify(data)
     })
-    .then(response => response.json())
-    .then(data => {
-      alert(data.message);
-      window.location.href = '/profile';
-    })
-    .catch(error => {
-      alert("Vami zadané údaje (e-mail, telefónne číslo alebo prezývka) už niekto vlastní");
-    })
+      .then(response => response.json())
+      .then(data => {
+        showNotification(data.message);
+        window.location.href = '/profile';
+      })
+      .catch(error => {
+        showNotification("Vami zadané údaje (e-mail, telefónne číslo alebo prezývka) už niekto vlastní");
+      })
   })
 }
 
 //fetch change of password
 const change_passwordForm = document.getElementById("change_password-form");
-if (change_passwordForm){
+if (change_passwordForm) {
   change_passwordForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -306,22 +303,23 @@ if (change_passwordForm){
       password_confirmation: formData.get('retype_password'),
     };
 
-    if (data.new_password.length<6){
-      alert("Nové heslo musí obsahovať aspoň 6 znakov");
+    if (data.new_password.length < 6) {
+      sendSessionNotification("Nové heslo musí obsahovať aspoň 6 znakov");
+      showNotification("Nové heslo musí obsahovať aspoň 6 znakov");
     }
 
-    else{
-      if (data.new_password != data.password_confirmation){
-        alert("Nové heslo nie je zhodné s položkou Potvrdiť heslo!");
+    else {
+      if (data.new_password != data.password_confirmation) {
+        showNotification("Nové heslo nie je zhodné s položkou Potvrdiť heslo!");
       }
 
-      else{
-        if (data.new_password == data.current_password){
-          alert("Nové heslo nemôže byť rovnaké ako to aktuálne");
+      else {
+        if (data.new_password == data.current_password) {
+          showNotification("Nové heslo nemôže byť rovnaké ako to aktuálne");
         }
 
-        else{
-          fetch('/change_password',{
+        else {
+          fetch('/change_password', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -329,10 +327,11 @@ if (change_passwordForm){
             },
             body: JSON.stringify(data)
           })
-          .then(response => response.json())
-          .then(data => {
-            alert(data.message);
-          })
+            .then(response => response.json())
+            .then(data => {
+              sendSessionNotification(data.message);
+              showNotification(data.message);
+            })
         }
       }
     }

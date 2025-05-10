@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 
 class OrderController extends Controller{
+    public function control_card_data(Request $request){
+        $validated = $request->validate([
+            'card_number' => ['required', 'digits:16'],
+            'duration' => ['required', 'regex:/^(0[1-9]|1[0-2])\/\d{2}$/'],
+            'cvv' => ['required', 'digits:3'],
+        ]);
+
+        return redirect('/create_order');
+    }
+
     public function create_order(Request $request){
         $orderData = session('order_data');
 
@@ -21,6 +31,23 @@ class OrderController extends Controller{
             'pay' => $orderData['pay'],
             'delivery' => $orderData['delivery'],
         ]);
+
+        $cart = session('cart');
+
+        foreach ($cart as $productId => $sizes) {
+            foreach ($sizes as $size => $item) {
+                $order->items()->create([
+                    'product_id' => $item['product_id'],
+                    'order_id' => $order->id,
+                    'quantity' => $item['quantity'],
+                    'size' => $item['size'],
+                ]);
+            }
+        }
+
+        session()->forget('cart');
+
+        session()->forget('orderData');
 
         return redirect('/');
     }

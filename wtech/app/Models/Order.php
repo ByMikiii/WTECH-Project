@@ -25,4 +25,9 @@ class Order extends Model
     protected $attributes = [
         'status' => 'pending',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

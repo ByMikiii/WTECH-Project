@@ -26,21 +26,21 @@
 
     <section class="container">
     <h1>Platba kartou</h1>
-    <form id="pay-form" class="login-form">
+    <form id="pay-form" class="login-form" method="POST" action="/control_card_data">
       @csrf
       <div>
       <label for="card_number">Číslo karty</label>
-      <input type="text" name="card_number" required />
+      <input type="number" name="card_number" placeholder="v tvare 1111222233334444"required />
       </div>
       <div>
       <label for="duration">Platnosť karty</label>
-      <input type="text" name="duration" required />
+      <input type="text" name="duration" placeholder="v tvare MM/RR" required />
       </div>
       <div>
       <label for="cvv">CVV</label>
-      <input type="text" name="cvv" required />
+      <input type="number" name="cvv" placeholder="v tvare 123" required />
       </div>
-      <button onclick="location.href='/create_order';">Potvrdiť objednávku a platbu</button>
+      <button type="submit">Potvrdiť objednávku a platbu</button>
     </form>
     </section>
   </main>

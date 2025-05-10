@@ -225,7 +225,7 @@ Route::get('/bank_pay', function () {
 });
 
 Route::get('/create_order', [OrderController::class, 'create_order']);
-Route::post('/create_order', [OrderController::class, 'create_order']);
+Route::post('/control_card_data', [OrderController::class, 'control_card_data']);
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 

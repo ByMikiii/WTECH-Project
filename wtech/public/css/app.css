@@ -974,6 +974,10 @@ footer {
   display: none;
 }
 
+.store-top h1 {
+  max-width: 88%;
+}
+
 .product-box {
   margin-bottom: 64px;
 }
@@ -1343,6 +1347,10 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 
+  #add-product {
+    height: auto;
+  }
+
   .reviews {
     grid-template-columns: 1fr;
   }
@@ -1545,11 +1553,20 @@ footer {
     height: 120px;
   }
 
+  #add-product {
+    height: 256px;
+  }
+
   .product-list {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }
 
+@media (max-width: 524px) {
+  #add-product {
+    height: auto;
+  }
+}
 
 
 @media (max-width: 400px) {

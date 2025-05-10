@@ -61,6 +61,15 @@ Route::get('/women', function () {
 
 Route::get('/filter', [ProductController::class, 'filter'])->name('store.filter');
 
+Route::get('/all', function () {
+  $products = Product::paginate(12);
+  return view('pages.store', [
+    'title' => 'NaNohu - Produkty',
+    'category' => 'Všetky Produkty',
+    'products' => $products
+  ]);
+});
+
 Route::get('/sale', function () {
   $products = Product::where('isSale', true)->paginate(12);
   return view('pages.store', [

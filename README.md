@@ -9,9 +9,9 @@ Responzívne šablóny: [WTECH-Project/wtech/public/html/](https://github.com/By
 
 CSS: [WTECH-Project/wtech/public/css/](https://github.com/ByMikiii/WTECH-Project/tree/main/wtech/public/css)
 
-Skice: [Wireframe](https://github.com/ByMikiii/WTECH-Project/tree/main/wtech/resources/wireframe.jpg)
+Skice: [Wireframe](https://github.com/ByMikiii/WTECH-Project/blob/main/wireframe.jpg)
 
-Návrh fyzického dátového modelu: [Class Diagram](https://github.com/ByMikiii/WTECH-Project/tree/main/wtech/resources/class_diagram.png)
+Návrh fyzického dátového modelu: [Class Diagram](https://github.com/ByMikiii/WTECH-Project/blob/main/class_diagram.png)
 
 ### Zdroje
 #### Obrazky
@@ -25,3 +25,6 @@ Obrazky použité v tomto projekte sú voľne dostupné na stránke [Pexels](htt
 #### Ikony
 
 Ikony použité v tomto projekte sú voľne dostupné na stránke [Heroicons](https://heroicons.dev/).
+
+
+### 2. fáza projektu

@@ -18,6 +18,9 @@
     @if (!Auth::check())
     <li><span class="login-nav">|</span></li>
     <li><a href="/login">Prihlásiť sa</a></li>
+  @elseif (Auth::check() && Auth::user()->role == 'admin')
+    <li><span class="login-nav">|</span></li>
+    <li><a href="/all">Všetky produkty</a></li>
   @endif
 
   </ul>
@@ -41,6 +44,10 @@
     <hr>
     <li><a href="/sale">Výpredaj</a></li>
     <hr>
+    @if (Auth::check() && Auth::user()->role == 'admin')
+    <li><a href="/all">Všetky produkty</a></li>
+    <hr>
+  @endif
     @if (Auth::check())
     <li><a href="/profile">Profil</a></li>
     <hr>

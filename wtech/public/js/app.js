@@ -238,7 +238,7 @@ if (reg_form) {
             return response.json().then(result => {
               if (response.ok) {
                 showNotification(result.message);
-                window.location.href = '/login';
+                window.location.href = '/';
               } else {
                 showNotification('Chyba pri registrácii: ' + (result.message || 'Skontrolujte údaje.'));
               }

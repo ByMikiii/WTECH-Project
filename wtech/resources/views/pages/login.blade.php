@@ -26,7 +26,7 @@
       </div>
       <button type="submit">Prihlásiť sa</button>
     </form>
-    <p>Zabudli ste heslo? <a href="/renew_password">Obnoviť heslo</a></p>
+    <p>Zabudli ste heslo? <a href="/forgot_password">Obnoviť heslo</a></p>
     <p>Nemáte účet? <a href="/register">Registrovať sa</a></p>
     </section>
   </main>

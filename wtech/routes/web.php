@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\ProductSizes;
@@ -237,9 +238,16 @@ Route::get('/register', function () {
   return view('pages.register', ['title' => 'NaNohu - Registrácia']);
 });
 
-Route::get('/renew_password', function () {
-  return view('pages.renew_password', ['title' => 'NaNohu - Obnova hesla']);
+/*Route::get('/forgot_password', function () {
+  return view('pages.forgot_password', ['title' => 'NaNohu - Obnova hesla']);
 });
+*/
+Route::get('/forgot_password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
+Route::post('/forgot_password', [AuthController::class, 'sendResetLink'])->name('password.email');
+
+Route::get('/reset_password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset_password', [AuthController::class, 'resetPassword'])->name('password.update');
+
 
 Route::get('/profile', function () {
   $user = Auth::user();

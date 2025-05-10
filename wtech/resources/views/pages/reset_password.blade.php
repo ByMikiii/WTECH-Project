@@ -12,26 +12,28 @@
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
                     <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
                 </svg>
-                <li><a href="/renew_password">Obnova hesla</a></li>
+                <li><a href="/reset_password">Obnova hesla</a></li>
             </ol>
         </nav>
 
         <section class="container">
             <h1>Obnova hesla</h1>
-            <form class="login-form">
+            <form class="login-form" method="POST" action="{{ route('password.update') }}">
+            @csrf
+                <input type="hidden" name="token" value="{{ $token }}">
                 <div>
                     <label for="email">E-mail</label>
-                    <input type="email" name="email" required />
+                    <input type="email" name="email" required>
                 </div>
                 <div>
-                    <label for="new_password">Nové heslo</label>
-                    <input type="password" name="new_password" required />
+                    <label for="password">Nové heslo</label>
+                    <input type="password" name="password" required>
                 </div>
                 <div>
-                    <label for="retype_password">Potvrdiť heslo</label>
-                    <input type="password" name="retype_password" required />
+                    <label for="password_confirmation">Zopakuj heslo</label>
+                    <input type="password" name="password_confirmation" required>
                 </div>
-                <button type="submit">Uložiť zmenu</button>
+                <button type="submit">Zmeniť heslo</button>
             </form>
         </section>
     </main>

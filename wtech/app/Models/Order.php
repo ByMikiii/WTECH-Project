@@ -20,6 +20,7 @@ class Order extends Model
         'created_at',
         'pay',
         'delivery',
+        'total_price',
     ];
 
     protected $attributes = [

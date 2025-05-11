@@ -32,6 +32,7 @@ class OrderController extends Controller
   public function create_order(Request $request)
   {
     $orderData = session('order_data');
+    $total_price = session('total');
 
     $order = Order::create([
       'email' => $orderData['email'],
@@ -43,6 +44,7 @@ class OrderController extends Controller
       'postal_code' => $orderData['postal_code'],
       'pay' => $orderData['pay'],
       'delivery' => $orderData['delivery'],
+      'total_price' => $total_price,
     ]);
 
     if (Auth::check()) {

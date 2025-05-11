@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->string('postal_code');
             $table->string('pay');
             $table->string('delivery');
+            $table->double('total_price');
         });
     }
 

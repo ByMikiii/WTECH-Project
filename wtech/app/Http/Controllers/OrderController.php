@@ -10,6 +10,39 @@ use App\Models\Cart;
 
 class OrderController extends Controller
 {
+  public function control_order_data(Request $request){
+    $validated = $request->validate([
+      'first_name' => [
+        'required',
+        'regex:/^[\p{L}\s\-\'\.]+$/u',
+      ],
+      'last_name' => [
+        'required',
+        'regex:/^[\p{L}\s\-\'\.]+$/u',
+      ],
+      'street' => 'required|string',
+      'city' => [
+        'required',
+        'regex:/^[\p{L}\s\-\'\.]+$/u',
+      ],
+      'phone' => [
+        'required',
+        'regex:/^\+421\d{9}$/',
+      ],
+      'postal_code' => [
+        'required',
+        'regex:/^\d{5}$/',
+      ],
+      'email' => 'required|email',
+      'delivery' => 'required',
+      'pay' => 'required',
+    ]);
+  
+    session(['order_data' => $validated]);
+  
+    return redirect('/summary');
+  }
+
   public function control_card_data(Request $request)
   {
     $validator = Validator::make($request->all(), [

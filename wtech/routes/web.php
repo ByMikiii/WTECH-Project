@@ -144,23 +144,7 @@ Route::get('/order', function () {
   ]);
 });
 
-Route::post('/order', function (Request $request) {
-  $validated = $request->validate([
-    'first_name' => 'required|string',
-    'last_name' => 'required|string',
-    'street' => 'required|string',
-    'city' => 'required|string',
-    'postal_code' => 'required|string',
-    'phone' => 'required|string',
-    'email' => 'required|string',
-    'delivery' => 'required',
-    'pay' => 'required',
-  ]);
-
-  session(['order_data' => $validated]);
-
-  return redirect('/summary');
-});
+Route::post('/order', [OrderController::class, 'control_order_data']);
 
 Route::get('/summary', function () {
   $orderData = session('order_data');

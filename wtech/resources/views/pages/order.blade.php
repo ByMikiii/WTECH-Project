@@ -57,7 +57,7 @@
       </div>
       <div>
         <label for="postal_code">PSČ</label>
-        <input type="text" name="postal_code" value="{{ $postal_code }}" required />
+        <input type="text" name="postal_code" placeholder="v tvare 12345" value="{{ $postal_code }}" required />
       </div>
       <div>
         <label for="street">Ulica a číslo domu</label>

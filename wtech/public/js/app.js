@@ -285,7 +285,7 @@ if (edit_profile_form) {
         window.location.href = '/profile';
       })
       .catch(error => {
-        showNotification("Vami zadané údaje (e-mail, telefónne číslo alebo prezývka) už niekto vlastní");
+        showNotification("Skontrolujte si zadané údaje!");
       })
   })
 }

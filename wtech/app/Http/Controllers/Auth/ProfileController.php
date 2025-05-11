@@ -27,16 +27,34 @@ class ProfileController extends Controller
             ],
             'phone' => [
                 'nullable',
-                'string',
+                'regex:/^\+421\d{9}$/',
                 Rule::unique('users')->ignore(Auth::id()),
+            ],
+            'postal_code' => [
+                'nullable',
+                'regex:/^\d{5}$/',
+            ],
+            'first_name' => [
+                'nullable',
+                'regex:/^[\p{L}\s\-\'\.]+$/u',
+            ],
+            'last_name' => [
+                'nullable',
+                'regex:/^[\p{L}\s\-\'\.]+$/u',
+            ],
+            'city' => [
+                'nullable',
+                'regex:/^[\p{L}\s\-\'\.]+$/u',
+            ],
+            'street' => [
+                'nullable',
+                'string',
             ],
         ]);
 
-        $otherData = $request->only(['first_name', 'last_name', 'city', 'postal_code', 'street']);
-
         $user = Auth::user();
 
-        $user->update(array_merge($validated, $otherData));
+        $user->update($validated);
         
         return response()->json(['message' => 'Úspešná zmena údajov']);
     }

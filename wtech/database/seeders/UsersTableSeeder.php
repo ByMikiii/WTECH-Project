@@ -26,6 +26,18 @@ class UsersTableSeeder extends Seeder
         'city' => null,
         'postal_code' => null,
         'role' => 'admin',
+      ],
+      [
+        'username' => 'customer',
+        'password' => Hash::make('userrr'),
+        'first_name' => 'User',
+        'last_name' => 'Customer',
+        'phone' => null,
+        'email' => 'user@user.user',
+        'street' => null,
+        'city' => null,
+        'postal_code' => null,
+        'role' => 'customer',
       ]
     ];
     foreach ($users as $user) {

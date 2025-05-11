@@ -35,6 +35,3 @@ yarn-error.log
 /storage/framework/cache/*
 /storage/framework/views/*
 /storage/app/*
-
-#Images
-/resources/images/products/*

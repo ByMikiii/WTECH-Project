@@ -40,7 +40,7 @@ class OrderController extends Controller
   
     session(['order_data' => $validated]);
   
-    return redirect('/summary');
+    return response()->json(['message' => 'Dodacie údaje uložené!']);
   }
 
   public function control_card_data(Request $request)

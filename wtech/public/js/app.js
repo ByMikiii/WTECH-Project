@@ -253,6 +253,50 @@ if (reg_form) {
   });
 }
 
+const orderForm = document.getElementById("order-form");
+if (orderForm){
+  orderForm.addEventListener("submit",(e) => {
+    e.preventDefault();
+
+    const formData = new FormData(orderForm);
+
+    const data = {
+      email: formData.get('email'),
+      first_name: formData.get('first_name'),
+      last_name: formData.get('last_name'),
+      postal_code: formData.get('postal_code'),
+      phone: formData.get('phone'),
+      city: formData.get('city'),
+      street: formData.get('street'),
+      pay: formData.get('pay'),
+      delivery: formData.get('delivery'),
+    };
+    console.log(data);
+    fetch('/order', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      return response.json().then(result => {
+        if (response.ok) {
+          showNotification(result.message);
+          window.location.href = '/summary';
+        } else {
+          showNotification('Chyba pri zadaní údajov!');
+        }
+      });
+    })
+    .catch(error => {
+      console.error('Chyba pri fetchi:', error);
+      showNotification('Chyba pri zadaní údajov, skontrolujte údaje!');
+    });
+  });
+}
+
 //fetch editing profile
 const edit_profile_form = document.getElementById("edit_profile-form");
 if (edit_profile_form) {

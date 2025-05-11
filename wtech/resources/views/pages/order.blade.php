@@ -18,7 +18,7 @@
 
     <section class="container">
     <h1>Dodacie údaje</h1>
-    <form class="login-form" method="POST" action="/order">
+    <form class="login-form" id="order-form">
     @csrf
       <div>
         <label for="first_name">Krstné meno</label>

@@ -21,7 +21,7 @@
     </nav>
 
     @if (!$cartItems->isEmpty())
-    <section class="cart">
+    <section class="cart" id="summary">
     <h1>Zhrnutie objednávky</h1>
     <div id="first_div">
       <span>
